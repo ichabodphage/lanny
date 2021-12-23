@@ -29,8 +29,15 @@ https://www.sfml-dev.org/tutorials/2.5/start-vc.php
 set the visual studio solution platform to x64 and then set the build type to release
 finally the engine can be built by just navigating to the VS build menu and pressing build solution
 
-## roadmap
+## todo
+here is a list of things that lanny needs implemented, i
 1. implement a texture entity component
-2. implement a colision entity component
+2. implement a colision entity component using SAT colision detection
 3. rework the shape component to allow more shapes than just rectangles
 4. implement a mouse/keyboard entity component
+5. implement a wraper class for handling all generic entity component handlers
+
+### roadmap
+this is like a todo, but more long term, this list will probably be updated in the future
+1. finish all basic entity components
+2. implement system for creating custom app specific entity components
