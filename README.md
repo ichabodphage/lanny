@@ -8,7 +8,7 @@ SFML (used for graphics, audio, and IO)
 requirements
 1. visual studio 2019 or beyond
 2. SFML 
-3. machine that has x64 architecture
+3. machine with x64 architecture
 
 ### step one
 downloaded the github repo onto any windows, macos, or linux device
