@@ -31,11 +31,11 @@ finally the engine can be built by just navigating to the VS build menu and pres
 
 ## todo
 here is a list of things that lanny needs implemented
-1. implement a texture entity component
+1. rework the shape component to allow more shapes than just rectangles
 2. implement a colision entity component using SAT colision detection
-3. rework the shape component to allow more shapes than just rectangles
-4. implement a mouse/keyboard entity component
-5. implement a wraper class for handling all generic entity component handlers
+3. implement a mouse/keyboard input entity component
+4. implement a texture component
+5. implement an asset handling system
 
 ### roadmap
 this is like a todo, but more long term, this list will probably be updated in the future
