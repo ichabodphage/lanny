@@ -28,7 +28,7 @@ public:
 	void handleEvents();
 
 	//adds a red square
-	void addRedSquare();
+	void addSquare();
 	
 	void render();
 };

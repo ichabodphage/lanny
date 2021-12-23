@@ -20,8 +20,18 @@ struct CompPosition {
 //shape entity component used for rendering the entity
 struct CompShape {
 public:
-	sf::RectangleShape rect; //rectangle shape for rendering
-	CompShape(XyVector size, sf::Color shapeColor) :rect(size) { //constructor using size and color of rectangle
-		rect.setFillColor(shapeColor);
-	};
+	sf::ConvexShape shape; //rectangle shape for rendering
+	CompShape(){};
+
+	void makeSquare(XyVector size) {
+		shape.setPointCount(4);
+		shape.setPoint(0, { 0,0 });			 //top left of square
+		shape.setPoint(1, { size.x,0 });	 //top right
+		shape.setPoint(2, { size.x,size.y });//bottom right
+		shape.setPoint(3, { 0,size.y });	 //bottom left
+	}
+	void tint(sf::Color c) {
+		shape.setFillColor(c);
+	}
 };
+

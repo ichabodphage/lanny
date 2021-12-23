@@ -10,7 +10,7 @@ void App::run() {
 	while (isRunning) {
 		handleEvents();
 		render();
-		addRedSquare();
+		addSquare();
 	}
 }
 
@@ -24,12 +24,12 @@ void App::handleEvents() {
 			window->close();
 		}
 		if (event.type == sf::Event::MouseButtonPressed){
-			addRedSquare();
+			addSquare();
 		}
 	}
 }
 
-void App::addRedSquare() {
+void App::addSquare() {
 	//RNG stuff
 	std::random_device rd; // obtain a random number from hardware
 	std::mt19937 gen(rd()); // seed the generator
@@ -41,14 +41,17 @@ void App::addRedSquare() {
 
 	//initalize red square entity component values;
 	square->cPosition = std::shared_ptr<CompPosition>(new CompPosition({ distrP(gen),distrP(gen) }));
-	square->cShape = std::shared_ptr<CompShape>(new CompShape({ distrS(gen),distrS(gen) }, sf::Color(distrC(gen), distrC(gen), distrC(gen))));
-	square->cShape->rect.setPosition(square->cPosition->positionXy);
+	square->cShape = std::shared_ptr<CompShape>(new CompShape());
+	square->cShape->shape.setPosition(square->cPosition->positionXy);
+	square->cShape->makeSquare({ distrS(gen),distrS(gen) }); //make square shape
+	square->cShape->tint(sf::Color(distrC(gen), distrC(gen), distrC(gen), distrC(gen))); //generate random RGBA color
+	
 }
 
 void App::render() {
 	window->clear();
 	for (auto& entity : entityManager->entities) {
-		window->draw(entity->cShape->rect);
+		window->draw(entity->cShape->shape);
 	}
 	window->display();
 }
