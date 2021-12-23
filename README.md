@@ -28,3 +28,9 @@ https://www.sfml-dev.org/tutorials/2.5/start-vc.php
 ### step four
 set the visual studio solution platform to x64 and then set the build type to release
 finally the engine can be built by just navigating to the VS build menu and pressing build solution
+
+## roadmap
+1. implement a texture entity component
+2. implement a colision entity component
+3. rework the shape component to allow more shapes than just rectangles
+4. implement a mouse/keyboard entity component
