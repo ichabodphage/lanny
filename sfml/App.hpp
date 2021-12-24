@@ -5,7 +5,7 @@ enum EntType {
 	REGULAR = 0
 };
 typedef std::shared_ptr<sf::RenderWindow> AppWindow;
-typedef std::shared_ptr<EntityManager> AppEntityManager;
+typedef std::shared_ptr<lny::EntityManager> AppEntityManager;
 //App class handles the window and the entity manager
 class App
 {
@@ -17,7 +17,7 @@ private:
 public:
 	App(sf::VideoMode video, std::string name) :
 		window(new sf::RenderWindow(video, name)),
-		entityManager(new EntityManager()) {};
+		entityManager(new lny::EntityManager()) {};
 	//sets isRunning to true and begins the gameLoop
 	void init();
 

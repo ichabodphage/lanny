@@ -1,6 +1,6 @@
 #include "EntityManager.hpp"
 
-
+using namespace lny;
 typedef std::vector < std::shared_ptr<Entity>> EntityVector;
 typedef std::map<int, EntityVector> EntityMap;
 
