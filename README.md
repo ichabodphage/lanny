@@ -29,15 +29,9 @@ https://www.sfml-dev.org/tutorials/2.5/start-vc.php
 set the visual studio solution platform to x64 and then set the build type to release
 finally the engine can be built by just navigating to the VS build menu and pressing build solution
 
-## todo
-here is a list of things that lanny needs implemented
-1. implement a colision entity component using SAT colision detection
-2. implement a mouse/keyboard input entity component
 
-
-### roadmap
+## roadmap
 this is like a todo, but more long term, this list will probably be updated in the future
-1. finish all basic entity components in todo
-2. abstract scene class that is used to designate different sections of an app with different logic
-3. LannyEngine class to handle scenes
+1. scene class that is used to designate different sections of an app with different logic
+2. LannyEngine class to handle scenes
 3. implement system for creating custom app specific entity components
