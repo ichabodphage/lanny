@@ -40,7 +40,7 @@ namespace lny {
 		}
 		void triangle(XyVector size) {
 			shape.setPointCount(3);
-			shape.setPoint(0, { size.x / 2,0 });	 //middle of shape in x
+			shape.setPoint(0, { size.x / 2,0 }); //middle of shape in x
 			shape.setPoint(1, { size.x,size.y });//bottom right corner
 			shape.setPoint(2, { 0,size.y });	 //bottom left
 		}

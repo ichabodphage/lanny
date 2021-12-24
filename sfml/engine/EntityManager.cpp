@@ -5,13 +5,13 @@ typedef std::vector < std::shared_ptr<Entity>> EntityVector;
 typedef std::map<int, EntityVector> EntityMap;
 
 
-std::shared_ptr<Entity> EntityManager::insertEntity(int name) {
+std::shared_ptr<Entity> EntityManager::insertEntity(int id) {
 	//make shared new shared ptr
-	auto newEntity = std::make_shared<Entity>(managerEntityCount++, name);
+	auto newEntity = std::make_shared<Entity>(managerEntityCount++, id);
 	entities.push_back(newEntity);
 
 	//add entity ptr to map with name as key and return the entity ptr
-	entityMap[name].push_back(newEntity);
+	entityMap[id].push_back(newEntity);
 	return newEntity;
 }
 

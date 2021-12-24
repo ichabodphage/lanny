@@ -21,7 +21,10 @@
     <ClCompile Include="engine\EntityManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="App.cpp">
+    <ClCompile Include="LannyEngine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\BaseScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -35,7 +38,13 @@
     <ClInclude Include="engine\Components.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="App.hpp">
+    <ClInclude Include="LannyEngine.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\BaseScene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rectScene.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

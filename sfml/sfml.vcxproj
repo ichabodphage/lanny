@@ -152,12 +152,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="App.cpp" />
+    <ClCompile Include="engine\BaseScene.cpp" />
+    <ClCompile Include="LannyEngine.cpp" />
     <ClCompile Include="engine\EntityManager.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="App.hpp" />
+    <ClInclude Include="engine\BaseScene.hpp" />
+    <ClInclude Include="rectScene.hpp" />
+    <ClInclude Include="LannyEngine.hpp" />
     <ClInclude Include="engine\Components.hpp" />
     <ClInclude Include="engine\Entity.hpp" />
     <ClInclude Include="engine\EntityManager.hpp" />

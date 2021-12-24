@@ -7,12 +7,12 @@ namespace lny {
 		friend class EntityManager;
 		size_t entityCount;	  //total entity count
 		bool isActive = true; //is active flag tells the enine if the entity needs to be removed or not
-		int name = 0;		  //name id variable, enum used to declare names and their corisponding id's
+		int id = 0;		  //id variable, enum used to declare names and their corisponding id's
 
 
 	public:
 		//entity constructor, using id and name
-		Entity(size_t c, int n) :entityCount(c), name(n) {};
+		Entity(size_t c, int n) :entityCount(c), id(n) {};
 		//shared ptrs for entity components
 		std::shared_ptr<lny::CompPosition> cPosition;
 		std::shared_ptr<lny::CompShape> cShape;
@@ -23,7 +23,7 @@ namespace lny {
 		}
 		//getter functions
 		int& getname() { //name getter
-			return name;
+			return id;
 		}
 		size_t& getid() { //entityCount getter
 			return entityCount;
