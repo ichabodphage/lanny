@@ -1,6 +1,7 @@
 #include "App.hpp"
 #include "engine/Components.hpp"
 #include <random>
+#include <iostream>
 void App::init() {
 	isRunning = true;
 	run();
@@ -43,7 +44,7 @@ void App::addSquare() {
 	square->cPosition = std::shared_ptr<CompPosition>(new CompPosition({ distrP(gen),distrP(gen) }));
 	square->cShape = std::shared_ptr<CompShape>(new CompShape());
 	square->cShape->shape.setPosition(square->cPosition->positionXy);
-	square->cShape->makeSquare({ distrS(gen),distrS(gen) }); //make square shape
+	square->cShape->triangle({ distrS(gen),distrS(gen) }); //make square shape
 	square->cShape->tint(sf::Color(distrC(gen), distrC(gen), distrC(gen), distrC(gen))); //generate random RGBA color
 	
 }
@@ -53,5 +54,6 @@ void App::render() {
 	for (auto& entity : entityManager->entities) {
 		window->draw(entity->cShape->shape);
 	}
+	std::cout << entityManager->entities.size() << "\n";
 	window->display();
 }

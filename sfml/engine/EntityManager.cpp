@@ -36,6 +36,7 @@ void EntityManager::sweepInactiveEntities(EntityVector& vect) {
 		//remove entity if if it isnt active
 		if (!vect[i]->isActive) {
 			vect.erase(vect.begin() + i);
+			managerEntityCount--;
 			continue;
 		}
 		//if entity is active move to next entity
