@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\BaseScene.hpp" />
+    <ClInclude Include="engine\Event.hpp" />
     <ClInclude Include="rectScene.hpp" />
     <ClInclude Include="engine\LannyEngine.hpp" />
     <ClInclude Include="engine\Entity\Components.hpp" />

@@ -20,14 +20,22 @@ void BaseScene::start() {
 	sceneLoop();
 }
 
+void BaseScene::registerKeyEvent(int key, int eventName) {
+	events[key] = eventName;
+}
+
 void BaseScene::sceneLoop() {
 	while (isRunning && window->isOpen()) {
 		run();
 	}
 }
+
 void BaseScene::kill() {
 	isRunning = false;
 }
 void BaseScene::run() {
 	render();
+}
+void BaseScene::reciveEvent(Event myEvent) {
+	std::cout << "eventHaved\n";
 }

@@ -19,7 +19,17 @@ void LannyEngine::loadScene(std::string sceneName) {
 ScenePtr LannyEngine::getCurrentScene(std::string sceneName) {
 	return scenes.at(sceneName);
 }
+void LannyEngine::sendKeyPress(sf::Event * myKeyEvent) {
+	try {
+		auto current = scenes.at(currentScene);
+		int eventName = current->events.at(myKeyEvent->key.code);
+		bool isPressed = (myKeyEvent->type == sf::Event::KeyPressed) ? true : false;
+		current->reciveEvent(lny::Event(eventName, isPressed));
+	}
+	catch (std::exception e) {
 
+	};
+}
 void LannyEngine::input() {
 	sf::Event event;
 	while (window->pollEvent(event)) {
@@ -28,7 +38,10 @@ void LannyEngine::input() {
 				window->close();
 				break;
 			case sf::Event::KeyPressed:
-				std::cout << event.key.code << "\n";
+				sendKeyPress(&event);
+				break;
+			case sf::Event::KeyReleased:
+				sendKeyPress(&event);
 				break;
 		}
 	}

@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Entity/EntityManager.hpp"
 #include "BaseScene.hpp"
+#include "Event.hpp"
 enum EntType {
 	REGULAR = 0
 };
@@ -26,6 +27,7 @@ namespace lny {
 
 		void loadScene(std::string sceneName);
 
+		void sendKeyPress(sf::Event * myKeyEvent);
 		// gets the current scene
 		ScenePtr getCurrentScene(std::string sceneName);
 		void input();

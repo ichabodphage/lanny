@@ -47,5 +47,8 @@
     <ClInclude Include="rectScene.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="engine\Event.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
