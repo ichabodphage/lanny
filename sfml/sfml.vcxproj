@@ -153,17 +153,17 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="engine\BaseScene.cpp" />
-    <ClCompile Include="LannyEngine.cpp" />
-    <ClCompile Include="engine\EntityManager.cpp" />
+    <ClCompile Include="engine\LannyEngine.cpp" />
+    <ClCompile Include="engine\Entity\EntityManager.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\BaseScene.hpp" />
     <ClInclude Include="rectScene.hpp" />
-    <ClInclude Include="LannyEngine.hpp" />
-    <ClInclude Include="engine\Components.hpp" />
-    <ClInclude Include="engine\Entity.hpp" />
-    <ClInclude Include="engine\EntityManager.hpp" />
+    <ClInclude Include="engine\LannyEngine.hpp" />
+    <ClInclude Include="engine\Entity\Components.hpp" />
+    <ClInclude Include="engine\Entity\Entity.hpp" />
+    <ClInclude Include="engine\Entity\EntityManager.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

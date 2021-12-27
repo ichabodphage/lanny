@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-typedef sf::Vector2f XyVector;
 namespace lny {
+	typedef sf::Vector2f XyVector;
 	//position entity Component
 	struct CompPosition {
 		XyVector positionXy = { 0,0 };		//position vector

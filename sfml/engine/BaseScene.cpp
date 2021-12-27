@@ -10,16 +10,24 @@ void BaseScene::render() {
 	}
 	window->display();
 }
+
 void BaseScene::init() {
+	start();
+}
+
+void BaseScene::start() {
 	isRunning = true;
 	sceneLoop();
 }
+
 void BaseScene::sceneLoop() {
-	while (isRunning) {
+	while (isRunning && window->isOpen()) {
 		run();
 	}
 }
-
+void BaseScene::kill() {
+	isRunning = false;
+}
 void BaseScene::run() {
 	render();
 }
