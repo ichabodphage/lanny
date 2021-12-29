@@ -156,10 +156,12 @@
     <ClCompile Include="engine\LannyEngine.cpp" />
     <ClCompile Include="engine\Entity\EntityManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="engine\Media\MediaManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\BaseScene.hpp" />
     <ClInclude Include="engine\Event.hpp" />
+    <ClInclude Include="engine\Media\MediaManager.hpp" />
     <ClInclude Include="rectScene.hpp" />
     <ClInclude Include="engine\LannyEngine.hpp" />
     <ClInclude Include="engine\Entity\Components.hpp" />

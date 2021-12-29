@@ -18,6 +18,7 @@ namespace lny {
 		bool isPaused = false;
 	public:
 		std::map<int, int> events;
+
 		BaseScene(EngineWindow localWindow, lny::LannyEngine* engine) :
 			entityManager(new EntityManager()),
 			localEngine(engine),

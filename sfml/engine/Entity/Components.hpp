@@ -49,4 +49,9 @@ namespace lny {
 		}
 	};
 
+	//texture entity component used to texture entities
+	struct CompTexture {
+		std::shared_ptr<sf::Texture> texture;
+		CompTexture(std::shared_ptr<sf::Texture> tex) :texture(tex) {};
+	};
 };

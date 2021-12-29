@@ -16,7 +16,7 @@ namespace lny {
 		//shared ptrs for entity components
 		std::shared_ptr<lny::CompPosition> cPosition;
 		std::shared_ptr<lny::CompShape> cShape;
-
+		std::shared_ptr<lny::CompTexture> cTexture;
 		//setter functions
 		void disable() { //isActive setter
 			isActive = false;
