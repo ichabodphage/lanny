@@ -3,6 +3,12 @@
 typedef std::vector < std::shared_ptr<lny::Entity>> EntityVector;
 typedef std::map<int, EntityVector> EntityMap;
 namespace lny {
+
+	/*
+	* EntityManager class manages insertion, retreval, and removal of entities within a scene.
+	* EntityManager is the only class that is allowed to handle anything related to creation and deletion of entities.
+	* the class itself cannot initalize components of entities.
+	*/
 	class EntityManager {
 	public:
 		EntityVector entities;

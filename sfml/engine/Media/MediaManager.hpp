@@ -1,7 +1,11 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <string>
+
 namespace lny {
+	/*
+	* MediaManager manages texture images and other kinds of external media used by a scene
+	*/
 	class MediaManager
 	{
 	private:

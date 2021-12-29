@@ -2,7 +2,14 @@
 #include <SFML/Graphics.hpp>
 namespace lny {
 	typedef sf::Vector2f XyVector;
-	//position entity Component
+
+
+	/*
+		standard entity components that all classes derived from entity contain.
+		all components are structs that lack any instance methods besides constructors.
+	*/
+
+	//position entity Component used to position the entity onto the window
 	struct CompPosition {
 		XyVector positionXy = { 0,0 };		//position vector
 		XyVector velocityXy = { 0,0 };		//velocity vector

@@ -17,11 +17,11 @@ enum eventIDs {
 };
 class RectScene : public lny::BaseScene {
 public:
-	RectScene(lny::EngineWindow localWindow,lny::LannyEngine * engine):BaseScene(localWindow, engine){}
+	RectScene(lny::EngineWindow localWindow,lny::LannyEngine * engine,lny::MediaManager * media):BaseScene(localWindow, engine,media){}
 
 
 	void init() {
-		localEngine->media->insertTexture("crate0_diffuse.png");
+		globalMedia->insertTexture("crate0_diffuse.png");
 		//register key events
 		registerKeyEvent(sf::Keyboard::Escape,END);
 		registerKeyEvent(sf::Keyboard::A, MOV_LEFT);
@@ -45,15 +45,15 @@ public:
 		auto rect = entityManager->insertEntity(RECT);
 		rect->cPosition = std::make_shared<lny::CompPosition>(pos);
 		rect->cShape = std::make_shared<lny::CompShape>();
-		rect->cTexture = std::make_shared<lny::CompTexture>(localEngine->media->getTexture("crate0_diffuse.png"));
+		rect->cTexture = std::make_shared<lny::CompTexture>(globalMedia->getTexture("crate0_diffuse.png"));
 		rect->cShape->rect(size);
 		rect->cShape->shape.setTexture(rect->cTexture->texture.get());
-		rect->cShape->tint(sf::Color(randomint(0,255), randomint(0, 255), randomint(0, 255)));
+		rect->cShape->tint(sf::Color(randomFloat(0,255), randomFloat(0, 255), randomFloat(0, 255)));
 		rect->cShape->shape.setPosition(rect->cPosition->positionXy);
 	}
 
 	void run() {
-		localEngine->input();
+		globalEngine->input();
 		render();
 		move();
 	}

@@ -1,27 +1,37 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Entity/EntityManager.hpp"
+#include "Media/MediaManager.hpp"
 #include <iostream>
 #include "Event.hpp"
 namespace lny {
 	class LannyEngine;
 	typedef std::shared_ptr<sf::RenderWindow> EngineWindow;
 	typedef std::shared_ptr<lny::EntityManager> SceneEntityManager;
+	/*
+	* BaseScene class that is used both as an abstract class to derive specific scenes and as a default scene with no entities
+	* classes derived from BaseScene can be used to initalize components of entities using init and have their behavior determined by run
+	* 
+	*/
 	class BaseScene
 	{
 	protected:
 		EngineWindow window;
 		SceneEntityManager entityManager;
-		//engine is initalized on heap so raw pointer is acceptable
-		lny::LannyEngine* localEngine;
+		//pointer back to the engine
+		lny::LannyEngine* globalEngine;
+		//pointer back to the media manager
+		lny::MediaManager* globalMedia;
 		bool isRunning = false;
 		bool isPaused = false;
 	public:
+		//map holding keycode event id pairs
 		std::map<int, int> events;
-
-		BaseScene(EngineWindow localWindow, lny::LannyEngine* engine) :
+		//constructor using shared ptr of the window and the engine
+		BaseScene(EngineWindow localWindow, lny::LannyEngine* engine,lny::MediaManager *media) :
 			entityManager(new EntityManager()),
-			localEngine(engine),
+			globalEngine(engine),
+			globalMedia(media),
 			window(localWindow)
 		{}
 		//loop that runs while isRunning, runs 
@@ -38,10 +48,10 @@ namespace lny {
 		//starts the main level loop and sets isRunning to true
 		void start();
 
-		//initalizes the scene, will be different amoung children classes
+		//initalizes the entities of a scene along with keyPresses and media. 
 		virtual void init();
 		
-		//gets called by sceneLoop on each frame
+		//gets called by sceneLoop on each frame, used to determine entity behavior
 		virtual void run();
 		
 		//does whatever event is sent in even
