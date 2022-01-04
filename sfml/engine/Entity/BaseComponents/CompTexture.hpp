@@ -8,6 +8,6 @@ namespace lny {
 	*/
 	struct CompTexture : Compoment {
 		std::shared_ptr<sf::Texture> texture;
-		CompTexture(std::shared_ptr<sf::Texture> tex) :texture(tex) {};
+		CompTexture(std::shared_ptr<sf::Texture> tex) :texture(tex) { isActive = true; };
 	};
 }

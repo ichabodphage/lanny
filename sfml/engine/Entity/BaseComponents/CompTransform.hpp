@@ -10,6 +10,6 @@ namespace lny {
 	struct CompTransform : Compoment {
 		Vec2 pos;
 		float rotation = 0.f;
-		CompTransform(Vec2 p, float r) : pos(p), rotation(r) {};
+		CompTransform(Vec2 p, float r) : pos(p), rotation(r) { isActive = true; };
 	};
 }

@@ -3,6 +3,8 @@
 #include "BaseComponents/CompShape.hpp"
 #include "BaseComponents/CompTexture.hpp"
 #include "BaseComponents/CompTransform.hpp"
+#include "ComponentManager.hpp"
+
 namespace lny {
 
 	/*
@@ -21,29 +23,32 @@ namespace lny {
 	protected:
 		//entity manager 
 		friend class EntityManager;
-		size_t entityCount;	  //total entity count
-		bool isActive = true; //is active flag tells the enine if the entity needs to be removed or not
-		int id = 0;			  //id variable, enum used to declare names and their corisponding id's
+		size_t id;	  
+		
 	public:
-		Entity(size_t c, int n) :entityCount(c), id(n) {};
-		//position component that holds postion, velocity, and acceleration
-		std::shared_ptr<lny::CompTransform> cPosition;
-		//shape component that holds the shape that is used to draw the entity
-		std::shared_ptr<lny::CompShape> cShape;
-		//texture 
-		std::shared_ptr<lny::CompTexture> cTexture;
+		Entity(size_t i) :id(i) {};
+#ifdef COMPONENT_MANAGER
+		template<typename T>
+		T& getComponent() {
+			return COMPONENT_MANAGER::instance().getComponent<T>(id);
+		}
+		template<typename T>
+		bool hasComponent() {
+			return COMPONENT_MANAGER::instance().getComponent<T>(id).isActive;
+			
+		}
 
-		//disables an entity and flags it for removal by the entity manager
-		void disable() {
-			isActive = false;
+#else 
+		template<typename T>
+		T& getComponent() {
+			return DEFAULT_MANAGER::instance().getComponent<T>(id);
 		}
-		//gets the integer ID of the entity
-		int& getName() { //name getter
-			return id;
+		template<typename T>
+		bool hasComponent() {
+			return DEFAULT_MANAGER::instance().getComponent<T>(id).isActive;
+
 		}
-		//gets the number corisponding to the current amount of entities when the entity was initated
-		size_t& getCount() { 
-			return entityCount;
-		}
+#endif // DEFAULT_MANAGER
 	};
+
 }

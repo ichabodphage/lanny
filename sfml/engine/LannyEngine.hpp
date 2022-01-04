@@ -67,8 +67,8 @@ namespace lny {
 		//template that makes a shared pointer of a class that extends scene
 		template<typename SceneType>
 		std::shared_ptr<SceneType> generateScene() {
-			return std::make_shared<SceneType>(window,this,&mediaManager);
-		}
+			return std::make_shared<SceneType>(window, this, &mediaManager);
+		};
 	};
 
 }

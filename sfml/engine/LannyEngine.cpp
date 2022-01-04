@@ -3,7 +3,10 @@
 #include <iostream>
 using namespace lny;
 
+
+
 void LannyEngine::insertScene(std::string sceneName, ScenePtr scene) {
+	
 	scenes[sceneName] = scene;
 }
 
