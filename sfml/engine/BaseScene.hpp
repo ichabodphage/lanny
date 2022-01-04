@@ -22,6 +22,7 @@ namespace lny {
 		lny::LannyEngine* globalEngine;
 		//pointer back to the media manager
 		lny::MediaManager* globalMedia;
+
 		bool isRunning = false;
 		bool isPaused = false;
 	public:

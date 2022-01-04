@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Components.hpp"
+#include "BaseComponents/CompShape.hpp"
+#include "BaseComponents/CompTexture.hpp"
+#include "BaseComponents/CompTransform.hpp"
 namespace lny {
 
 	/*
@@ -25,7 +27,7 @@ namespace lny {
 	public:
 		Entity(size_t c, int n) :entityCount(c), id(n) {};
 		//position component that holds postion, velocity, and acceleration
-		std::shared_ptr<lny::CompPosition> cPosition;
+		std::shared_ptr<lny::CompTransform> cPosition;
 		//shape component that holds the shape that is used to draw the entity
 		std::shared_ptr<lny::CompShape> cShape;
 		//texture 

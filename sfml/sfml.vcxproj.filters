@@ -38,7 +38,7 @@
     <ClInclude Include="engine\Entity\EntityManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\Entity\Components.hpp">
+    <ClInclude Include="engine\Entity\Component.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\LannyEngine.hpp">
@@ -54,6 +54,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\Media\MediaManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Entity\BaseComponents\CompTransform.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Entity\BaseComponents\CompShape.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Entity\BaseComponents\CompTexture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -18,6 +18,7 @@ namespace lny {
 		//constructor using texture file path
 		MediaManager(std::string texPath) :textureFile(texPath) {};
 
+		//inserts a texture into textures
 		void insertTexture(std::string texName);
 
 		std::shared_ptr<sf::Texture> getTexture(std::string texName);

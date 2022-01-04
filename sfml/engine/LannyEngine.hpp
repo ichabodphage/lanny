@@ -10,7 +10,6 @@ enum EntType {
 //App class handles the window and the entity manager
 namespace lny {
 	typedef std::shared_ptr<sf::RenderWindow> EngineWindow;
-	typedef std::shared_ptr<lny::MediaManager> EngineMedia;
 	typedef std::shared_ptr<lny::BaseScene> ScenePtr;
 	typedef std::map<std::string, ScenePtr> SceneMap;
 

@@ -7,12 +7,22 @@ void BaseScene::render() {
 	//loop through all entities in the entity manager
 	for (auto& entity : entityManager->entities) {
 		//render entity if the entity has a shape
-		if (entity->cShape) {
-			window->draw(entity->cShape->shape);
+		if (entity->cShape && entity->cPosition) {
+			sf::Transform trans;
+			sf::RenderStates entityRender;
+			entityRender.transform = trans.translate(entity->cPosition->pos).rotate(entity->cPosition->rotation, entity->cShape->center);
+			if (entity->cTexture) {
+				entityRender.texture = entity->cTexture->texture.get();
+			}
+			window->draw(entity->cShape->verticies
+				, entityRender
+			);
 		}
 	}
 	window->display();
 }
+
+
 
 void BaseScene::init() {
 	start();

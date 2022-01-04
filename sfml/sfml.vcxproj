@@ -160,11 +160,14 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine\BaseScene.hpp" />
+    <ClInclude Include="engine\Entity\BaseComponents\CompShape.hpp" />
+    <ClInclude Include="engine\Entity\BaseComponents\CompTexture.hpp" />
+    <ClInclude Include="engine\Entity\BaseComponents\CompTransform.hpp" />
     <ClInclude Include="engine\Event.hpp" />
     <ClInclude Include="engine\Media\MediaManager.hpp" />
     <ClInclude Include="rectScene.hpp" />
     <ClInclude Include="engine\LannyEngine.hpp" />
-    <ClInclude Include="engine\Entity\Components.hpp" />
+    <ClInclude Include="engine\Entity\Component.hpp" />
     <ClInclude Include="engine\Entity\Entity.hpp" />
     <ClInclude Include="engine\Entity\EntityManager.hpp" />
   </ItemGroup>

@@ -8,12 +8,9 @@ enum objectIDs {
 	PLAYER
 };
 enum eventIDs {
-	MOV_LEFT,
-	MOV_RIGHT,
-	MOV_UP,
-	MOV_DOWN,
 	END,
-	INSERT_RECT
+	INSERT_RECT,
+	RECOLOR_RECT
 };
 class RectScene : public lny::BaseScene {
 public:
@@ -24,79 +21,71 @@ public:
 		globalMedia->insertTexture("crate0_diffuse.png");
 		//register key events
 		registerKeyEvent(sf::Keyboard::Escape,END);
-		registerKeyEvent(sf::Keyboard::A, MOV_LEFT);
-		registerKeyEvent(sf::Keyboard::D, MOV_RIGHT);
-		registerKeyEvent(sf::Keyboard::W, MOV_UP);
-		registerKeyEvent(sf::Keyboard::S, MOV_DOWN);
-		registerKeyEvent(sf::Keyboard::U, INSERT_RECT);
-		
+		registerKeyEvent(sf::Keyboard::Q, INSERT_RECT);
+		registerKeyEvent(sf::Keyboard::W, RECOLOR_RECT);
 		initRectangle({ 10,10 }, { 200,100 });
 		//start game loop
 		start();
 	}
-	void move(){
-		auto rect = entityManager->getEntities()[0];
-		rect->cPosition->positionXy += rect->cPosition->velocityXy;
-		rect->cShape->shape.setPosition(rect->cPosition->positionXy);
+	void changeColor(){
+
+		for (auto& entity : entityManager->entities) {
+			for (int i = 0; i < entity->cShape->verticies.getVertexCount(); i++){
+				entity->cShape->verticies[i].color.r = randomFloat(0, 255);
+				entity->cShape->verticies[i].color.g = randomFloat(0, 255);
+				entity->cShape->verticies[i].color.b = randomFloat(0, 255);
+				
+			}
+		}
 		
 	}
-	void initRectangle(lny::XyVector pos, lny::XyVector size) {
-		//insert rect into engine
+	void rotateRandom() {
+		if (globalEngine->getCurrentFrame() % 60 == 0) {
+			for (auto& entity : entityManager->entities) {
+				entity->cPosition->rotation += 1.f;
+			}
+		}
+	}
+	void sweep() {
+		if (entityManager->entities.size() > 100) {
+			for (int i = 0; i < 10; i++) {
+				entityManager->entities[i]->disable();
+			}
+		}
+		entityManager->update();
+	}
+	void initRectangle(lny::Vec2 pos, lny::Vec2 size) {
 		auto rect = entityManager->insertEntity(RECT);
-		rect->cPosition = std::make_shared<lny::CompPosition>(pos);
-		rect->cShape = std::make_shared<lny::CompShape>();
-		rect->cTexture = std::make_shared<lny::CompTexture>(globalMedia->getTexture("crate0_diffuse.png"));
-		rect->cShape->rect(size);
-		rect->cShape->shape.setTexture(rect->cTexture->texture.get());
-		rect->cShape->tint(sf::Color(randomFloat(0,255), randomFloat(0, 255), randomFloat(0, 255)));
-		rect->cShape->shape.setPosition(rect->cPosition->positionXy);
+		rect->cPosition = std::make_shared<lny::CompTransform>(pos, randomFloat(-180, 180));
+		rect->cShape = std::make_shared<lny::CompShape>(sf::Quads,4,size);
+		for (int i = 0; i < rect->cShape->verticies.getVertexCount(); i++) {
+			
+			rect->cShape->verticies[i].color.r = randomFloat(0, 255);
+			rect->cShape->verticies[i].color.g = randomFloat(0, 255);
+			rect->cShape->verticies[i].color.b = randomFloat(0, 255);
+			
+		}
+
 	}
 
 	void run() {
 		globalEngine->input();
 		render();
-		move();
+		rotateRandom();
+		sweep();
+
 	}
+
 	void reciveEvent(lny::Event myEvent) {
-		auto rect = entityManager->getEntities(RECT)[0];
 		switch (myEvent.name) { //keyboard input handler
-		case MOV_LEFT:
-			if (myEvent.active) {
-				rect->cPosition->velocityXy.x = -0.1f;
-			}
-			else {
-				rect->cPosition->velocityXy.x = 0;
-			}
-			break;
-		case MOV_RIGHT:
-			if (myEvent.active) {
-				rect->cPosition->velocityXy.x = 0.1f;
-			}
-			else {
-				rect->cPosition->velocityXy.x = 0;
-			}
-			break;
-		case MOV_UP:
-			if (myEvent.active) {
-				rect->cPosition->velocityXy.y = -0.1f;
-			}
-			else {
-				rect->cPosition->velocityXy.y = 0;
-			}
-			break;
-		case MOV_DOWN:
-			if (myEvent.active) {
-				rect->cPosition->velocityXy.y = 0.1f;
-			}
-			else {
-				rect->cPosition->velocityXy.y = 0;
-			}
-			break;
 		case END:
 			kill();
 			break;
 		case INSERT_RECT:
-			initRectangle({ randomFloat(0, 1280) ,randomFloat(0, 720) }, {randomFloat(0,100),randomFloat(0,100) });
+			initRectangle({ randomFloat(0, 1280) ,randomFloat(0, 720) }, {randomFloat(0,400),randomFloat(0,400) });
+			break;
+		case RECOLOR_RECT:
+			changeColor();
 			break;
 		}
 	}
