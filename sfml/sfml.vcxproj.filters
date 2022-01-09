@@ -62,10 +62,10 @@
     <ClInclude Include="engine\Entity\BaseComponents\CompShape.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\Entity\BaseComponents\CompTexture.hpp">
+    <ClInclude Include="engine\Entity\ComponentManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\Entity\ComponentManager.hpp">
+    <ClInclude Include="engine\Entity\BaseComponents\CompBB.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

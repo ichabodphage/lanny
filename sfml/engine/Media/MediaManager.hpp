@@ -21,6 +21,7 @@ namespace lny {
 		//inserts a texture into textures
 		void insertTexture(std::string texName);
 
+		//method that returns a pointer to a texture in the texture map
 		std::shared_ptr<sf::Texture> getTexture(std::string texName);
 	};
 }

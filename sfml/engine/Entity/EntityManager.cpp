@@ -24,3 +24,15 @@ void EntityManager::deInit() {
 	DEFAULT_MANAGER::instance().deInit();
 #endif
 }
+
+void EntityManager::sweepInactive() {
+	size_t i = 0;
+	while (i < entities.size()) {
+		if (!entities[i].isActive()) {
+			entities.erase(entities.begin() +i);
+			continue;
+		}
+		i++;
+
+	}
+}

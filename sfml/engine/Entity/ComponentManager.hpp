@@ -26,10 +26,11 @@ void for_each(TupleType&& t, FunctionType f)
 
 
 
-
+#define ENTITY_COUNT 3000
 namespace lny {
 	/*
 	* ComponentManager manages the components of entities
+	* singleton right now, but will be migrated as an instance variable of EntityManager
 	*/
 	
 	template <class ...types>
@@ -41,14 +42,13 @@ namespace lny {
 		//tuple of all the entity components
 		std::tuple<std::vector<types>...> components;
 		
+		
+	public:
 		//bool for wheather or not entity is active
 		std::vector<bool> active;
-	public:
-		
-		ComponentManager(size_t maxEntities) {
-			entityCount = maxEntities;
+		ComponentManager(size_t maxEntities):entityCount(maxEntities){
+			//reserve maxEntities amount of space in each vector
 			active.reserve(maxEntities);
-
 			for_each(components,
 				[maxEntities](auto& x) {
 					x.reserve(maxEntities);
@@ -57,20 +57,29 @@ namespace lny {
 
 		//gets the index of the next unalocated index
 		size_t nextEntity() {
-			size_t old = currentIndex;
-			if (currentIndex < entityCount) {
+			//if the current index is less then entity count, march forward by one
+			while (active[currentIndex] == true && currentIndex < entityCount) {
 				currentIndex++;
 			}
-			return old;
+			return currentIndex;
 		}
-		//adds an entity into the memory pool
+		//adds an entity into the memory pool and returns its index
 		size_t addEntity() {
 			size_t index = nextEntity();
 			active[index] = true;
 			return index;
 
 		}
-
+		void destroyEntity(size_t index) {
+			active[index] = false;
+			for_each(components,
+				[index](auto& x) {
+					x[index].isActive = false;
+				});
+			if (index < currentIndex) {
+				currentIndex = index;
+			}
+		}
 		//gets a component of an entity
 		template<typename T>
 		T& getComponent(size_t entityIndex) {
@@ -79,11 +88,14 @@ namespace lny {
 		
 		//sets all entitiy components to inactive
 		void deInit() {
+			// loop through all entity component vectors
 			for_each(components, [](auto& vector) {
+				// set isActive on all the components of each vector to false, equivalen
 				for (auto& x : vector) {
 					x.isActive = false;
 				}
 			});
+			//set isActive to false with allEntities
 			for (int i = 0; i < active.size();i++) {
 				active[i] = false;
 			}
@@ -103,4 +115,4 @@ namespace lny {
 	};
 
 }
-#define DEFAULT_MANAGER ComponentManager<lny::CompShape, lny::CompTexture, lny::CompTransform>
+#define DEFAULT_MANAGER ComponentManager<lny::CompShape, lny::CompTransform,lny::CompBB>

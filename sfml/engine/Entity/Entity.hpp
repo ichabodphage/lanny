@@ -1,8 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "BaseComponents/CompShape.hpp"
-#include "BaseComponents/CompTexture.hpp"
 #include "BaseComponents/CompTransform.hpp"
+#include "BaseComponents/CompBB.hpp"
 #include "ComponentManager.hpp"
 
 namespace lny {
@@ -21,31 +21,52 @@ namespace lny {
 	*/
 	class Entity {
 	protected:
-		//entity manager 
+		//entity manager
 		friend class EntityManager;
 		size_t id;	  
-		
+
 	public:
 		Entity(size_t i) :id(i) {};
+		size_t getid() {
+			return id;
+		}
+
+		//methods to get components of the specific entity
 #ifdef COMPONENT_MANAGER
 		template<typename T>
 		T& getComponent() {
-			return COMPONENT_MANAGER::instance().getComponent<T>(id);
+			return COMPONENT_MANAGER::instance().getComponent<T>(this->id);
 		}
 		template<typename T>
 		bool hasComponent() {
-			return COMPONENT_MANAGER::instance().getComponent<T>(id).isActive;
+			return COMPONENT_MANAGER::instance().getComponent<T>(this->id).isActive;
 			
 		}
+		
+		bool isActive() {
+			return COMPONENT_MANAGER::instance().active[this->id];
 
+		}
+		void destroy() {
+			return COMPONENT_MANAGER::instance().destroyEntity(this->id);
+
+		}
 #else 
+
 		template<typename T>
 		T& getComponent() {
-			return DEFAULT_MANAGER::instance().getComponent<T>(id);
+			return DEFAULT_MANAGER::instance().getComponent<T>(this->id);
 		}
 		template<typename T>
 		bool hasComponent() {
-			return DEFAULT_MANAGER::instance().getComponent<T>(id).isActive;
+			return DEFAULT_MANAGER::instance().getComponent<T>(this->id).isActive;
+
+		}
+		bool isActive() {
+			return DEFAULT_MANAGER::instance().active[this->id];
+		}
+		void destroy() {
+			return DEFAULT_MANAGER::instance().destroyEntity(this->id);
 
 		}
 #endif // DEFAULT_MANAGER

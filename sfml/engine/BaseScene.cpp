@@ -8,9 +8,8 @@ using namespace lny;
 void BaseScene::render() {
 	window->clear();
 	//loop through all entities in the entity manager
-	for (auto entity : entityManager->entities) {
+	for (auto& entity : entityManager->entities) {
 		//render entity if the entity has a shape
-		CompShape comp = entity.getComponent<lny::CompShape>();
 		if (entity.hasComponent<lny::CompShape>()) {
 			sf::RectangleShape loc = entity.getComponent<lny::CompShape>().shape;
 			sf::Transform	   shapeTransform;
@@ -24,6 +23,7 @@ void BaseScene::render() {
 
 
 void BaseScene::init() {
+	//just run the start function in the base scene
 	start();
 }
 
@@ -41,6 +41,7 @@ void BaseScene::sceneLoop() {
 	//loop that only ends if the window is closed or the scene is nolonger running
 	while (isRunning && window->isOpen()) {
 		globalEngine->incrementFrame();
+		entityManager->sweepInactive();
 		run();
 	}
 }
