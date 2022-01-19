@@ -124,6 +124,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>D:\c++projects\SFML-2.5.1-windows-vc15-64-bit\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -141,6 +142,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>D:\c++projects\SFML-2.5.1-windows-vc15-64-bit\SFML-2.5.1\include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -159,14 +161,17 @@
     <ClCompile Include="engine\Media\MediaManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="demos\LargeEntityCountScene.hpp" />
+    <ClInclude Include="demos\TextureScene.hpp" />
     <ClInclude Include="engine\BaseScene.hpp" />
     <ClInclude Include="engine\Entity\BaseComponents\CompShape.hpp" />
     <ClInclude Include="engine\Entity\BaseComponents\CompTransform.hpp" />
     <ClInclude Include="engine\Entity\BaseComponents\CompBB.hpp" />
     <ClInclude Include="engine\Entity\ComponentManager.hpp" />
+    <ClInclude Include="engine\Entity\MemoryPool.hpp" />
     <ClInclude Include="engine\Event.hpp" />
     <ClInclude Include="engine\Media\MediaManager.hpp" />
-    <ClInclude Include="rectScene.hpp" />
+    <ClInclude Include="demos\ColisonScene.hpp" />
     <ClInclude Include="engine\LannyEngine.hpp" />
     <ClInclude Include="engine\Entity\Component.hpp" />
     <ClInclude Include="engine\Entity\Entity.hpp" />

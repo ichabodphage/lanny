@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Entity/EntityManager.hpp"
+#include "Entity/ComponentManager.hpp"
 #include "Media/MediaManager.hpp"
 #include <iostream>
 #include "Event.hpp"
@@ -29,12 +30,21 @@ namespace lny {
 		//map holding keycode event id pairs
 		std::map<int, int> events;
 		//constructor using shared ptr of the window and the engine
-		BaseScene(EngineWindow localWindow, lny::LannyEngine* engine,lny::MediaManager *media) :
-			entityManager(new EntityManager()),
+#ifdef COMPONENT_MANAGER
+		BaseScene(EngineWindow localWindow, lny::LannyEngine* engine, lny::MediaManager* media, COMPONENT_MANAGER * components) :
+			entityManager(new EntityManager(components)),
 			globalEngine(engine),
 			globalMedia(media),
 			window(localWindow)
 		{}
+#else
+		BaseScene(EngineWindow localWindow, lny::LannyEngine* engine, lny::MediaManager* media, DEFAULT_MANAGER * components) :
+			entityManager(new EntityManager(components)),
+			globalEngine(engine),
+			globalMedia(media),
+			window(localWindow)
+		{}
+#endif
 		//loop that runs while isRunning, runs 
 		void sceneLoop();
 		//renders all renderable Entites

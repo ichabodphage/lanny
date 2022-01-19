@@ -22,51 +22,53 @@ namespace lny {
 	class Entity {
 	protected:
 		//entity manager
+		
 		friend class EntityManager;
 		size_t id;	  
 
 	public:
-		Entity(size_t i) :id(i) {};
 		size_t getid() {
 			return id;
 		}
-
 		//methods to get components of the specific entity
 #ifdef COMPONENT_MANAGER
+		COMPONENT_MANAGER* localComponentManager;
+		Entity(size_t i, COMPONENT_MANAGER* d) :id(i), localComponentManager(d){};
 		template<typename T>
 		T& getComponent() {
-			return COMPONENT_MANAGER::instance().getComponent<T>(this->id);
+			return localComponentManager ->getComponent<T>(this->id);
 		}
 		template<typename T>
 		bool hasComponent() {
-			return COMPONENT_MANAGER::instance().getComponent<T>(this->id).isActive;
+			return localComponentManager->getComponent<T>(this->id).isActive;
 			
 		}
 		
 		bool isActive() {
-			return COMPONENT_MANAGER::instance().active[this->id];
+			return localComponentManager->active.getValue(this->id);
 
 		}
 		void destroy() {
-			return COMPONENT_MANAGER::instance().destroyEntity(this->id);
+			return localComponentManager->destroyEntity(this->id);
 
 		}
 #else 
-
+		DEFAULT_MANAGER* localComponentManager;
+		Entity(size_t i, DEFAULT_MANAGER* d) :id(i), localComponentManager(d) {};
 		template<typename T>
 		T& getComponent() {
-			return DEFAULT_MANAGER::instance().getComponent<T>(this->id);
+			return localComponentManager->getComponent<T>(this->id);
 		}
 		template<typename T>
 		bool hasComponent() {
-			return DEFAULT_MANAGER::instance().getComponent<T>(this->id).isActive;
+			return localComponentManager->getComponent<T>(this->id).isActive;
 
 		}
 		bool isActive() {
-			return DEFAULT_MANAGER::instance().active[this->id];
+			return localComponentManager->active.getValue(this->id);
 		}
 		void destroy() {
-			return DEFAULT_MANAGER::instance().destroyEntity(this->id);
+			return localComponentManager->destroyEntity(this->id);
 
 		}
 #endif // DEFAULT_MANAGER

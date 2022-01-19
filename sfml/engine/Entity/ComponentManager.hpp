@@ -1,7 +1,8 @@
 #pragma once
 #include "Component.hpp"
+#include "./MemoryPool.hpp"
 #include <tuple>
-
+#include <list>
 
 template<typename TupleType, typename FunctionType>
 void for_each(TupleType&&, FunctionType
@@ -25,8 +26,6 @@ void for_each(TupleType&& t, FunctionType f)
 }
 
 
-
-#define ENTITY_COUNT 3000
 namespace lny {
 	/*
 	* ComponentManager manages the components of entities
@@ -41,44 +40,35 @@ namespace lny {
 		size_t currentIndex = 0;
 		//tuple of all the entity components
 		std::tuple<std::vector<types>...> components;
-		
-		
+		size_t maxEntitiyCount;
 	public:
 		//bool for wheather or not entity is active
-		std::vector<bool> active;
-		ComponentManager(size_t maxEntities):entityCount(maxEntities){
+		MemoryPool<bool> active;
+		ComponentManager(size_t maxEntities):entityCount(maxEntities), active(maxEntities,false), maxEntitiyCount(maxEntities){
 			//reserve maxEntities amount of space in each vector
-			active.reserve(maxEntities);
 			for_each(components,
 				[maxEntities](auto& x) {
 					x.reserve(maxEntities);
 				});
+			//this for loop fixes a memory error involving random access of active elements
+			
 		}
 
-		//gets the index of the next unalocated index
-		size_t nextEntity() {
-			//if the current index is less then entity count, march forward by one
-			while (active[currentIndex] == true && currentIndex < entityCount) {
-				currentIndex++;
-			}
-			return currentIndex;
-		}
+		
+		
 		//adds an entity into the memory pool and returns its index
 		size_t addEntity() {
-			size_t index = nextEntity();
-			active[index] = true;
-			return index;
+			
+			return active.allocate(true);
 
 		}
 		void destroyEntity(size_t index) {
-			active[index] = false;
+			active.deallocate(index);
 			for_each(components,
 				[index](auto& x) {
 					x[index].isActive = false;
 				});
-			if (index < currentIndex) {
-				currentIndex = index;
-			}
+			
 		}
 		//gets a component of an entity
 		template<typename T>
@@ -95,23 +85,11 @@ namespace lny {
 					x.isActive = false;
 				}
 			});
-			//set isActive to false with allEntities
-			for (int i = 0; i < active.size();i++) {
-				active[i] = false;
-			}
+			
+			active = MemoryPool<bool>(maxEntitiyCount, false);
+			
 		}
 
-#ifdef ENTITY_COUNT
-		static ComponentManager& instance() {
-			static ComponentManager pool(ENTITY_COUNT);
-			return pool;
-		}
-#else
-		static ComponentManager& instance() {
-			static ComponentManager pool(10000);
-			return pool;
-		}
-#endif
 	};
 
 }

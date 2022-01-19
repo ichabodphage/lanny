@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Entity/EntityManager.hpp"
+#include "Entity/ComponentManager.hpp"
 #include "BaseScene.hpp"
 #include "Event.hpp"
 #include "Media/MediaManager.hpp"
@@ -12,7 +13,15 @@ namespace lny {
 	typedef std::shared_ptr<sf::RenderWindow> EngineWindow;
 	typedef std::shared_ptr<lny::BaseScene> ScenePtr;
 	typedef std::map<std::string, ScenePtr> SceneMap;
+#ifdef COMPONENT_MANAGER;
+	typedef COMPONENT_MANAGER ComponentMgr;
+	typedef std::unique_ptr <COMPONENT_MANAGER> ComponentManagerPtr;
+#else
+	typedef DEFAULT_MANAGER ComponentMgr;
+	typedef std::unique_ptr <DEFAULT_MANAGER> ComponentManagerPtr;
+#endif // DEFAULT_MANAGER
 
+	
 	/*
 	* LannyEngine is a class that is used to handle loading of scenes along with the handling of media
 	* specifically it determines which scenes should be active, and acts as an interface for the scenes to interact with the MediaManager class
@@ -32,11 +41,12 @@ namespace lny {
 		//engine media manager used for handling textures
 		lny::MediaManager mediaManager;
 
+		ComponentManagerPtr componentManager;
 		unsigned long long frame = 0;
 	public:
-		
 		//constructor using video mode, window name, and path to texture file
-		LannyEngine(sf::VideoMode video, std::string name,std::string mediaPath):
+		LannyEngine(sf::VideoMode video, std::string name,std::string mediaPath,size_t maxEntities = 3000):
+			componentManager(std::make_unique<ComponentMgr>(maxEntities)),
 			window(new sf::RenderWindow(video, name)),
 			mediaManager(mediaPath){};
 
@@ -67,7 +77,7 @@ namespace lny {
 		//template that makes a shared pointer of a class that extends scene
 		template<typename SceneType>
 		std::shared_ptr<SceneType> generateScene() {
-			return std::make_shared<SceneType>(window, this, &mediaManager);
+			return std::make_shared<SceneType>(window, this, &mediaManager, componentManager.get());
 		};
 	};
 

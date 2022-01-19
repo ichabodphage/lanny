@@ -1,7 +1,7 @@
 #pragma once
-#include "engine/BaseScene.hpp"
-#include "engine/LannyEngine.hpp"
-#include "engine/Entity/Entity.hpp"
+#include "../engine/BaseScene.hpp"
+#include "../engine/LannyEngine.hpp"
+#include "../engine/Entity/Entity.hpp"
 #include <random>
 
 enum eventIDs {
@@ -9,11 +9,12 @@ enum eventIDs {
 	MOVE_UP,
 	MOVE_DOWN,
 	MOVE_LEFT,
-	MOVE_RIGHT
+	MOVE_RIGHT,
+	CHANGE_SCENE
 };
-class RectScene : public lny::BaseScene {
+class ColisonScene: public lny::BaseScene {
 public:
-	RectScene(lny::EngineWindow  localWindow,lny::LannyEngine * engine,lny::MediaManager * media):BaseScene(localWindow, engine,media){}
+	ColisonScene(lny::EngineWindow  localWindow,lny::LannyEngine * engine,lny::MediaManager * media, lny::DEFAULT_MANAGER* w):BaseScene(localWindow, engine,media,w){}
 
 	lny::Entity rect = entityManager->addEntity();
 	void init() {
@@ -22,13 +23,9 @@ public:
 		registerKeyEvent(sf::Keyboard::S, MOVE_DOWN);
 		registerKeyEvent(sf::Keyboard::A, MOVE_LEFT);
 		registerKeyEvent(sf::Keyboard::D, MOVE_RIGHT);
-
-		globalMedia->insertTexture("crate0_diffuse.png");
-		auto s = globalMedia->getTexture("crate0_diffuse.png");
-
+		registerKeyEvent(sf::Keyboard::Num1, CHANGE_SCENE);
 		
 		rect.getComponent<lny::CompShape>() = lny::CompShape({ 100,100 });
-		rect.getComponent<lny::CompShape>().shape.setTexture(globalMedia->getTexture("crate0_diffuse.png").get());
 		rect.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(10, 10),0);
 		rect.getComponent<lny::CompBB>() = lny::CompBB({ 100,100 });
 
@@ -100,6 +97,10 @@ public:
 		case MOVE_DOWN:
 			if (myEvent.active)
 				rect.getComponent<lny::CompTransform>().pos.y += 2.5f;
+			break;
+		case CHANGE_SCENE:
+			kill();
+			globalEngine->loadScene("scene2");
 			break;
 		}
 	}

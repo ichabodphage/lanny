@@ -47,7 +47,7 @@
     <ClInclude Include="engine\BaseScene.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="rectScene.hpp">
+    <ClInclude Include="demos\ColisonScene.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\Event.hpp">
@@ -66,6 +66,15 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\Entity\BaseComponents\CompBB.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demos\TextureScene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="demos\LargeEntityCountScene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Entity\MemoryPool.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

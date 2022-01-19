@@ -10,11 +10,23 @@ namespace lny {
 	*/
 	class EntityManager {
 	public:
+#ifdef COMPONENT_MANAGER
+		COMPONENT_MANAGER* localComponentManager;
+		EntityManager(COMPONENT_MANAGER* d) :localComponentManager(d) {}
 		EntityVector entities;
 		lny::Entity addEntity();
 
 		void deInit();
 		void sweepInactive();
+#else
+		DEFAULT_MANAGER* localComponentManager;
+		EntityManager(DEFAULT_MANAGER* d) :localComponentManager(d) {}
+		EntityVector entities;
+		lny::Entity addEntity();
+
+		void deInit();
+		void sweepInactive();
+#endif
 	};
 
 }
