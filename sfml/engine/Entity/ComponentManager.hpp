@@ -27,10 +27,6 @@ void for_each(TupleType&& t, FunctionType f)
 
 
 namespace lny {
-	/*
-	* ComponentManager manages the components of entities
-	* singleton right now, but will be migrated as an instance variable of EntityManager
-	*/
 	
 	template <class ...types>
 	class ComponentManager {
@@ -50,7 +46,7 @@ namespace lny {
 				[maxEntities](auto& x) {
 					x.reserve(maxEntities);
 				});
-			//this for loop fixes a memory error involving random access of active elements
+			
 			
 		}
 

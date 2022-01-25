@@ -158,10 +158,12 @@
     <ClCompile Include="engine\LannyEngine.cpp" />
     <ClCompile Include="engine\Entity\EntityManager.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="engine\Media\MediaManager.cpp" />
+    <ClCompile Include="engine\Media\TextureManager.cpp" />
+    <ClCompile Include="engine\Media\MusicManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="demos\LargeEntityCountScene.hpp" />
+    <ClInclude Include="demos\MusicScene.hpp" />
     <ClInclude Include="demos\TextureScene.hpp" />
     <ClInclude Include="engine\BaseScene.hpp" />
     <ClInclude Include="engine\Entity\BaseComponents\CompShape.hpp" />
@@ -171,11 +173,13 @@
     <ClInclude Include="engine\Entity\MemoryPool.hpp" />
     <ClInclude Include="engine\Event.hpp" />
     <ClInclude Include="engine\Media\MediaManager.hpp" />
+    <ClInclude Include="engine\Media\TextureManager.hpp" />
     <ClInclude Include="demos\ColisonScene.hpp" />
     <ClInclude Include="engine\LannyEngine.hpp" />
     <ClInclude Include="engine\Entity\Component.hpp" />
     <ClInclude Include="engine\Entity\Entity.hpp" />
     <ClInclude Include="engine\Entity\EntityManager.hpp" />
+    <ClInclude Include="engine\Media\MusicManager.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

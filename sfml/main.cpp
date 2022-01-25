@@ -4,13 +4,15 @@
 #include "demos/ColisonScene.hpp"
 #include "demos/TextureScene.hpp"
 #include "demos/LargeEntityCountScene.hpp"
+#include "demos/MusicScene.hpp"
 #include "engine/Entity/ComponentManager.hpp"
 int main()
 {   
-    lny::LannyEngine myApp(sf::VideoMode(1280, 720), "myApp","TextureAssets",100000);
-    myApp.insertScene("scene1",myApp.generateScene<ColisonScene>());
-    myApp.insertScene("scene2", myApp.generateScene<TextureScene>());
-    myApp.insertScene("scene3", myApp.generateScene<LargeEntityCountScene>());
-    myApp.loadScene("scene1");
+    lny::LannyEngine myApp(sf::VideoMode(1280, 720), "myApp","TextureAssets","MusicAssets", 10000);
+    myApp.loadScene<ColisonScene>("scene1");
+    myApp.loadScene<TextureScene>("scene2");
+    myApp.loadScene<LargeEntityCountScene>("scene3");
+    myApp.loadScene<MusicScene>("scene4");
+    myApp.playScene("scene1");
     return 0;
 }

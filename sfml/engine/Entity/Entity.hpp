@@ -31,30 +31,14 @@ namespace lny {
 			return id;
 		}
 		//methods to get components of the specific entity
-#ifdef COMPONENT_MANAGER
-		COMPONENT_MANAGER* localComponentManager;
-		Entity(size_t i, COMPONENT_MANAGER* d) :id(i), localComponentManager(d){};
-		template<typename T>
-		T& getComponent() {
-			return localComponentManager ->getComponent<T>(this->id);
-		}
-		template<typename T>
-		bool hasComponent() {
-			return localComponentManager->getComponent<T>(this->id).isActive;
-			
-		}
-		
-		bool isActive() {
-			return localComponentManager->active.getValue(this->id);
+#ifdef COMPONENT_MANAGER;
+		typedef COMPONENT_MANAGER ComponentMgr;
+#else
+		typedef DEFAULT_MANAGER ComponentMgr;
+#endif // DEFAULT_MANAGER
 
-		}
-		void destroy() {
-			return localComponentManager->destroyEntity(this->id);
-
-		}
-#else 
-		DEFAULT_MANAGER* localComponentManager;
-		Entity(size_t i, DEFAULT_MANAGER* d) :id(i), localComponentManager(d) {};
+		ComponentMgr* localComponentManager;
+		Entity(size_t i, ComponentMgr* d) :id(i), localComponentManager(d) {};
 		template<typename T>
 		T& getComponent() {
 			return localComponentManager->getComponent<T>(this->id);
@@ -71,7 +55,7 @@ namespace lny {
 			return localComponentManager->destroyEntity(this->id);
 
 		}
-#endif // DEFAULT_MANAGER
+
 	};
 
 }

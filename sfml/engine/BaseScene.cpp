@@ -23,38 +23,36 @@ void BaseScene::render() {
 
 
 void BaseScene::init() {
-	//just run the start function in the base scene
-	start();
+	std::cout << "SCENE INIT TEST GONE RIGHT\n";
 }
-
-void BaseScene::start() {
-	//set is running to true and call scene loop to begin the scene
-	isRunning = true;
-	sceneLoop();
-}
-
-void BaseScene::registerKeyEvent(int key, int eventName) {
-	events[key] = eventName;
-}
-
-void BaseScene::sceneLoop() {
-	//loop that only ends if the window is closed or the scene is nolonger running
-	while (isRunning && window->isOpen()) {
-		globalEngine->incrementFrame();
-		entityManager->sweepInactive();
-		run();
+void BaseScene::registerInputEvent(enum eventType type,int key, int eventName) {
+	switch (type) {
+	case keyEvent:
+		keyEvents[key] = eventName;
+		break;
+	case mouseEvent:
+		mouseEvents[key] = eventName;
+		break;
 	}
+	
 }
+
 
 void BaseScene::kill() {
 	//setting isRunning to false ends the scene loop
 	entityManager->deInit();
 	isRunning = false;
 }
-void BaseScene::run() {
+
+void BaseScene::run_frameIndependant() {
+	globalEngine->input();
+	entityManager->sweepInactive();
 	render();
 }
-void BaseScene::reciveEvent(Event myEvent) {
+void BaseScene::run(float deltaT) {
+	
+}
+void BaseScene::reciveInput(Event myEvent) {
 	std::string status = (myEvent.active) ? " and active" : " and not active";
 	std::cout << "event with code: " <<std::to_string(myEvent.name) << status << "\n";
 }

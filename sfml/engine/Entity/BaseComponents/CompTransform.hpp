@@ -9,6 +9,8 @@ namespace lny {
 	*/
 	struct CompTransform : Compoment {
 		Vec2 pos;
+		float xvel = 0;
+		float yvel = 0;
 		float rotation = 0.f;
 		CompTransform(Vec2 p, float r) : pos(p), rotation(r) { isActive = true; };
 	};

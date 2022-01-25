@@ -6,6 +6,10 @@
 #include <iostream>
 #include "Event.hpp"
 namespace lny {
+	enum eventType {
+		keyEvent,
+		mouseEvent
+	};
 	class LannyEngine;
 	typedef std::shared_ptr<sf::RenderWindow> EngineWindow;
 	typedef std::shared_ptr<lny::EntityManager> SceneEntityManager;
@@ -23,12 +27,13 @@ namespace lny {
 		lny::LannyEngine* globalEngine;
 		//pointer back to the media manager
 		lny::MediaManager* globalMedia;
-
+		
 		bool isRunning = false;
 		bool isPaused = false;
 	public:
 		//map holding keycode event id pairs
-		std::map<int, int> events;
+		std::map<int, int> keyEvents;
+		std::map<int, int> mouseEvents;
 		//constructor using shared ptr of the window and the engine
 #ifdef COMPONENT_MANAGER
 		BaseScene(EngineWindow localWindow, lny::LannyEngine* engine, lny::MediaManager* media, COMPONENT_MANAGER * components) :
@@ -45,28 +50,30 @@ namespace lny {
 			window(localWindow)
 		{}
 #endif
-		//loop that runs while isRunning, runs 
-		void sceneLoop();
 		//renders all renderable Entites
 		void render();
 
 		//adds an event to the events map
-		void registerKeyEvent(int key, int id);
-		
+		void registerInputEvent(enum eventType type,int key, int id);
+
 		//kills the current scene loop and sets isRunning to false
 		void kill();
 
-		//starts the main level loop and sets isRunning to true
-		void start();
+		bool* isOn() {
+			return &isRunning;
+		}
 
 		//initalizes the entities of a scene along with keyPresses and media. 
 		virtual void init();
 		
+		//run function that is frame independant and 
+		virtual void run_frameIndependant();
+
 		//gets called by sceneLoop on each frame, used to determine entity behavior
-		virtual void run();
+		virtual void run(float deltaT);
 		
 		//does whatever event is sent in even
-		virtual void reciveEvent(lny::Event localEvent);
+		virtual void reciveInput(lny::Event localEvent);
 	};
 }
 

@@ -41,32 +41,46 @@ namespace lny {
 		//engine media manager used for handling textures
 		lny::MediaManager mediaManager;
 
+		//component manager used to managing memory pooling of components
 		ComponentManagerPtr componentManager;
-		unsigned long long frame = 0;
+
+		//template that makes a shared pointer of a class that extends scene
+		template<typename SceneType>
+		std::shared_ptr<SceneType> generateScene() {
+			return std::make_shared<SceneType>(window, this, &mediaManager, componentManager.get());
+		};
+		size_t frame = 0;
+
+		//while loop that runs the current scene;
+		void runScene();
+
 	public:
 		//constructor using video mode, window name, and path to texture file
-		LannyEngine(sf::VideoMode video, std::string name,std::string mediaPath,size_t maxEntities = 3000):
+		LannyEngine(sf::VideoMode video, std::string name,std::string mediaPath,std::string musicPath,size_t maxEntities = 3000):
 			componentManager(std::make_unique<ComponentMgr>(maxEntities)),
 			window(new sf::RenderWindow(video, name)),
-			mediaManager(mediaPath){};
+			mediaManager(mediaPath, musicPath){};
 
 		//inserts a scene into scene map
-		void insertScene(std::string sceneName, ScenePtr scene);
+		template<typename SceneType>
+		void loadScene(std::string sceneName) {
+			try {
+				scenes[sceneName] = generateScene<SceneType>();
+				std::cout << "loaded scene: " << sceneName << "\n";
+			}
+			catch (std::exception e) {
+				std::cout << "error, attempted to load invalid scene type\n";
+			};
+		};
 
-		//gets a scene with sceneName
-		ScenePtr getScene(std::string sceneName);
-		
-		//returns currentScene
-		ScenePtr getCurrentScene();
-
-		//loads a scene if it is in the scene map
-		void loadScene(std::string sceneName);
+		//begins playing a scene
+		void playScene(std::string sceneName);
 
 		//increases frame by one
 		void incrementFrame();
 		
 		//gets the current frame
-		unsigned long long getCurrentFrame();
+		size_t getCurrentFrame();
 
 		//pools keyboard input
 		void input();
@@ -74,11 +88,9 @@ namespace lny {
 		//sends an lny::Event to the scene currentScene containing a keycode and wheather or not a key is pressed
 		void sendKeyPress(sf::Event* myKeyEvent, bool isPressed);
 
-		//template that makes a shared pointer of a class that extends scene
-		template<typename SceneType>
-		std::shared_ptr<SceneType> generateScene() {
-			return std::make_shared<SceneType>(window, this, &mediaManager, componentManager.get());
-		};
+		//sends an lny event holding information on the mouse cursor
+		void sendMouseEvent(sf::Event* myKeyEvent, bool isPresse,lny::Vec2 mag);
+
 	};
 
 }

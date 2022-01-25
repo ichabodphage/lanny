@@ -3,26 +3,24 @@
 #include "../engine/LannyEngine.hpp"
 #include "../engine/Entity/Entity.hpp"
 #include <random>
+#include <chrono>
+#include <iostream>
 
 class LargeEntityCountScene : public lny::BaseScene {
 public:
 	LargeEntityCountScene(lny::EngineWindow  localWindow, lny::LannyEngine* engine, lny::MediaManager* media, lny::ComponentMgr* w) :BaseScene(localWindow, engine, media, w) {}
-
-
+	float dt;
 	void init() {
-		registerKeyEvent(sf::Keyboard::Escape, END);
-		registerKeyEvent(sf::Keyboard::Num1, CHANGE_SCENE);
+		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Escape, END);
+		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Num1, CHANGE_SCENE);
+		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Num2, GET_FPS);
 
-
-		globalMedia->insertTexture("crate0_diffuse.png");
-		globalMedia->insertTexture("pen.jpg");
-		globalMedia->insertTexture("car1_spr.png");
-		for (int i = 0; i < 1000; i += 1) {
+		for (int i = 0; i < 100; i += 1) {
 			for (int j = 0; j < 10; j++) {
 				for (int k = 0; k < 10; k++) {
 					lny::Entity rect = entityManager->addEntity();
 					rect.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 });
-					rect.getComponent<lny::CompShape>().shape.setTexture(globalMedia->getTexture("crate0_diffuse.png").get());
+					rect.getComponent<lny::CompShape>().shape.setTexture(globalMedia->globalTextures.getTexture("box"));
 					rect.getComponent<lny::CompShape>().shape.setFillColor(sf::Color(255, 255, 255));
 					rect.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(10 + j*50 , 10 + k * 50), 0);
 					
@@ -31,24 +29,35 @@ public:
 		}
 
 
-		start();
-	}
-
-	void run() {
-		globalEngine->input();
-
-		render();
 
 	}
 
-	void reciveEvent(lny::Event myEvent) {
+	void run(float deltaT) {
+
+		dt = deltaT;
+
+	}
+
+	void getFrameRate() {
+		std::cout << "current frames per second: " << 1 / dt << "\n";
+
+	}
+
+	void reciveInput(lny::Event myEvent) {
 		switch (myEvent.name) {
 		case END:
 			kill();
 			break;
 		case CHANGE_SCENE:
-			kill();
-			globalEngine->loadScene("scene1");
+			if (myEvent.active) {
+			
+				globalEngine->playScene("scene4");
+			}
+			break;
+		case GET_FPS:
+			if (!myEvent.active) {
+				getFrameRate();
+			}
 			break;
 		}
 	}
