@@ -16,7 +16,7 @@ void TextureManager::loadTexture(std::string name,std::string path) {
 			textures[name] = std::make_shared<sf::Texture>(tex);
 			std::cout << "texture " << name << " loaded from: " << textureFile<< "/" <<  path <<"\n";
 		}else{
-			std::cout << "error, file path: " << textureFile + "/" + path << " is an invalid texture path.\n;
+			std::cout << "error, file path: " << textureFile + "/" + path << " is an invalid texture path.\n";
 		}
 	}
 
