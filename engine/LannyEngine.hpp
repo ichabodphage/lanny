@@ -67,13 +67,10 @@ namespace lny {
 		//inserts a scene into scene map
 		template<typename SceneType>
 		void loadScene(std::string sceneName) {
-			try {
-				scenes[sceneName] = generateScene<SceneType>();
-				std::cout << "loaded scene: " << sceneName << "\n";
-			}
-			catch (std::exception e) {
-				std::cout << "error, scene: " << sceneName << " loaded as invalid scene type. (does the type extend engine/Scene/BaseScene.hpp?)"<<"\n";
-			};
+			scenes[sceneName] = generateScene<SceneType>();
+			std::cout << "loaded scene: " << sceneName << "\n";
+			
+			
 		};
 
 		//begins playing a scene
