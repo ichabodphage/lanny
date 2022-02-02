@@ -6,7 +6,7 @@ SFML (used for graphics, audio, and IO)
 
 ## build
 requirements
-1. clang or GCC with c++ 17
+1. clang with c++ 17
 2. SFML 
 3. machine with x64 architecture
 
