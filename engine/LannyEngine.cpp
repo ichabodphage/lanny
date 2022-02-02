@@ -15,11 +15,11 @@ void LannyEngine::playScene(std::string sceneName) {
 		//save the name of the current scene and run init
 		currentScene = newScene;
 		currentScene->init();
-		std::cout << "successfully initalized scene: " << sceneName << "\n";
+		std::cout << "successfully started scene: " << sceneName << "\n";
 		runScene();
 	}
 	catch (std::exception e) {
-		std::cout << "error, scene " << sceneName << " attemped loading but threw exception:\n"<< e.what() <<"\n";
+		std::cout << "error, scene " << sceneName << " is not currently loaded. (does a scene named " <<sceneName<<" exist?)\n";
 	};
 }
 

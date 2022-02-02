@@ -8,6 +8,7 @@ namespace lny {
 	* bounding box component used for entity colisions
 	*/
 	struct CompBB : Compoment {
+		//length width size of the bounding box
 		Vec2 size;
 		CompBB(Vec2 p) : size(p){ isActive = true; };
 	};

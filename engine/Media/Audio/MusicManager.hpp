@@ -28,7 +28,7 @@ namespace lny {
 		void loadTrack(std::string name, std::string file);
 
 		//plays a track in the music map
-		void playTrack(std::string name);
+		void playTrack(std::string name, bool repeat = false);
 
 		//pauses the current track
 		void pauseCurrentTrack();

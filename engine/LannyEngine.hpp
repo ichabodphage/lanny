@@ -50,7 +50,7 @@ namespace lny {
 		//template that makes a shared pointer of a class that extends scene
 		template<typename SceneType>
 		std::shared_ptr<SceneType> generateScene() {
-			return std::make_shared<SceneType>(window, this, &mediaManager, componentManager.get());
+				return std::make_shared<SceneType>(window, this, &mediaManager, componentManager.get());
 		};
 		size_t frame = 0;
 
@@ -72,7 +72,7 @@ namespace lny {
 				std::cout << "loaded scene: " << sceneName << "\n";
 			}
 			catch (std::exception e) {
-				std::cout << "error, attempted to load invalid scene type\n";
+				std::cout << "error, scene: " << sceneName << " loaded as invalid scene type. (does the type extend engine/Scene/BaseScene.hpp?)"<<"\n";
 			};
 		};
 

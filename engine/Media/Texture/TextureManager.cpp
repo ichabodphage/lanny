@@ -16,7 +16,7 @@ void TextureManager::loadTexture(std::string name,std::string path) {
 			textures[name] = std::make_shared<sf::Texture>(tex);
 			std::cout << "texture " << name << " loaded from: " << textureFile<< "/" <<  path <<"\n";
 		}else{
-			std::cout << "error, file path: " << textureFile + "/" + path << " is an invalid texture path.\n";
+			std::cout << "error, file path: " << textureFile + "/" + path << " is an invalid texture path. (does " <<textureFile + "/" + path << " exist or is in a supported file format?)\n";
 		}
 	}
 
@@ -31,7 +31,7 @@ sf::Texture* TextureManager::getTexture(std::string name) {
 	}
 	catch (std::exception e) {
 		//return a nullptr and log an exception if it is not in the map
-		std::cout << "error, texture: " << name << " does not exist.\n";
+		std::cout << "error, texture: " << name << " is not a texture that has been loaded into the texture manager.\n";
 		return nullptr;
 	}
 }
@@ -44,7 +44,7 @@ void TextureManager::unloadTexture(std::string name) {
 	}
 	catch (std::exception e) {
 		//log an exception if the texture is not loaded
-		std::cout << "error, texture: " << name << " not loaded into texture manager\n";
+		std::cout << "error, texture: " << name << " not loaded into texture manager. (cannot delete texture that does not exist)\n";
 	}
 }
 void TextureManager::dumpTextures() {

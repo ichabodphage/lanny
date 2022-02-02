@@ -38,7 +38,7 @@ public:
 		globalMedia->globalTextures.loadTexture("box", "crate0_diffuse.png");
 		globalMedia->globalTextures.loadTexture("pen", "pen.jpg");
 		globalMedia->globalTextures.loadTexture("car", "car1_spr.png");
-
+	
 		lny::Entity rect = entityManager->addEntity();
 		rect.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 });
 		rect.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(10, 10),0);

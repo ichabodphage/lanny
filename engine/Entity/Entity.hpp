@@ -22,8 +22,9 @@ namespace lny {
 	class Entity {
 	protected:
 		//entity manager
-		
 		friend class EntityManager;
+
+		//id of the entity
 		size_t id;	  
 
 	public:

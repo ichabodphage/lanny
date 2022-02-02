@@ -16,12 +16,12 @@ void MusicManager::loadTrack(std::string name, std::string path) {
 			std::cout << "song " << name << " successfully loaded from: " << musicFolder << "/" << path << "\n";
 		}else{
 			//log an error if the music file does not successfully load
-			std::cout << "error, music file: " << path << " is not a valid path.\n";
+			std::cout << "error, music file: " << musicFolder + "/" + path << " is not a valid path. (does " <<musicFolder + "/" + path<<" exist or in a supported file format?)\n";
 		}
 	}
 }
 
-void MusicManager::playTrack(std::string name) {
+void MusicManager::playTrack(std::string name, bool repeat) {
 	try {
 		std::string path = music.at(name);
 
@@ -30,6 +30,8 @@ void MusicManager::playTrack(std::string name) {
 			currentTrackPath = path;
 			currentTrack.openFromFile(path);
 			currentTrack.play();
+			//loop the track if repeat is true
+			currentTrack.setLoop(repeat);
 		}
 		else if (currentTrack.getStatus() == sf::Music::Status::Paused || currentTrack.getStatus() == sf::Music::Status::Stopped) {
 			//resume playing the track if the current track is paused
@@ -37,7 +39,7 @@ void MusicManager::playTrack(std::string name) {
 		}
 		
 	}catch (std::exception e) {
-		std::cout << "error, music named: " << name << " is not currently loaded\n";
+		std::cout << "error, music named: " << name << " is not currently loaded. (was a track named " <<name <<" loaded?)\n";
 	}
 }
 

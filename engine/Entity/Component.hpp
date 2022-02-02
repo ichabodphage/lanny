@@ -9,6 +9,7 @@ namespace lny {
 	*/
 
 	struct Compoment {
+		//is active determines the activity of the components
 		bool isActive = false;
 	};
 

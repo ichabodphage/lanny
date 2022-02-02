@@ -8,8 +8,11 @@ namespace lny {
 	* media managers. used to make engine media easier to maintain
 	*/
 	struct MediaManager {
+		//engine texture manager
 		lny::TextureManager globalTextures;
+		//engine music manager
 		lny::MusicManager globalMusic;
+		
 		//constructor using texture path and music path
 		MediaManager(std::string pathOne, std::string pathTwo):
 			globalTextures(pathOne),
