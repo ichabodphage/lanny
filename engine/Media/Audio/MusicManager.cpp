@@ -7,8 +7,8 @@ void MusicManager::loadTrack(std::string name, std::string path) {
 		std::cout << "song " << name << " allready loaded\n";
 	}
 	catch (std::exception e) {
-		music[name] = musicFolder + "\\" + path;
-		std::cout << "song " << name << " successfully loaded from: " << musicFolder << "\\" << path << "\n";
+		music[name] = musicFolder + "/" + path;
+		std::cout << "song " << name << " successfully loaded from: " << musicFolder << "/" << path << "\n";
 	}
 }
 

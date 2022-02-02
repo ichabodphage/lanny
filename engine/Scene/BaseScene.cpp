@@ -1,7 +1,7 @@
 #include "BaseScene.hpp"
 #include "LannyEngine.hpp"
 #include <iostream>
-#include "Entity/ComponentManager.hpp"
+#include "Entity/Managers/ComponentManager.hpp"
 
 using namespace lny;
 

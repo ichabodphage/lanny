@@ -2,6 +2,7 @@
 #include <iostream>
 #include <SFML/Audio.hpp>
 #include <map>
+#include <memory>
 /*
 * music mixer class to handle playing and loading of music
 */

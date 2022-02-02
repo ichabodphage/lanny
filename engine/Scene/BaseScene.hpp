@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Entity/EntityManager.hpp"
-#include "Entity/ComponentManager.hpp"
+#include "Entity/Managers/EntityManager.hpp"
+#include "Entity/Managers/ComponentManager.hpp"
 #include "Media/MediaManager.hpp"
 #include <iostream>
 #include "Event.hpp"

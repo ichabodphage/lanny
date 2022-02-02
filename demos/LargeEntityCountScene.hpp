@@ -1,7 +1,8 @@
 #pragma once
-#include "../engine/BaseScene.hpp"
+#include "../engine/Scene/BaseScene.hpp"
 #include "../engine/LannyEngine.hpp"
 #include "../engine/Entity/Entity.hpp"
+
 #include <random>
 #include <chrono>
 #include <iostream>

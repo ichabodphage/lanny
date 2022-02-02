@@ -3,7 +3,7 @@
 #include "BaseComponents/CompShape.hpp"
 #include "BaseComponents/CompTransform.hpp"
 #include "BaseComponents/CompBB.hpp"
-#include "ComponentManager.hpp"
+#include "Managers/ComponentManager.hpp"
 
 namespace lny {
 
@@ -27,11 +27,12 @@ namespace lny {
 		size_t id;	  
 
 	public:
+		//gets the enitity ID
 		size_t getid() {
 			return id;
 		}
-		//methods to get components of the specific entity
-#ifdef COMPONENT_MANAGER;
+		//component manager boilerplate
+#ifdef COMPONENT_MANAGER
 		typedef COMPONENT_MANAGER ComponentMgr;
 #else
 		typedef DEFAULT_MANAGER ComponentMgr;
@@ -39,18 +40,23 @@ namespace lny {
 
 		ComponentMgr* localComponentManager;
 		Entity(size_t i, ComponentMgr* d) :id(i), localComponentManager(d) {};
+
+		//returns a reference to an entity component
 		template<typename T>
 		T& getComponent() {
 			return localComponentManager->getComponent<T>(this->id);
 		}
+		//returns the activity status of a specific entity component
 		template<typename T>
 		bool hasComponent() {
 			return localComponentManager->getComponent<T>(this->id).isActive;
 
 		}
+		//returns the current activity status of the entity
 		bool isActive() {
 			return localComponentManager->active.getValue(this->id);
 		}
+		//sets the entity to inactive
 		void destroy() {
 			return localComponentManager->destroyEntity(this->id);
 

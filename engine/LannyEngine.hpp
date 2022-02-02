@@ -1,8 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Entity/EntityManager.hpp"
-#include "Entity/ComponentManager.hpp"
-#include "BaseScene.hpp"
+#include "Entity/Managers/EntityManager.hpp"
+#include "Entity/Managers/ComponentManager.hpp"
+#include "Scene/BaseScene.hpp"
 #include "Event.hpp"
 #include "Media/MediaManager.hpp"
 enum EntType {
@@ -13,7 +13,7 @@ namespace lny {
 	typedef std::shared_ptr<sf::RenderWindow> EngineWindow;
 	typedef std::shared_ptr<lny::BaseScene> ScenePtr;
 	typedef std::map<std::string, ScenePtr> SceneMap;
-#ifdef COMPONENT_MANAGER;
+#ifdef COMPONENT_MANAGER
 	typedef COMPONENT_MANAGER ComponentMgr;
 	typedef std::unique_ptr <COMPONENT_MANAGER> ComponentManagerPtr;
 #else

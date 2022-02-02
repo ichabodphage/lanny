@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <string>
-
+#include <memory>
 namespace lny {
 	/*
 	* MediaManager manages texture images and other kinds of external media used by a scene
