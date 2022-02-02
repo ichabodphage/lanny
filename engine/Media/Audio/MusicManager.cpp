@@ -3,28 +3,39 @@ using namespace lny;
 
 void MusicManager::loadTrack(std::string name, std::string path) {
 	try {
+		//check if song name is allready loaded
 		music.at(name);
 		std::cout << "song " << name << " allready loaded\n";
 	}
 	catch (std::exception e) {
-		music[name] = musicFolder + "/" + path;
-		std::cout << "song " << name << " successfully loaded from: " << musicFolder << "/" << path << "\n";
+		//add the file path to the music map if the file is not loaded
+		sf::Music checkPath;
+		if(checkPath.openFromFile(musicFolder + "/" + path)){
+			//load the music path if it is a valid path
+			music[name] = musicFolder + "/" + path;
+			std::cout << "song " << name << " successfully loaded from: " << musicFolder << "/" << path << "\n";
+		}else{
+			//log an error if the music file does not successfully load
+			std::cout << "error, music file: " << path << " is not a valid path.\n";
+		}
 	}
 }
 
 void MusicManager::playTrack(std::string name) {
 	try {
 		std::string path = music.at(name);
-		if (currentTrack.getStatus() != sf::Music::Status::Paused && currentTrack.openFromFile(path)) {
+
+		if (currentTrackPath != path && currentTrack.openFromFile(path)) {
+			//play the music from path if the path is not the same as the path of the current file
+			currentTrackPath = path;
 			currentTrack.openFromFile(path);
 			currentTrack.play();
 		}
-		else if (currentTrack.getStatus() == sf::Music::Status::Paused) {
+		else if (currentTrack.getStatus() == sf::Music::Status::Paused || currentTrack.getStatus() == sf::Music::Status::Stopped) {
+			//resume playing the track if the current track is paused
 			currentTrack.play();
 		}
-		else {
-			std::cout << "error, music file: " << path << " is not a valid path.\n";
-		}
+		
 	}catch (std::exception e) {
 		std::cout << "error, music named: " << name << " is not currently loaded\n";
 	}

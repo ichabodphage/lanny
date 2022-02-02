@@ -16,6 +16,9 @@ namespace lny {
 		//path to music folder
 		std::string musicFolder;
 
+		//path to the current song
+		std::string currentTrackPath;
+		
 		//current track being played
 		sf::Music currentTrack;
 	public:

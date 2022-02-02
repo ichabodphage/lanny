@@ -40,15 +40,15 @@ public:
 		globalMedia->globalTextures.loadTexture("car", "car1_spr.png");
 
 		lny::Entity rect = entityManager->addEntity();
-		rect.getComponent<lny::CompShape>() = lny::CompShape({ 100,100 });
+		rect.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 });
 		rect.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(10, 10),0);
-		rect.getComponent<lny::CompBB>() = lny::CompBB({ 100,100 });
+		rect.getComponent<lny::CompBB>() = lny::CompBB({ 50,50 });
 
 		for (int i = 0; i < 5; i++) {
 			lny::Entity Two = entityManager->addEntity();
-			Two.getComponent<lny::CompShape>() = lny::CompShape({ 100,100 });
-			Two.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(1 + (rand() % 1000), 1 + (rand() % 1000)), 0);
-			Two.getComponent<lny::CompBB>() = lny::CompBB({ 100,100 });
+			Two.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 });
+			Two.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(1 + (rand() % 440), 1 + (rand() % 440)), 0);
+			Two.getComponent<lny::CompBB>() = lny::CompBB({ 50,50 });
 		}
 		
 	

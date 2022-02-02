@@ -1,10 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Entity/Managers/EntityManager.hpp"
-#include "Entity/Managers/ComponentManager.hpp"
-#include "Media/MediaManager.hpp"
 #include <iostream>
-#include "Event.hpp"
+#include "../Entity/Managers/EntityManager.hpp"
+#include "../Entity/Managers/ComponentManager.hpp"
+#include "../Media/MediaManager.hpp"
+#include "../Event.hpp"
 namespace lny {
 	enum eventType {
 		keyEvent,

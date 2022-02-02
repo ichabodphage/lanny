@@ -1,10 +1,13 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <random>
+#include <iostream>
 #include "Entity/Managers/EntityManager.hpp"
 #include "Entity/Managers/ComponentManager.hpp"
 #include "Scene/BaseScene.hpp"
 #include "Event.hpp"
 #include "Media/MediaManager.hpp"
+
 enum EntType {
 	REGULAR = 0
 };

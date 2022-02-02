@@ -1,8 +1,5 @@
 #include "BaseScene.hpp"
-#include "LannyEngine.hpp"
-#include <iostream>
-#include "Entity/Managers/ComponentManager.hpp"
-
+#include "../LannyEngine.hpp"
 using namespace lny;
 
 void BaseScene::render() {
