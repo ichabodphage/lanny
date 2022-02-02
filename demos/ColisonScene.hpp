@@ -97,7 +97,14 @@ public:
 			}
 		}
 	}
+	void recolor(){
+		for (auto& entOne : entityManager->entities) {
+			if (entOne.hasComponent<lny::CompShape>()) {
 
+				entOne.getComponent<lny::CompShape>().shape.setFillColor(sf::Color(255,255,255));
+			}
+		}
+	}
 	void updatePos(float deltaT) {
 		for (auto& entOne : entityManager->entities) {
 			if (entOne.hasComponent<lny::CompTransform>()) {
@@ -110,6 +117,7 @@ public:
 	void run_frameIndependant() {
 		globalEngine->input();
 		entityManager->sweepInactive();
+		recolor();
 		hitTest();
 		render();
 		std::this_thread::sleep_for(std::chrono::milliseconds(1));

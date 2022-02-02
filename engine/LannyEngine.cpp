@@ -72,10 +72,10 @@ void LannyEngine::input() {
 			case sf::Event::KeyReleased:	//key up
 				sendKeyPress(&event,false);
 				break;
-			case sf::Event::MouseButtonPressed:
+			case sf::Event::MouseButtonPressed: // mouse pressed
 				sendMouseEvent(&event, true, { (float)event.mouseButton.x,(float)event.mouseButton.y });
 				break;
-			case sf::Event::MouseButtonReleased:
+			case sf::Event::MouseButtonReleased: //mouse unpressed
 				sendMouseEvent(&event, false, { (float)event.mouseButton.x,(float)event.mouseButton.y });
 				break;
 		}

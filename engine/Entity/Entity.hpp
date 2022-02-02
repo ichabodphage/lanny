@@ -13,10 +13,8 @@ namespace lny {
 	* Entity lacks any means of handling the data within its components as 
 	* apart of the engines entity component system archetecture.
 	* 
-	* handling of entity components is done by the engine and its scenes.
+	* handling of entity components is done by the entity manager
 	* 
-	* can be derived to add new entity components. its highly discouraged 
-	* that mutator methods for such components are implemented in such child classes.
 	* 
 	*/
 	class Entity {
@@ -28,7 +26,7 @@ namespace lny {
 		size_t id;	  
 
 	public:
-		//gets the enitity ID
+		//returns the enitity ID
 		size_t getid() {
 			return id;
 		}
