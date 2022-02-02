@@ -16,7 +16,7 @@ void MusicManager::loadTrack(std::string name, std::string path) {
 			std::cout << "song " << name << " successfully loaded from: " << musicFolder << "/" << path << "\n";
 		}else{
 			//log an error if the music file does not successfully load
-			std::cout << "error, music file: " << musicFolder + "/" + path << " is not a valid path. (does " <<musicFolder + "/" + path<<" exist or in a supported file format?)\n";
+			std::cout << "error, music file: " << musicFolder + "/" + path << " is not a valid path\n";
 		}
 	}
 }
@@ -39,7 +39,7 @@ void MusicManager::playTrack(std::string name, bool repeat) {
 		}
 		
 	}catch (std::exception e) {
-		std::cout << "error, music named: " << name << " is not currently loaded. (was a track named " <<name <<" loaded?)\n";
+		std::cout << "error, music named: " << name << " is not defined\n";
 	}
 }
 

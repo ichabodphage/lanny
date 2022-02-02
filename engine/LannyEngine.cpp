@@ -19,7 +19,7 @@ void LannyEngine::playScene(std::string sceneName) {
 		runScene();
 	}
 	catch (std::exception e) {
-		std::cout << "error, scene " << sceneName << " is not currently loaded. (does a scene named " <<sceneName<<" exist?)\n";
+		std::cout << "error, scene " << sceneName << " is not defined \n";
 	};
 }
 
