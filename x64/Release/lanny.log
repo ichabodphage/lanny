@@ -1,0 +1,10 @@
+﻿  EntityManager.cpp
+  LannyEngine.cpp
+  MusicManager.cpp
+C:\Users\agari\source\repos\lanny\engine\media\audio\MusicManager.cpp(7,8): warning C4834: discarding return value of function with 'nodiscard' attribute
+  TextureManager.cpp
+C:\Users\agari\source\repos\lanny\engine\media\texture\TextureManager.cpp(8,11): warning C4834: discarding return value of function with 'nodiscard' attribute
+  BaseScene.cpp
+  main.cpp
+  Generating Code...
+  lanny.vcxproj -> C:\Users\agari\source\repos\lanny\x64\Release\lanny.exe
