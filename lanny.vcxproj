@@ -138,8 +138,9 @@
     <ClInclude Include="engine\entity\managers\MemoryPool.hpp" />
     <ClInclude Include="engine\Event.hpp" />
     <ClInclude Include="engine\LannyEngine.hpp" />
+    <ClInclude Include="engine\Media\BaseMediaManager.hpp" />
     <ClInclude Include="engine\media\audio\MusicManager.hpp" />
-    <ClInclude Include="engine\media\MediaManager.hpp" />
+    <ClInclude Include="engine\media\MediaHub.hpp" />
     <ClInclude Include="engine\media\texture\TextureManager.hpp" />
     <ClInclude Include="engine\scene\BaseScene.hpp" />
     <ClInclude Include="sfml-2.5.1\include\sfml\Audio.hpp" />

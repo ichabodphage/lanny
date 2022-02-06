@@ -3,18 +3,16 @@
 #include <SFML/Audio.hpp>
 #include <map>
 #include <memory>
+#include "../BaseMediaManager.hpp"
 /*
 * music mixer class to handle playing and loading of music
 */
 namespace lny {
-	class MusicManager
+	class MusicManager : public lny::BaseMediaManager
 	{
 	private:
 		//map holding track name keys and file name pair values
 		std::map<std::string, std::string> music;
-
-		//path to music folder
-		std::string musicFolder;
 
 		//path to the current song
 		std::string currentTrackPath;
@@ -22,7 +20,7 @@ namespace lny {
 		//current track being played
 		sf::Music currentTrack;
 	public:
-		MusicManager(std::string path) : musicFolder(path) {};
+		MusicManager() : lny::BaseMediaManager() {};
 
 		//adds a track to the mixer
 		void loadTrack(std::string name, std::string file);

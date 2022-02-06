@@ -10,13 +10,13 @@ void MusicManager::loadTrack(std::string name, std::string path) {
 	catch (std::exception e) {
 		//add the file path to the music map if the file is not loaded
 		sf::Music checkPath;
-		if(checkPath.openFromFile(musicFolder + "/" + path)){
+		if(checkPath.openFromFile(assetFolder + "/" + path)){
 			//load the music path if it is a valid path
-			music[name] = musicFolder + "/" + path;
-			std::cout << "song " << name << " successfully loaded from: " << musicFolder << "/" << path << "\n";
+			music[name] = assetFolder + "/" + path;
+			std::cout << "song " << name << " successfully loaded from: " << assetFolder << "/" << path << "\n";
 		}else{
 			//log an error if the music file does not successfully load
-			std::cout << "error, music file: " << musicFolder + "/" + path << " is not a valid path\n";
+			std::cout << "error, music file: " << assetFolder + "/" + path << " is not a valid path\n";
 		}
 	}
 }

@@ -6,11 +6,8 @@
 #include "Entity/Managers/ComponentManager.hpp"
 #include "Scene/BaseScene.hpp"
 #include "Event.hpp"
-#include "Media/MediaManager.hpp"
+#include "Media/MediaHub.hpp"
 
-enum EntType {
-	REGULAR = 0
-};
 //App class handles the window and the entity manager
 namespace lny {
 	typedef std::shared_ptr<sf::RenderWindow> EngineWindow;
@@ -42,7 +39,7 @@ namespace lny {
 		ScenePtr currentScene;
 
 		//engine media manager used for handling textures
-		lny::MediaManager mediaManager;
+		GLOBAL_MEDIA mediaManager;
 
 		//component manager used to managing memory pooling of components
 		ComponentManagerPtr componentManager;
@@ -59,10 +56,10 @@ namespace lny {
 
 	public:
 		//constructor using video mode, window name, and path to texture file
-		LannyEngine(sf::VideoMode video, std::string name,std::string mediaPath,std::string musicPath,size_t maxEntities = 3000):
+		LannyEngine(sf::VideoMode video, std::string name,std::string assetPath,size_t maxEntities = 3000):
 			componentManager(std::make_unique<ComponentMgr>(maxEntities)),
 			window(new sf::RenderWindow(video, name)),
-			mediaManager(mediaPath, musicPath){};
+			mediaManager(assetPath){};
 
 		//inserts a scene into scene map
 		template<typename SceneType>

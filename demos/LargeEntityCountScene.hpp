@@ -9,7 +9,7 @@
 
 class LargeEntityCountScene : public lny::BaseScene {
 public:
-	LargeEntityCountScene(lny::EngineWindow  localWindow, lny::LannyEngine* engine, lny::MediaManager* media, lny::ComponentMgr* w) :BaseScene(localWindow, engine, media, w) {}
+	LargeEntityCountScene(lny::EngineWindow  localWindow, lny::LannyEngine* engine, lny::GLOBAL_MEDIA* media, lny::ComponentMgr* w) :BaseScene(localWindow, engine, media, w) {}
 	float dt;
 	void init() {
 		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Escape, END);
@@ -21,7 +21,7 @@ public:
 				for (int k = 0; k < 10; k++) {
 					lny::Entity rect = entityManager->addEntity();
 					rect.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 });
-					rect.getComponent<lny::CompShape>().shape.setTexture(globalMedia->globalTextures.getTexture("box"));
+					rect.getComponent<lny::CompShape>().shape.setTexture(globalMedia->get<lny::TextureManager>().getTexture("box"));
 					rect.getComponent<lny::CompShape>().shape.setFillColor(sf::Color(255, 255, 255));
 					rect.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(10 + j*50 , 10 + k * 50), 0);
 					

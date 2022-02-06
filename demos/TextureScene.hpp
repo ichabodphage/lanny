@@ -7,7 +7,7 @@
 #include <thread>
 class TextureScene : public lny::BaseScene {
 public:
-	TextureScene(lny::EngineWindow localWindow, lny::LannyEngine* engine, lny::MediaManager* media,lny::ComponentMgr * w) :BaseScene(localWindow, engine, media,w) {}
+	TextureScene(lny::EngineWindow localWindow, lny::LannyEngine* engine, lny::GLOBAL_MEDIA* media,lny::ComponentMgr * w) :BaseScene(localWindow, engine, media,w) {}
 
 	float dt;
 	void init() {
@@ -18,7 +18,7 @@ public:
 		for (int i = 0; i < 200; i+=10) {
 			lny::Entity rect = entityManager->addEntity();
 			rect.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 });
-			rect.getComponent<lny::CompShape>().shape.setTexture(globalMedia->globalTextures.getTexture("box"));
+			rect.getComponent<lny::CompShape>().shape.setTexture(globalMedia->get<lny::TextureManager>().getTexture("box"));
 			rect.getComponent<lny::CompShape>().shape.setFillColor(sf::Color(255 - i, 255, 255));
 			rect.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(10, 10 +i*5), 0);
 
@@ -28,7 +28,7 @@ public:
 		for (int j = 0; j < 200; j += 10) {
 			lny::Entity rect2 = entityManager->addEntity();
 			rect2.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 });
-			rect2.getComponent<lny::CompShape>().shape.setTexture(globalMedia->globalTextures.getTexture("pen"));
+			rect2.getComponent<lny::CompShape>().shape.setTexture(globalMedia->get<lny::TextureManager>().getTexture("pen"));
 			rect2.getComponent<lny::CompShape>().shape.setFillColor(sf::Color(255, 255 - j, 255));
 			rect2.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(120, 10 + j * 5), 0);
 		}
@@ -36,7 +36,7 @@ public:
 		for (int j = 0; j < 200; j += 10) {
 			lny::Entity rect2 = entityManager->addEntity();
 			rect2.getComponent<lny::CompShape>() = lny::CompShape({ 100,50 });
-			rect2.getComponent<lny::CompShape>().shape.setTexture(globalMedia->globalTextures.getTexture("car"));
+			rect2.getComponent<lny::CompShape>().shape.setTexture(globalMedia->get<lny::TextureManager>().getTexture("car"));
 			rect2.getComponent<lny::CompShape>().shape.setFillColor(sf::Color(255, 255, 255 - j));
 			rect2.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(220, 10 + j * 5), 0);
 		}

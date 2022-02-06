@@ -77,7 +77,7 @@
     <ClInclude Include="engine\entity\managers\MemoryPool.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="engine\media\MediaManager.hpp">
+    <ClInclude Include="engine\media\MediaHub.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="engine\media\audio\MusicManager.hpp">
@@ -381,6 +381,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="sfml-2.5.1\include\sfml\window\WindowStyle.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Media\BaseMediaManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

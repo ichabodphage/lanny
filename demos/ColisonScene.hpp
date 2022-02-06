@@ -21,7 +21,7 @@ enum keyeventIDs {
 };
 class ColisonScene: public lny::BaseScene {
 public:
-	ColisonScene(lny::EngineWindow  localWindow,lny::LannyEngine * engine,lny::MediaManager * media, lny::DEFAULT_MANAGER* w):BaseScene(localWindow, engine,media,w){}
+	ColisonScene(lny::EngineWindow  localWindow,lny::LannyEngine * engine,lny::GLOBAL_MEDIA* media, lny::DEFAULT_MANAGER* w):BaseScene(localWindow, engine,media,w){}
 
 	float dt;
 	void init() {
@@ -35,9 +35,11 @@ public:
 		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Num2,   GET_FPS);
 
 		registerInputEvent(lny::eventType::mouseEvent, sf::Mouse::Left, COLIDE_CURSOR);
-		globalMedia->globalTextures.loadTexture("box", "crate0_diffuse.png");
-		globalMedia->globalTextures.loadTexture("pen", "pen.jpg");
-		globalMedia->globalTextures.loadTexture("car", "car1_spr.png");
+		globalMedia->setFolder<lny::TextureManager>("TextureAssets");
+		globalMedia->setFolder<lny::MusicManager>("MusicAssets");
+		globalMedia->get<lny::TextureManager>().loadTexture("box", "crate0_diffuse.png");
+		globalMedia->get<lny::TextureManager>().loadTexture("pen", "pen.jpg");
+		globalMedia->get<lny::TextureManager>().loadTexture("car", "car1_spr.png");
 	
 		lny::Entity rect = entityManager->addEntity();
 		rect.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 });

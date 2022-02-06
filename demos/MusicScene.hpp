@@ -10,7 +10,7 @@
 #include <thread>
 class MusicScene : public lny::BaseScene {
 public:
-	MusicScene(lny::EngineWindow  localWindow, lny::LannyEngine* engine, lny::MediaManager* media, lny::ComponentMgr* w) :BaseScene(localWindow, engine, media, w) {}
+	MusicScene(lny::EngineWindow  localWindow, lny::LannyEngine* engine, lny::GLOBAL_MEDIA* media, lny::ComponentMgr* w) :BaseScene(localWindow, engine, media, w) {}
 	float dt;
 	void init() {
 
@@ -21,7 +21,7 @@ public:
 		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Num4,   PAUSE_SONG);
 
 
-		globalMedia->globalMusic.loadTrack("songOne", "Orbital_Colossus.wav");
+		globalMedia->get<lny::MusicManager>().loadTrack("songOne", "Orbital_Colossus.wav");
 
 
 
@@ -61,12 +61,12 @@ public:
 			break;
 		case PLAY_SONG:
 			if (myEvent.active) {
-				globalMedia->globalMusic.playTrack("songOne");
+				globalMedia->get<lny::MusicManager>().playTrack("songOne");
 			}
 			break;
 		case PAUSE_SONG:
 			if (myEvent.active) {
-				globalMedia->globalMusic.pauseCurrentTrack();
+				globalMedia->get<lny::MusicManager>().pauseCurrentTrack();
 			}
 			break;
 		}

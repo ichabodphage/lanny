@@ -2,22 +2,21 @@
 #include <SFML/Graphics.hpp>
 #include <string>
 #include <memory>
+#include "../BaseMediaManager.hpp"
 namespace lny {
 	/*
 	* MediaManager manages texture images and other kinds of external media used by a scene
 	*/
-	class TextureManager
+	class TextureManager : public lny::BaseMediaManager
 	{
 	private:
 		//map that holds all the textures
 		std::map<std::string, std::shared_ptr<sf::Texture>> textures;
-		
-		//path to texture assets
-		std::string textureFile;
+	
 	public:
 
 		//constructor using texture file path
-		TextureManager(std::string texPath) :textureFile(texPath) {};
+		TextureManager() :BaseMediaManager() {};
 
 		//inserts a texture into textures
 		void loadTexture(std::string name,std::string path);

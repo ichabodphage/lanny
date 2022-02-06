@@ -11,12 +11,12 @@ void TextureManager::loadTexture(std::string name,std::string path) {
 	catch (std::exception e) {
 		//load the texture if the texture is not allready loaded
 		sf::Texture tex;
-		if (tex.loadFromFile(textureFile + "/" + path)) {
+		if (tex.loadFromFile(assetFolder + "/" + path)) {
 			//insert the texture into the map if the path is valid
 			textures[name] = std::make_shared<sf::Texture>(tex);
-			std::cout << "texture " << name << " loaded from: " << textureFile<< "/" <<  path <<"\n";
+			std::cout << "texture " << name << " loaded from: " << assetFolder << "/" <<  path <<"\n";
 		}else{
-			std::cout << "error, file path: " << textureFile + "/" + path << " is an invalid texture path.\n";
+			std::cout << "error, file path: " << assetFolder + "/" + path << " is an invalid texture path.\n";
 		}
 	}
 

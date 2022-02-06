@@ -3,7 +3,7 @@
 #include <iostream>
 #include "../Entity/Managers/EntityManager.hpp"
 #include "../Entity/Managers/ComponentManager.hpp"
-#include "../Media/MediaManager.hpp"
+#include "../Media/MediaHub.hpp"
 #include "../Event.hpp"
 namespace lny {
 	enum eventType {
@@ -26,7 +26,7 @@ namespace lny {
 		//pointer back to the engine
 		lny::LannyEngine* globalEngine;
 		//pointer back to the media manager
-		lny::MediaManager* globalMedia;
+		lny::GLOBAL_MEDIA* globalMedia;
 		
 		bool isRunning = false;
 		bool isPaused = false;
@@ -36,14 +36,14 @@ namespace lny {
 		std::map<int, int> mouseEvents;
 		//constructor using shared ptr of the window and the engine
 #ifdef COMPONENT_MANAGER
-		BaseScene(EngineWindow localWindow, lny::LannyEngine* engine, lny::MediaManager* media, COMPONENT_MANAGER * components) :
+		BaseScene(EngineWindow localWindow, lny::LannyEngine* engine, lny::lny::GLOBAL_MEDIA* media, COMPONENT_MANAGER * components) :
 			entityManager(new EntityManager(components)),
 			globalEngine(engine),
 			globalMedia(media),
 			window(localWindow)
 		{}
 #else
-		BaseScene(EngineWindow localWindow, lny::LannyEngine* engine, lny::MediaManager* media, DEFAULT_MANAGER * components) :
+		BaseScene(EngineWindow localWindow, lny::LannyEngine* engine, lny::GLOBAL_MEDIA* media, DEFAULT_MANAGER * components) :
 			entityManager(new EntityManager(components)),
 			globalEngine(engine),
 			globalMedia(media),
