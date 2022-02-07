@@ -5,7 +5,7 @@ using namespace lny;
 void TextureManager::loadTexture(std::string name,std::string path) {
 	try {
 		//check if texture is allready loaded
-		textures.at(name);
+		assets.at(name);
 		std::cout << "texture " << name << " allready loaded\n";
 	}
 	catch (std::exception e) {
@@ -13,7 +13,7 @@ void TextureManager::loadTexture(std::string name,std::string path) {
 		sf::Texture tex;
 		if (tex.loadFromFile(assetFolder + "/" + path)) {
 			//insert the texture into the map if the path is valid
-			textures[name] = std::make_shared<sf::Texture>(tex);
+			assets[name] = std::make_shared<sf::Texture>(tex);
 			std::cout << "texture " << name << " loaded from: " << assetFolder << "/" <<  path <<"\n";
 		}else{
 			std::cout << "error, file path: " << assetFolder + "/" + path << " is an invalid texture path.\n";
@@ -26,7 +26,7 @@ sf::Texture* TextureManager::getTexture(std::string name) {
 	sf::Texture* ret;
 	try {
 		//try accessing the texture with name from the texture map
-		ret = textures.at(name).get();
+		ret = assets.at(name).get();
 		return ret;
 	}
 	catch (std::exception e) {
@@ -39,7 +39,7 @@ sf::Texture* TextureManager::getTexture(std::string name) {
 void TextureManager::unloadTexture(std::string name) {
 	try {
 		//erease the texture at name if the texture is loaded
-		textures.erase(name);
+		assets.erase(name);
 		std::cout << "texture: " << name << " successfully unloaded\n";
 	}
 	catch (std::exception e) {
@@ -49,6 +49,6 @@ void TextureManager::unloadTexture(std::string name) {
 }
 void TextureManager::dumpTextures() {
 	//clear the texture map
-	textures.clear();
+	assets.clear();
 
 }

@@ -117,7 +117,6 @@ public:
 		}
 	}
 	void run_frameIndependant() {
-		globalEngine->input();
 		entityManager->sweepInactive();
 		recolor();
 		hitTest();

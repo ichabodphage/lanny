@@ -4,7 +4,7 @@ using namespace lny;
 void MusicManager::loadTrack(std::string name, std::string path) {
 	try {
 		//check if song name is allready loaded
-		music.at(name);
+		assets.at(name);
 		std::cout << "song " << name << " allready loaded\n";
 	}
 	catch (std::exception e) {
@@ -12,7 +12,7 @@ void MusicManager::loadTrack(std::string name, std::string path) {
 		sf::Music checkPath;
 		if(checkPath.openFromFile(assetFolder + "/" + path)){
 			//load the music path if it is a valid path
-			music[name] = assetFolder + "/" + path;
+			assets[name] = assetFolder + "/" + path;
 			std::cout << "song " << name << " successfully loaded from: " << assetFolder << "/" << path << "\n";
 		}else{
 			//log an error if the music file does not successfully load
@@ -23,7 +23,7 @@ void MusicManager::loadTrack(std::string name, std::string path) {
 
 void MusicManager::playTrack(std::string name, bool repeat) {
 	try {
-		std::string path = music.at(name);
+		std::string path = assets.at(name);
 
 		if (currentTrackPath != path && currentTrack.openFromFile(path)) {
 			//play the music from path if the path is not the same as the path of the current file

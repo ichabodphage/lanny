@@ -7,16 +7,12 @@ namespace lny {
 	/*
 	* MediaManager manages texture images and other kinds of external media used by a scene
 	*/
-	class TextureManager : public lny::BaseMediaManager
+	class TextureManager : public lny::BaseMediaManager<std::shared_ptr<sf::Texture>>
 	{
-	private:
-		//map that holds all the textures
-		std::map<std::string, std::shared_ptr<sf::Texture>> textures;
-	
 	public:
 
 		//constructor using texture file path
-		TextureManager() :BaseMediaManager() {};
+		TextureManager() :BaseMediaManager<std::shared_ptr<sf::Texture>>() {};
 
 		//inserts a texture into textures
 		void loadTexture(std::string name,std::string path);

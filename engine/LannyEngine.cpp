@@ -85,6 +85,7 @@ void LannyEngine::input() {
 void LannyEngine::runScene() {
 	sf::Clock timer;
 	while (window->isOpen() && currentScene->isOn()) {
+		input();
 		currentScene->run_frameIndependant();
 		currentScene->run(timer.getElapsedTime().asSeconds());
 		timer.restart();

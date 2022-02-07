@@ -8,11 +8,9 @@
 * music mixer class to handle playing and loading of music
 */
 namespace lny {
-	class MusicManager : public lny::BaseMediaManager
+	class MusicManager : public lny::BaseMediaManager<std::string>
 	{
 	private:
-		//map holding track name keys and file name pair values
-		std::map<std::string, std::string> music;
 
 		//path to the current song
 		std::string currentTrackPath;
@@ -20,7 +18,7 @@ namespace lny {
 		//current track being played
 		sf::Music currentTrack;
 	public:
-		MusicManager() : lny::BaseMediaManager() {};
+		MusicManager() : lny::BaseMediaManager<std::string>() {};
 
 		//adds a track to the mixer
 		void loadTrack(std::string name, std::string file);
