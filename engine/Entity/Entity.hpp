@@ -1,8 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "BaseComponents/CompShape.hpp"
-#include "BaseComponents/CompTransform.hpp"
-#include "BaseComponents/CompBB.hpp"
+#include "CompInclude.hpp"
 #include "Managers/ComponentManager.hpp"
 
 namespace lny {
