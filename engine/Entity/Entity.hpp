@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "CompInclude.hpp"
+#include "ComponentInclude.hpp"
 #include "Managers/ComponentManager.hpp"
 
 namespace lny {
