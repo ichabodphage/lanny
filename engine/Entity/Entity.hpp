@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "ComponentInclude.hpp"
+#include "../Typedefs.hpp"
 #include "Managers/ComponentManager.hpp"
 
 namespace lny {
@@ -28,13 +29,6 @@ namespace lny {
 		size_t getid() {
 			return id;
 		}
-		//component manager boilerplate
-#ifdef COMPONENT_MANAGER
-		typedef COMPONENT_MANAGER ComponentMgr;
-#else
-		typedef DEFAULT_MANAGER ComponentMgr;
-#endif // DEFAULT_MANAGER
-
 		ComponentMgr* localComponentManager;
 		Entity(size_t i, ComponentMgr* d) :id(i), localComponentManager(d) {};
 

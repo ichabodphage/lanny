@@ -11,8 +11,6 @@ namespace lny {
 	public:
 		//sf shape used for rendering
 		sf::RectangleShape shape;
-		//rotation center of the shape
-		Vec2 center = { 0,0 };
 		CompShape(Vec2 s) :shape(s) {
 			isActive = true;
 			

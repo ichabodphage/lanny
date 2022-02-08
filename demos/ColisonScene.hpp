@@ -110,9 +110,7 @@ public:
 	void updatePos(float deltaT) {
 		for (auto& entOne : entityManager->entities) {
 			if (entOne.hasComponent<lny::CompTransform>()) {
-
-				entOne.getComponent<lny::CompTransform>().pos.x += entOne.getComponent<lny::CompTransform>().xvel * deltaT;
-				entOne.getComponent<lny::CompTransform>().pos.y += entOne.getComponent<lny::CompTransform>().yvel * deltaT;
+					
 			}
 		}
 	}
@@ -138,34 +136,33 @@ public:
 			break;
 		case MOVE_RIGHT:
 			if (myEvent.active) {
-				entityManager->entities[0].getComponent<lny::CompTransform>().xvel = 150.f;
 			}
 			else {
-				entityManager->entities[0].getComponent<lny::CompTransform>().xvel = 0;
+				
 			}
 			break;
 		case MOVE_LEFT:
 			if (myEvent.active) {
-				entityManager->entities[0].getComponent<lny::CompTransform>().xvel = -150.f;
+				
 			}
 			else {
-				entityManager->entities[0].getComponent<lny::CompTransform>().xvel = 0;
+
 			}
 			break;
 		case MOVE_UP:
 			if (myEvent.active) {
-				entityManager->entities[0].getComponent<lny::CompTransform>().yvel = -150.f;
+				
 			}
 			else {
-				entityManager->entities[0].getComponent<lny::CompTransform>().yvel = 0;
+				
 			}
 			break;
 		case MOVE_DOWN:
 			if (myEvent.active) {
-				entityManager->entities[0].getComponent<lny::CompTransform>().yvel = 150.f;
+				
 			}
 			else {
-				entityManager->entities[0].getComponent<lny::CompTransform>().yvel = 0;
+
 			}
 			break;
 		case CHANGE_SCENE:

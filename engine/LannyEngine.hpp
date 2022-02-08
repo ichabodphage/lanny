@@ -3,25 +3,16 @@
 #include <random>
 #include <iostream>
 #include "Entity/Managers/EntityManager.hpp"
-#include "Entity/Managers/ComponentManager.hpp"
 #include "Scene/BaseScene.hpp"
 #include "Event.hpp"
-#include "Media/MediaHub.hpp"
+#include "Typedefs.hpp"
 
 //App class handles the window and the entity manager
 namespace lny {
 	typedef std::shared_ptr<sf::RenderWindow> EngineWindow;
 	typedef std::shared_ptr<lny::BaseScene> ScenePtr;
 	typedef std::map<std::string, ScenePtr> SceneMap;
-#ifdef COMPONENT_MANAGER
-	typedef COMPONENT_MANAGER ComponentMgr;
-	typedef std::unique_ptr <COMPONENT_MANAGER> ComponentManagerPtr;
-#else
-	typedef DEFAULT_MANAGER ComponentMgr;
-	typedef std::unique_ptr <DEFAULT_MANAGER> ComponentManagerPtr;
-#endif // DEFAULT_MANAGER
 
-	
 	/*
 	* LannyEngine is a class that is used to handle loading of scenes along with the handling of media
 	* specifically it determines which scenes should be active, and acts as an interface for the scenes to interact with the MediaManager class

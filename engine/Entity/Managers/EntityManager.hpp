@@ -1,6 +1,6 @@
 #pragma once
 #include "../Entity.hpp"
-#include "ComponentManager.hpp"
+#include "../../Typedefs.hpp"
 namespace lny {
 	typedef std::vector<lny::Entity> EntityVector;
 	/*
@@ -10,13 +10,7 @@ namespace lny {
 	*/
 	class EntityManager {
 	public:
-#ifdef COMPONENT_MANAGER
-	typedef COMPONENT_MANAGER ComponentMgr;
-	typedef std::unique_ptr <COMPONENT_MANAGER> ComponentManagerPtr;
-#else
-	typedef DEFAULT_MANAGER ComponentMgr;
-	typedef std::unique_ptr <DEFAULT_MANAGER> ComponentManagerPtr;
-#endif // DEFAULT_MANAGER
+
 
 
 		ComponentMgr* localComponentManager;

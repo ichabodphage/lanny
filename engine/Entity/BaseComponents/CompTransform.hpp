@@ -10,8 +10,6 @@ namespace lny {
 	struct CompTransform : Compoment {
 		// xy position of entity
 		Vec2 pos;
-		float xvel = 0;
-		float yvel = 0;
 		//rotation of the entity around its shape component center
 		float rotation = 0.f;
 		CompTransform(Vec2 p, float r) : pos(p), rotation(r) { isActive = true; };

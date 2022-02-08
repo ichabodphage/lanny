@@ -5,6 +5,7 @@
 #include "../Entity/Managers/ComponentManager.hpp"
 #include "../Media/MediaHub.hpp"
 #include "../Event.hpp"
+#include "../Typedefs.hpp"
 namespace lny {
 	enum eventType {
 		keyEvent,
@@ -35,21 +36,13 @@ namespace lny {
 		std::map<int, int> keyEvents;
 		std::map<int, int> mouseEvents;
 		//constructor using shared ptr of the window and the engine
-#ifdef COMPONENT_MANAGER
-		BaseScene(EngineWindow localWindow, lny::LannyEngine* engine, lny::lny::GLOBAL_MEDIA* media, COMPONENT_MANAGER * components) :
+		BaseScene(EngineWindow localWindow, lny::LannyEngine* engine, lny::GLOBAL_MEDIA* media, ComponentMgr * components) :
 			entityManager(new EntityManager(components)),
 			globalEngine(engine),
 			globalMedia(media),
 			window(localWindow)
 		{}
-#else
-		BaseScene(EngineWindow localWindow, lny::LannyEngine* engine, lny::GLOBAL_MEDIA* media, DEFAULT_MANAGER * components) :
-			entityManager(new EntityManager(components)),
-			globalEngine(engine),
-			globalMedia(media),
-			window(localWindow)
-		{}
-#endif
+
 		//renders all renderable Entites
 		void render();
 
