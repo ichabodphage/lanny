@@ -8,10 +8,11 @@ void BaseScene::render() {
 	for (auto& entity : entityManager->entities) {
 		//render entity if the entity has a shape
 		if (entity.hasComponent<lny::CompShape>()) {
-			sf::RectangleShape loc = entity.getComponent<lny::CompShape>().shape;
-			sf::Transform	   shapeTransform;
-
-			window->draw(loc, shapeTransform.translate(entity.getComponent<lny::CompTransform>().pos));
+			auto loc = entity.getComponent<lny::CompShape>();
+			if(entity.hasComponent<lny::CompTransform>()){
+			 loc.shape.setPos(entity.getComponent<lny::CompTransform>().pos);
+			}
+			window->draw(loc.shape.getPoints());
 		}
 	}
 	window->display();

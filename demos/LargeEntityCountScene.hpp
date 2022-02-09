@@ -21,7 +21,6 @@ public:
 				for (int k = 0; k < 10; k++) {
 					lny::Entity rect = entityManager->addEntity();
 					rect.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 });
-					rect.getComponent<lny::CompShape>().shape.setTexture(globalMedia->get<lny::TextureManager>().getTexture("box"));
 					rect.getComponent<lny::CompShape>().shape.setFillColor(sf::Color(255, 255, 255));
 					rect.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(10 + j*50 , 10 + k * 50), 0);
 					

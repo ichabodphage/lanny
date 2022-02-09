@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "../Component.hpp"
+#include "../../Renderer/RenderRect.hpp"
 namespace lny {
 	/*
 	* shape entity component used for drawing the entity onto the screen
@@ -10,7 +11,7 @@ namespace lny {
 	struct CompShape : Compoment {
 	public:
 		//sf shape used for rendering
-		sf::RectangleShape shape;
+		lny::RenderRect shape;
 		CompShape(Vec2 s) :shape(s) {
 			isActive = true;
 			
