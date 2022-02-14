@@ -2,36 +2,51 @@
 #include "../engine/Scene/BaseScene.hpp"
 #include "../engine/LannyEngine.hpp"
 #include "../engine/Entity/Entity.hpp"
-
+#include "../engine/Renderer/RenderBatch.hpp"
 #include <random>
 #include <chrono>
 #include <iostream>
 
 class LargeEntityCountScene : public lny::BaseScene {
 public:
-	LargeEntityCountScene(lny::EngineWindow  localWindow, lny::LannyEngine* engine, lny::GLOBAL_MEDIA* media, lny::ComponentMgr* w) :BaseScene(localWindow, engine, media, w) {}
-	float dt;
+	LargeEntityCountScene(lny::EngineWindow  localWindow, lny::LannyEngine* engine, lny::GLOBAL_MEDIA* media, lny::ComponentMgr* w) :BaseScene(localWindow, engine, media, w),localBatch(engine->getEntityLimit()) {}
+	float dt = 0.f;
+	lny::RenderBatch localBatch;
 	void init() {
 		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Escape, END);
 		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Num1, CHANGE_SCENE);
 		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Num2, GET_FPS);
 
 		for (int i = 0; i < 100; i += 1) {
-			for (int j = 0; j < 10; j++) {
+			for (int j = 0; j < 100; j++) {
 				for (int k = 0; k < 10; k++) {
 					lny::Entity rect = entityManager->addEntity();
-					rect.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 });
+					rect.getComponent<lny::CompShape>() = lny::CompShape(lny::Vec2(50,50));
 					rect.getComponent<lny::CompShape>().shape.setFillColor(sf::Color(255, 255, 255));
 					rect.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(10 + j*50 , 10 + k * 50), 0);
 					
 				}
 			}
 		}
-
-
-
 	}
-
+	
+	void render() {
+		localBatch.clear();
+		window->clear();
+		//loop through all entities in the entity manager
+		for (auto& entity : entityManager->entities) {
+			//render entity if the entity has a shape
+			if (entity.hasComponent<lny::CompShape>()) {
+				auto loc = entity.getComponent<lny::CompShape>();
+				if (entity.hasComponent<lny::CompTransform>()) {
+					loc.shape.setPos(entity.getComponent<lny::CompTransform>().pos);
+				}
+				localBatch.addVerticies(&loc.shape);
+			}
+		}
+		window->draw(localBatch.getVerticies().data(), localBatch.size(), sf::Quads);
+		window->display();
+	}
 	void run(float deltaT) {
 
 		dt = deltaT;

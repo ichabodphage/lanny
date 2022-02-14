@@ -23,7 +23,7 @@ class ColisonScene: public lny::BaseScene {
 public:
 	ColisonScene(lny::EngineWindow  localWindow,lny::LannyEngine * engine,lny::GLOBAL_MEDIA* media, lny::DEFAULT_MANAGER* w):BaseScene(localWindow, engine,media,w){}
 
-	float dt;
+	float dt = 0.f;
 	void init() {
 
 		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Escape, END);
@@ -45,7 +45,7 @@ public:
 		rect.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 });
 		rect.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(10, 10),0);
 		rect.getComponent<lny::CompBB>() = lny::CompBB({ 50,50 });
-
+		rect.getComponent<lny::CompMovement>() = lny::CompMovement({ 0,0 });
 		for (int i = 0; i < 5; i++) {
 			lny::Entity Two = entityManager->addEntity();
 			Two.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 });
@@ -109,8 +109,9 @@ public:
 	}
 	void updatePos(float deltaT) {
 		for (auto& entOne : entityManager->entities) {
-			if (entOne.hasComponent<lny::CompTransform>()) {
-					
+			if (entOne.hasComponent<lny::CompTransform>() && entOne.hasComponent<lny::CompMovement>()) {
+				entOne.getComponent<lny::CompTransform>().pos.x += entOne.getComponent<lny::CompMovement>().velocity.x * deltaT;
+				entOne.getComponent<lny::CompTransform>().pos.y += entOne.getComponent<lny::CompMovement>().velocity.y * deltaT;
 			}
 		}
 	}
@@ -136,33 +137,34 @@ public:
 			break;
 		case MOVE_RIGHT:
 			if (myEvent.active) {
+				entityManager->entities[0].getComponent<lny::CompMovement>().velocity.x = 150.f;
 			}
 			else {
-				
+				entityManager->entities[0].getComponent<lny::CompMovement>().velocity.x = 0;
 			}
 			break;
 		case MOVE_LEFT:
 			if (myEvent.active) {
-				
+				entityManager->entities[0].getComponent<lny::CompMovement>().velocity.x = -150.f;
 			}
 			else {
-
+				entityManager->entities[0].getComponent<lny::CompMovement>().velocity.x = 0;
 			}
 			break;
 		case MOVE_UP:
 			if (myEvent.active) {
-				
+				entityManager->entities[0].getComponent<lny::CompMovement>().velocity.y = -150.f;
 			}
 			else {
-				
+				entityManager->entities[0].getComponent<lny::CompMovement>().velocity.y = 0;
 			}
 			break;
 		case MOVE_DOWN:
 			if (myEvent.active) {
-				
+				entityManager->entities[0].getComponent<lny::CompMovement>().velocity.y = 150.f;
 			}
 			else {
-
+				entityManager->entities[0].getComponent<lny::CompMovement>().velocity.y = 0;
 			}
 			break;
 		case CHANGE_SCENE:

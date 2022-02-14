@@ -40,8 +40,10 @@ namespace lny {
 		std::shared_ptr<SceneType> generateScene() {
 				return std::make_shared<SceneType>(window, this, &mediaManager, componentManager.get());
 		};
+		//long long holding current frame
 		size_t frame = 0;
-
+		
+		const size_t entityLimit;
 		//while loop that runs the current scene;
 		void runScene();
 
@@ -50,7 +52,7 @@ namespace lny {
 		LannyEngine(sf::VideoMode video, std::string name,std::string assetPath,size_t maxEntities = 3000):
 			componentManager(std::make_unique<ComponentMgr>(maxEntities)),
 			window(new sf::RenderWindow(video, name)),
-			mediaManager(assetPath){};
+			mediaManager(assetPath), entityLimit(maxEntities) {};
 
 		//inserts a scene into scene map
 		template<typename SceneType>
@@ -70,6 +72,8 @@ namespace lny {
 		//gets the current frame
 		size_t getCurrentFrame();
 
+		//gets the max amount of entities
+		const size_t getEntityLimit();
 		//pools keyboard input
 		void input();
 

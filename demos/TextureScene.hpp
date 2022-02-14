@@ -9,7 +9,7 @@ class TextureScene : public lny::BaseScene {
 public:
 	TextureScene(lny::EngineWindow localWindow, lny::LannyEngine* engine, lny::GLOBAL_MEDIA* media,lny::ComponentMgr * w) :BaseScene(localWindow, engine, media,w) {}
 
-	float dt;
+	float dt = 0.f;
 	void init() {
 		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Escape, END);
 		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Num1, CHANGE_SCENE);

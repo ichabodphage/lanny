@@ -4,3 +4,9 @@
 
 /.vs/lanny/v17/Preview/Browse.VC.opendb
 /.vs/lanny/v17/Browse.VC.opendb
+/.vs
+/x64/Release
+/lanny.sln
+*.vcxproj
+*.filters
+*.user

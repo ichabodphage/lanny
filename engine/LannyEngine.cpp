@@ -59,6 +59,11 @@ void LannyEngine::sendMouseEvent(sf::Event* myMouseEvent, bool isPressed,lny::Ve
 }
 
 
+const size_t lny::LannyEngine::getEntityLimit()
+{
+	return entityLimit;
+}
+
 void LannyEngine::input() {
 	sf::Event event;
 	while (window->pollEvent(event)) {

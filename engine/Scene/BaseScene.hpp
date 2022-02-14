@@ -44,7 +44,7 @@ namespace lny {
 		{}
 
 		//renders all renderable Entites
-		void render();
+		virtual void render();
 
 		//adds an event to the events map
 		void registerInputEvent(enum eventType type,int key, int id);
@@ -52,6 +52,7 @@ namespace lny {
 		//kills the current scene loop and sets isRunning to false
 		void kill();
 
+		//returns if the scene is active or not
 		bool* isOn() {
 			return &isRunning;
 		}
