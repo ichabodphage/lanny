@@ -10,15 +10,18 @@ namespace lny {
 	*/
 	class EntityManager {
 	public:
-
-
-
+		//pointer back to the component manager
 		ComponentMgr* localComponentManager;
+		//constructor using pointer to the component manager
 		EntityManager(ComponentMgr* d) :localComponentManager(d) {}
+		//array holding entities made by the entity manager
 		EntityVector entities;
-		lny::Entity addEntity();
 
+		//method that inserts an enity into the entity array and returns the same entity
+		lny::Entity addEntity();
+		//clears entities and tells the compoment manager to deconstruct all entity components
 		void deInit();
+		//removes all inactive entities from the entity array
 		void sweepInactive();
 
 	};

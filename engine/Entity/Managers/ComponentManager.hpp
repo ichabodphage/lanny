@@ -31,16 +31,14 @@ namespace lny {
 	template <class ...types>
 	class ComponentManager {
 	private:
-		//number of entities inside the component manager
-		size_t entityCount;
-		size_t currentIndex = 0;
 		//tuple of all the entity components
 		std::tuple<std::vector<types>...> components;
+		//max amount of entities allowed by the component manager
 		size_t maxEntitiyCount;
 	public:
 		//bool for wheather or not entity is active
 		MemoryPool<bool> active;
-		ComponentManager(size_t maxEntities):entityCount(maxEntities), active(maxEntities,false), maxEntitiyCount(maxEntities){
+		ComponentManager(size_t maxEntities): active(maxEntities,false), maxEntitiyCount(maxEntities){
 			//reserve maxEntities amount of space in each vector
 			for_each(components,
 				[maxEntities](auto& x) {
@@ -81,9 +79,24 @@ namespace lny {
 					x.isActive = false;
 				}
 			});
-			
+			//reset the active entity memory pool
 			active = MemoryPool<bool>(maxEntitiyCount, false);
 			
+		}
+		//resizes the max amount of entities allowed
+		void setMaxEntityCount(size_t newMax){
+			maxEntitiyCount = newMax;
+			//
+			active = MemoryPool<bool>(maxEntitiyCount, false);
+			//resize all of the component arrays
+			for_each(components,
+				[newMax](auto& x) {
+					x.resize(newMax);
+				});
+		}
+		//returns the max entity count
+		size_t getEntityLimit(){
+			return maxEntitiyCount;
 		}
 
 	};

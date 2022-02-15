@@ -7,7 +7,7 @@
 #include "demos/MusicScene.hpp"
 int main()
 {   
-    lny::LannyEngine myApp(sf::VideoMode(1280, 720), "myApp","Assets", 100000);
+    lny::LannyEngine myApp(sf::VideoMode(460, 400), "myApp","Assets", 100000);
     myApp.loadScene<ColisonScene>("scene1");
     myApp.loadScene<TextureScene>("scene2");
     myApp.loadScene<LargeEntityCountScene>("scene3");

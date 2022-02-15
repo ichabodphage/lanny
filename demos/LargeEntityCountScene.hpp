@@ -9,16 +9,15 @@
 
 class LargeEntityCountScene : public lny::BaseScene {
 public:
-	LargeEntityCountScene(lny::EngineWindow  localWindow, lny::LannyEngine* engine, lny::GLOBAL_MEDIA* media, lny::ComponentMgr* w) :BaseScene(localWindow, engine, media, w),localBatch(engine->getEntityLimit()) {}
+	LargeEntityCountScene(lny::EngineWindow  localWindow, lny::LannyEngine* engine, lny::GLOBAL_MEDIA* media, lny::ComponentMgr* w) :BaseScene(localWindow, engine, media, w),localBatch(w->getEntityLimit()) {}
 	float dt = 0.f;
 	lny::RenderBatch localBatch;
 	void init() {
 		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Escape, END);
 		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Num1, CHANGE_SCENE);
 		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Num2, GET_FPS);
-
 		for (int i = 0; i < 100; i += 1) {
-			for (int j = 0; j < 100; j++) {
+			for (int j = 0; j < 10; j++) {
 				for (int k = 0; k < 10; k++) {
 					lny::Entity rect = entityManager->addEntity();
 					rect.getComponent<lny::CompShape>() = lny::CompShape(lny::Vec2(50,50));
@@ -28,12 +27,6 @@ public:
 				}
 			}
 		}
-	}
-	
-	void render() {
-		localBatch.clear();
-		window->clear();
-		//loop through all entities in the entity manager
 		for (auto& entity : entityManager->entities) {
 			//render entity if the entity has a shape
 			if (entity.hasComponent<lny::CompShape>()) {
@@ -44,6 +37,11 @@ public:
 				localBatch.addVerticies(&loc.shape);
 			}
 		}
+	}
+	
+	void render() {
+		window->clear();
+	
 		window->draw(localBatch.getVerticies().data(), localBatch.size(), sf::Quads);
 		window->display();
 	}

@@ -23,16 +23,6 @@ void LannyEngine::playScene(std::string sceneName) {
 	};
 }
 
-
-void LannyEngine::incrementFrame() {
-	frame++;
-}
-
-size_t LannyEngine::getCurrentFrame() {
-	return frame;
-}
-
-
 void LannyEngine::sendKeyPress(sf::Event * myKeyEvent, bool isPressed) {
 	//try block catches any exceptions if the current scene is not found in the map
 	try {
@@ -56,12 +46,6 @@ void LannyEngine::sendMouseEvent(sf::Event* myMouseEvent, bool isPressed,lny::Ve
 	catch (std::exception e) {
 
 	};
-}
-
-
-const size_t lny::LannyEngine::getEntityLimit()
-{
-	return entityLimit;
 }
 
 void LannyEngine::input() {

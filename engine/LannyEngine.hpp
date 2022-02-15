@@ -29,7 +29,7 @@ namespace lny {
 		//currently loaded scene
 		ScenePtr currentScene;
 
-		//engine media manager used for handling textures
+		//engine media manager used for handling loading and distribution of media
 		GLOBAL_MEDIA mediaManager;
 
 		//component manager used to managing memory pooling of components
@@ -40,11 +40,8 @@ namespace lny {
 		std::shared_ptr<SceneType> generateScene() {
 				return std::make_shared<SceneType>(window, this, &mediaManager, componentManager.get());
 		};
-		//long long holding current frame
-		size_t frame = 0;
-		
-		const size_t entityLimit;
-		//while loop that runs the current scene;
+	
+		//scene loop that runs the current scene;
 		void runScene();
 
 	public:
@@ -52,7 +49,7 @@ namespace lny {
 		LannyEngine(sf::VideoMode video, std::string name,std::string assetPath,size_t maxEntities = 3000):
 			componentManager(std::make_unique<ComponentMgr>(maxEntities)),
 			window(new sf::RenderWindow(video, name)),
-			mediaManager(assetPath), entityLimit(maxEntities) {};
+			mediaManager(assetPath){};
 
 		//inserts a scene into scene map
 		template<typename SceneType>
@@ -66,14 +63,7 @@ namespace lny {
 		//begins playing a scene
 		void playScene(std::string sceneName);
 
-		//increases frame by one
-		void incrementFrame();
-		
-		//gets the current frame
-		size_t getCurrentFrame();
 
-		//gets the max amount of entities
-		const size_t getEntityLimit();
 		//pools keyboard input
 		void input();
 
