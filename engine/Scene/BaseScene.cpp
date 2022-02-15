@@ -12,7 +12,7 @@ void BaseScene::render() {
 			if(entity.hasComponent<lny::CompTransform>()){
 			 loc.shape.setPos(entity.getComponent<lny::CompTransform>().pos);
 			}
-			window->draw(loc.shape.getPoints());
+			window->draw(loc.shape.getPoints(), loc.shape.getTexture());
 		}
 	}
 	window->display();

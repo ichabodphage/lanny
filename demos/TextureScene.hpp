@@ -15,17 +15,17 @@ public:
 		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Num1, CHANGE_SCENE);
 		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Num2, GET_FPS);
 
-		for (int i = 0; i < 200; i+=10) {
+		for (int i = 0; i < 100; i+=10) {
 			lny::Entity rect = entityManager->addEntity();
-			rect.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 });
+			rect.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 },globalMedia->get<lny::TextureManager>().getTexture("box"));
 			
-			rect.getComponent<lny::CompShape>().shape.setFillColor(sf::Color(255 - i, 255, 255));
+			rect.getComponent<lny::CompShape>().shape.setFillColor(sf::Color(255 - (i*1.5), 255, 255));
 			rect.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(10, 10 +i*5), 0);
 
 		}
 	
 
-		for (int j = 0; j < 200; j += 10) {
+		for (int j = 0; j < 100; j += 10) {
 			lny::Entity rect2 = entityManager->addEntity();
 			rect2.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 });
 			
@@ -33,7 +33,7 @@ public:
 			rect2.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(120, 10 + j * 5), 0);
 		}
 
-		for (int j = 0; j < 200; j += 10) {
+		for (int j = 0; j < 100; j += 10) {
 			lny::Entity rect2 = entityManager->addEntity();
 			rect2.getComponent<lny::CompShape>() = lny::CompShape({ 100,50 });
 			rect2.getComponent<lny::CompShape>().shape.setFillColor(sf::Color(255, 255, 255 - j));

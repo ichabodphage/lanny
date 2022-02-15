@@ -15,16 +15,28 @@ namespace lny {
 		sf::VertexArray localShape;
 		//length and width of rectangle
 		lny::Vec2 size;
+		//texture of the rectangle
+		sf::Texture* rectTexture = nullptr;
 	public:
 		//constructor using size of rect
 		RenderRect(lny::Vec2 nsize);
+
+		//constructor using size of rect and texture
+		RenderRect(lny::Vec2 nsize, sf::Texture* newTexture);
 		//changes the position of the vertex array
 		void setPos(lny::Vec2 pos);
+
 		//returns all the points in the vertex array
 		sf::VertexArray& getPoints();
+
 		//sets all points of the shape to a specific color
 		void setFillColor(sf::Color newColor);
 
+		//sets the texture of the RenderRect
+		void setTexture(sf::Texture * newTexture);
+
+		//returns the RenderRect's texture
+		sf::Texture * getTexture();
 	};
 
 }

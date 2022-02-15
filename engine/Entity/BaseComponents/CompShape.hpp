@@ -17,6 +17,10 @@ namespace lny {
 			
 		};
 
+		CompShape(Vec2 s,sf::Texture* tex) :shape(s,tex) {
+			isActive = true;
+			
+		};
 
 	};
 }
