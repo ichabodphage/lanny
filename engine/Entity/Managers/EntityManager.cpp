@@ -30,3 +30,12 @@ void EntityManager::sweepInactive() {
 
 	}
 }
+
+void EntityManager::setMaxEntities(size_t newMax){
+	localComponentManager->setMaxEntityCount(newMax);
+	deInit();
+}
+
+size_t EntityManager::getEntityLimit(){
+	return localComponentManager->getEntityLimit();
+}

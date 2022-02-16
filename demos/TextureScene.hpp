@@ -27,7 +27,7 @@ public:
 
 		for (int j = 0; j < 100; j += 10) {
 			lny::Entity rect2 = entityManager->addEntity();
-			rect2.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 });
+			rect2.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 },globalMedia->get<lny::TextureManager>().getTexture("pen"));
 			
 			rect2.getComponent<lny::CompShape>().shape.setFillColor(sf::Color(255, 255 - j, 255));
 			rect2.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(120, 10 + j * 5), 0);
@@ -35,7 +35,7 @@ public:
 
 		for (int j = 0; j < 100; j += 10) {
 			lny::Entity rect2 = entityManager->addEntity();
-			rect2.getComponent<lny::CompShape>() = lny::CompShape({ 100,50 });
+			rect2.getComponent<lny::CompShape>() = lny::CompShape({ 100,50 },globalMedia->get<lny::TextureManager>().getTexture("car"));
 			rect2.getComponent<lny::CompShape>().shape.setFillColor(sf::Color(255, 255, 255 - j));
 			rect2.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(220, 10 + j * 5), 0);
 		}

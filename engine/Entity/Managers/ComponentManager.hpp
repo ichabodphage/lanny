@@ -91,7 +91,7 @@ namespace lny {
 			//resize all of the component arrays
 			for_each(components,
 				[newMax](auto& x) {
-					x.resize(newMax);
+					x.reserve(newMax);
 				});
 		}
 		//returns the max entity count

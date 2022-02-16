@@ -50,7 +50,7 @@ public:
 		dt = deltaT;
 
 	}
-
+	
 	void getFrameRate() {
 		std::cout << "current frames per second: " << 1 / dt << "\n";
 

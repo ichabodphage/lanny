@@ -24,6 +24,11 @@ namespace lny {
 		//removes all inactive entities from the entity array
 		void sweepInactive();
 
+		//resets the max entity count
+		void setMaxEntities(size_t newMax);
+
+		//returns the entity limit
+		size_t getEntityLimit();
 	};
 
 }
