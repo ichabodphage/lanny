@@ -2,6 +2,9 @@
 #include <SFML/Graphics.hpp>
 #include <random>
 #include <iostream>
+#include <chrono>
+#include <thread>
+
 #include "Entity/Managers/EntityManager.hpp"
 #include "Scene/BaseScene.hpp"
 #include "Event.hpp"
@@ -42,9 +45,12 @@ namespace lny {
 		};
 	
 		//scene loop that runs the current scene;
-		void runScene();
-
+		void runScene();		
 	public:
+		/*millisecond delay time to prevent too much CPU usage
+		* public as no undefined behavior is caused by modifying it
+		*/
+		size_t delay = 1;
 		//constructor using video mode, window name, and path to texture file
 		LannyEngine(sf::VideoMode video, std::string name,std::string assetPath,size_t maxEntities = 3000):
 			componentManager(std::make_unique<ComponentMgr>(maxEntities)),
@@ -73,6 +79,8 @@ namespace lny {
 		//sends an lny event holding information on the mouse cursor
 		void sendMouseEvent(sf::Event* myKeyEvent, bool isPresse,lny::Vec2 mag);
 
+		//causes the current thread to sleep for ms time
+		//void delayFor(long ms);
 	};
 
 }

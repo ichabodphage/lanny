@@ -4,8 +4,7 @@
 #include "../engine/Entity/Entity.hpp"
 #include <random>
 #include <iostream>
-#include <chrono>
-#include <thread>
+
 enum keyeventIDs {
 	END,
 	MOVE_UP,
@@ -120,11 +119,12 @@ public:
 		recolor();
 		hitTest();
 		render();
-		std::this_thread::sleep_for(std::chrono::milliseconds(1));
+	
 	}
 	void run(float deltaT) {
 		dt = deltaT;
 		updatePos(deltaT);
+		
 	}
 	void getFrameRate() {
 		std::cout << "current frames per second: " << 1 / dt << "\n";

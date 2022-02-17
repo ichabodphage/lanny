@@ -71,6 +71,14 @@ void LannyEngine::input() {
 	}
 }
 
+/*
+void LannyEngine::delayFor(long ms){
+	std::this_thread::sleep_for(std::chrono::milliseconds(ms));
+}
+*/
+
+
+
 void LannyEngine::runScene() {
 	sf::Clock timer;
 	while (window->isOpen() && currentScene->isOn()) {

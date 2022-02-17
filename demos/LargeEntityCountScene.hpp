@@ -16,6 +16,8 @@ public:
 		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Escape, END);
 		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Num1, CHANGE_SCENE);
 		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Num2, GET_FPS);
+
+		
 		for (int i = 0; i < 100; i += 1) {
 			for (int j = 0; j < 10; j++) {
 				for (int k = 0; k < 10; k++) {

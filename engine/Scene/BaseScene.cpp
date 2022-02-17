@@ -43,7 +43,6 @@ void BaseScene::kill() {
 }
 
 void BaseScene::run_frameIndependant() {
-	globalEngine->input();
 	entityManager->sweepInactive();
 	render();
 }
