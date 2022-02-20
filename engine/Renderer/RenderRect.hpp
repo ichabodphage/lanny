@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "Texture.hpp"
 namespace lny {
 	typedef sf::Vector2f Vec2;
 	/*
@@ -22,7 +23,7 @@ namespace lny {
 		RenderRect(lny::Vec2 nsize);
 
 		//constructor using size of rect and texture
-		RenderRect(lny::Vec2 nsize, sf::Texture* newTexture);
+		RenderRect(lny::Vec2 nsize, lny::Texture* newTexture);
 		//changes the position of the vertex array
 		void setPos(lny::Vec2 pos);
 
@@ -33,7 +34,7 @@ namespace lny {
 		void setFillColor(sf::Color newColor);
 
 		//sets the texture of the RenderRect
-		void setTexture(sf::Texture * newTexture);
+		void setTexture(lny::Texture * newTexture);
 
 		//returns the RenderRect's texture
 		sf::Texture * getTexture();

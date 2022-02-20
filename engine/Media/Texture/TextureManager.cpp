@@ -13,7 +13,7 @@ void TextureManager::loadTexture(std::string name,std::string path) {
 		sf::Texture tex;
 		if (tex.loadFromFile(assetFolder + "/" + path)) {
 			//insert the texture into the map if the path is valid
-			assets[name] = std::make_shared<sf::Texture>(tex);
+			assets[name] = lny::Texture(std::make_shared<sf::Texture>(tex));
 			std::cout << "texture " << name << " loaded from: " << assetFolder << "/" <<  path <<"\n";
 		}else{
 			std::cout << "error, file path: " << assetFolder + "/" + path << " is an invalid texture path.\n";
@@ -22,11 +22,11 @@ void TextureManager::loadTexture(std::string name,std::string path) {
 
 }
 
-sf::Texture* TextureManager::getTexture(std::string name) {
-	sf::Texture* ret;
+lny::Texture* TextureManager::getTexture(std::string name) {
+	lny::Texture* ret;
 	try {
 		//try accessing the texture with name from the texture map
-		ret = assets.at(name).get();
+		ret = &assets.at(name);
 		return ret;
 	}
 	catch (std::exception e) {
