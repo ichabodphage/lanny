@@ -27,6 +27,7 @@ void Renderer::insertEntity(lny::Entity& entity){
 
 
 void Renderer::makeBatches(){
+	//insert every entity into a render batch
 	for(auto &entity : entityManager->entities){
 		insertEntity(entity);
 	}
@@ -35,15 +36,18 @@ void Renderer::makeBatches(){
 void Renderer::render(){
 	localWindow->clear();
 	makeBatches();
+
+	//draw each batch
 	for( auto & [key,value]: batchMap){
 		localWindow->draw(value);
 	}
-	clearBatches();
+	//display the window and clear the batches
 	localWindow->display();
+	clearBatches();
 }
 
 void Renderer::clearBatches(){
 	for( auto & [key,value]: batchMap){
-	value.clear();	
+		value.clear();	
 	}
 }

@@ -4,7 +4,8 @@
 #include "../engine/Entity/Entity.hpp"
 #include <random>
 #include <iostream>
-
+#include <thread>
+#include <chrono>
 enum keyeventIDs {
 	END,
 	MOVE_UP,
@@ -46,10 +47,10 @@ public:
 		rect.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(10, 10),0);
 		rect.getComponent<lny::CompBB>() = lny::CompBB({ 50,50 });
 		rect.getComponent<lny::CompMovement>() = lny::CompMovement({ 0,0 });
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 10; i++) {
 			lny::Entity Two = entityManager->addEntity();
 			Two.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 });
-			Two.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(1 + (rand() % 300), 1 + (rand() % 30)), 0);
+			Two.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(1 + (rand() % 440), 1 + (rand() % 440)), 0);
 			Two.getComponent<lny::CompBB>() = lny::CompBB({ 50,50 });
 		}
 		
@@ -121,12 +122,12 @@ public:
 		recolor();
 		hitTest();
 		localRenderer.render();
-	
+		std::this_thread::sleep_for(std::chrono::milliseconds(2));
 	}
 	void run(float deltaT) {
 		dt = deltaT;
 		updatePos(deltaT);
-		
+		std::this_thread::sleep_for(std::chrono::milliseconds(2));
 	}
 	void getFrameRate() {
 		std::cout << "current frames per second: " << 1 / dt << "\n";

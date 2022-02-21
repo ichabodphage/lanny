@@ -49,6 +49,7 @@ namespace lny {
 	public:
 		/*millisecond delay time to prevent too much CPU usage
 		* public as no undefined behavior is caused by modifying it
+		* currently not actually implemented 
 		*/
 		size_t delay = 1;
 		//constructor using video mode, window name, and path to texture file

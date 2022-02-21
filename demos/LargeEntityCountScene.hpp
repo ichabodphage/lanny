@@ -16,7 +16,7 @@ public:
 		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Num2, GET_FPS);
 
 		
-		for (int i = 0; i < 100; i += 1) {
+		for (int i = 0; i < 25; i += 1) {
 			for (int j = 0; j < 10; j++) {
 				for (int k = 0; k < 10; k++) {
 					lny::Entity rect = entityManager->addEntity();
@@ -28,7 +28,6 @@ public:
 			}
 		}
 		
-	
 	}
 	
 

@@ -3,7 +3,6 @@
 #include "../engine/Scene/BaseScene.hpp"
 #include "../engine/LannyEngine.hpp"
 #include "../engine/Entity/Entity.hpp"
-
 #include <random>
 #include <chrono>
 #include <iostream>
@@ -24,12 +23,6 @@ public:
 		globalMedia->get<lny::MusicManager>().loadTrack("songOne", "Orbital_Colossus.wav");
 
 
-
-	}
-	void run_frameIndependant() {
-		globalEngine->input();
-		entityManager->sweepInactive();
-		render();
 	}
 	void run(float deltaT) {
 
