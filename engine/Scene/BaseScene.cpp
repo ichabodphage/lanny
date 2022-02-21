@@ -47,7 +47,7 @@ void BaseScene::kill() {
 
 void BaseScene::run_frameIndependant() {
 	entityManager->sweepInactive();
-	render();
+	localRenderer.render();
 }
 void BaseScene::run(float deltaT) {
 	

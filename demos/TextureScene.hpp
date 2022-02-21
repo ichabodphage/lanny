@@ -42,11 +42,6 @@ public:
 
 	
 	}
-	void run_frameIndependant() {
-		entityManager->sweepInactive();
-		render();
-
-	}
 	void run(float deltaT) {
 		dt = deltaT;
 

@@ -6,7 +6,8 @@
 #include "../../Renderer/Texture.hpp"
 namespace lny {
 	/*
-	* MediaManager manages texture images and other kinds of external media used by a scene
+	* Texture manager is an extention of BaseMediaManager using
+	* lny::Texture. manages loading of textures.
 	*/
 	class TextureManager : public lny::BaseMediaManager<lny::Texture>
 	{

@@ -20,7 +20,8 @@ enum keyeventIDs {
 };
 class ColisonScene: public lny::BaseScene {
 public:
-	ColisonScene(lny::EngineWindow  localWindow,lny::LannyEngine * engine,lny::GLOBAL_MEDIA* media, lny::DEFAULT_MANAGER* w):BaseScene(localWindow, engine,media,w){}
+	ColisonScene(lny::EngineWindow  localWindow,lny::LannyEngine * engine,lny::GLOBAL_MEDIA* media, lny::DEFAULT_MANAGER* w):BaseScene(localWindow, engine,media,w),localBatch(w->getEntityLimit()) {}
+	lny::RenderBatch localBatch;
 
 	float dt = 0.f;
 	void init() {
@@ -48,13 +49,14 @@ public:
 		for (int i = 0; i < 5; i++) {
 			lny::Entity Two = entityManager->addEntity();
 			Two.getComponent<lny::CompShape>() = lny::CompShape({ 50,50 });
-			Two.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(1 + (rand() % 440), 1 + (rand() % 440)), 0);
+			Two.getComponent<lny::CompTransform>() = lny::CompTransform(lny::Vec2(1 + (rand() % 300), 1 + (rand() % 30)), 0);
 			Two.getComponent<lny::CompBB>() = lny::CompBB({ 50,50 });
 		}
 		
 	
 		
 	}
+	
 	//colides bounding boxes using AABB
 	void AABBmouseColide(lny::Vec2 mousePos) {
 		for (auto& entityOne : entityManager->entities) {
@@ -118,7 +120,7 @@ public:
 		entityManager->sweepInactive();
 		recolor();
 		hitTest();
-		render();
+		localRenderer.render();
 	
 	}
 	void run(float deltaT) {
@@ -130,6 +132,7 @@ public:
 		std::cout << "current frames per second: " << 1 / dt << "\n";
 
 	}
+
 	void reciveInput(lny::Event myEvent) {
 		switch (myEvent.name) {
 		case END:

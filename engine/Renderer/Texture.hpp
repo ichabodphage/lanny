@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
+#include <memory>
 namespace lny {
 	typedef sf::Vector2u Vec2u;
 	/*

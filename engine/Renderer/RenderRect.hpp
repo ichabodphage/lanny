@@ -6,11 +6,9 @@ namespace lny {
 	typedef sf::Vector2f Vec2;
 	/*
 	* RenderRect class use to help with rendering sprites
-	* only stores vertecies and dimensions of the rectangle, does not store
-  * any transforms
+	* only stores vertecies and dimensions of the rectangle.
 	*/
 	class RenderRect {
-
 	private:
 		//vertex array of all the rectangles points
 		sf::VertexArray localShape;

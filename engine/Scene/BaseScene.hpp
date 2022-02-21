@@ -6,6 +6,7 @@
 #include "../Media/MediaHub.hpp"
 #include "../Event.hpp"
 #include "../Typedefs.hpp"
+#include "../Renderer/Renderer.hpp"
 namespace lny {
 	enum eventType {
 		keyEvent,
@@ -28,7 +29,10 @@ namespace lny {
 		lny::LannyEngine* globalEngine;
 		//pointer back to the media manager
 		lny::GLOBAL_MEDIA* globalMedia;
-		
+
+		//scenes renderer
+		lny::Renderer localRenderer;
+
 		bool isRunning = false;
 		bool isPaused = false;
 	public:
@@ -40,7 +44,8 @@ namespace lny {
 			entityManager(new EntityManager(components)),
 			globalEngine(engine),
 			globalMedia(media),
-			window(localWindow)
+			window(localWindow),
+			localRenderer(localWindow,entityManager.get(),components->getEntityLimit())
 		{}
 
 		//renders all renderable Entites
