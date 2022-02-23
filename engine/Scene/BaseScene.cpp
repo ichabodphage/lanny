@@ -14,7 +14,7 @@ void BaseScene::render() {
 			}
 			
 			
-			window->draw(loc.shape.getPoints(), loc.shape.getTexture());
+			//window->draw(loc.shape.getPoints(), loc.shape.getTexture());
 			
 		}
 	}
@@ -25,17 +25,6 @@ void BaseScene::render() {
 
 void BaseScene::init() {
 	std::cout << "SCENE INIT TEST GONE RIGHT\n";
-}
-void BaseScene::registerInputEvent(enum eventType type,int key, int eventName) {
-	switch (type) {
-	case keyEvent:
-		keyEvents[key] = eventName;
-		break;
-	case mouseEvent:
-		mouseEvents[key] = eventName;
-		break;
-	}
-	
 }
 
 
@@ -51,8 +40,4 @@ void BaseScene::run_frameIndependant() {
 }
 void BaseScene::run(float deltaT) {
 	
-}
-void BaseScene::reciveInput(Event myEvent) {
-	std::string status = (myEvent.active) ? " and active" : " and not active";
-	std::cout << "event with code: " <<std::to_string(myEvent.name) << status << "\n";
 }

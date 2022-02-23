@@ -1,12 +1,14 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
+
 #include "../Entity/Managers/EntityManager.hpp"
 #include "../Entity/Managers/ComponentManager.hpp"
 #include "../Media/MediaHub.hpp"
-#include "../Event.hpp"
+#include "../Input/Event.hpp"
 #include "../Typedefs.hpp"
-#include "../Renderer/Renderer.hpp"
+#include "../Input/InputManager.hpp"
+#include "RenderSystem/RenderSystem.hpp"
 namespace lny {
 	enum eventType {
 		keyEvent,
@@ -16,7 +18,8 @@ namespace lny {
 	typedef std::shared_ptr<sf::RenderWindow> EngineWindow;
 	typedef std::shared_ptr<lny::EntityManager> SceneEntityManager;
 	/*
-	* BaseScene class that is used both as an abstract class to derive specific scenes and as a default scene with no entities
+	* BaseScene class that is used both as an abstract class to
+	*	derive specific scenes and as a default scene with no entities
 	* classes derived from BaseScene can be used to initalize components of entities using init and have their behavior determined by run
 	* 
 	*/
@@ -31,28 +34,26 @@ namespace lny {
 		lny::GLOBAL_MEDIA* globalMedia;
 
 		//scenes renderer
-		lny::Renderer localRenderer;
-
+		lny::RenderSystem localRenderer;
+		
 		bool isRunning = false;
 		bool isPaused = false;
 	public:
-		//map holding keycode event id pairs
-		std::map<int, int> keyEvents;
-		std::map<int, int> mouseEvents;
+		//scenes input manager
+		lny::InputManager sceneInput;
+
 		//constructor using shared ptr of the window and the engine
 		BaseScene(EngineWindow localWindow, lny::LannyEngine* engine, lny::GLOBAL_MEDIA* media, ComponentMgr * components) :
 			entityManager(new EntityManager(components)),
 			globalEngine(engine),
 			globalMedia(media),
 			window(localWindow),
-			localRenderer(localWindow,entityManager.get(),components->getEntityLimit())
-		{}
+			localRenderer(localWindow,entityManager.get(),components->getEntityLimit()),
+			sceneInput(entityManager.get()){}
 
 		//renders all renderable Entites
 		virtual void render();
-
-		//adds an event to the events map
-		void registerInputEvent(enum eventType type,int key, int id);
+	
 
 		//kills the current scene loop and sets isRunning to false
 		void kill();
@@ -71,8 +72,6 @@ namespace lny {
 		//gets called by sceneLoop on each frame, used to determine entity behavior
 		virtual void run(float deltaT);
 		
-		//does whatever event is sent in even
-		virtual void reciveInput(lny::Event localEvent);
 	};
 }
 

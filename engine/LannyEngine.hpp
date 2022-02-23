@@ -7,7 +7,7 @@
 
 #include "Entity/Managers/EntityManager.hpp"
 #include "Scene/BaseScene.hpp"
-#include "Event.hpp"
+#include "Input/Event.hpp"
 #include "Typedefs.hpp"
 
 //App class handles the window and the entity manager

@@ -15,7 +15,7 @@ void RenderBatch::addVerticies(lny::RenderRect rectToInsert)
 {
 	if (currentBatchSize < maxSize) {
 		//get all the verticies inside of the renderRect and add them to the vertex array
-		sf::VertexArray verticies = rectToInsert.getPoints();
+		sf::Vertex* verticies = rectToInsert.getPoints();
 		for (int i = 0; i < 4; i++) {
 			vertexArr[i + (currentBatchSize * 4)] = verticies[i];
 		}
