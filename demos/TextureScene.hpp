@@ -11,9 +11,7 @@ public:
 
 	float dt = 0.f;
 	void init() {
-		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Escape, END);
-		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Num1, CHANGE_SCENE);
-		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Num2, GET_FPS);
+
 
 		for (int i = 0; i < 100; i+=10) {
 			lny::Entity rect = entityManager->addEntity();
@@ -49,21 +47,5 @@ public:
 	void getFrameRate() {
 		std::cout << "current frames per second: " << 1 / dt << "\n";
 	}
-	void reciveInput(lny::Event myEvent) {
-		switch (myEvent.name) {
-		case END:
-			kill();
-			break;
-		case CHANGE_SCENE:
-			if (myEvent.active) {
-				globalEngine->playScene("scene3");
-			}
-			break;
-		case GET_FPS:
-			if (myEvent.active) {
-				getFrameRate();
-			}
-			break;
-		}
-	}
+	
 };

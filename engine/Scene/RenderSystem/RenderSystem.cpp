@@ -1,10 +1,10 @@
-#include "Renderer.hpp"
+#include "RenderSystem.hpp"
 
 using namespace lny;
 
-Renderer::Renderer(std::shared_ptr<sf::RenderWindow> win,lny::EntityManager* manager,size_t max):localWindow(win),entityManager(manager),maxSize(max){};
+RenderSystem::RenderSystem(std::shared_ptr<sf::RenderWindow> win,lny::EntityManager* manager,size_t max):localWindow(win),entityManager(manager),maxSize(max){};
 
-void Renderer::insertEntity(lny::Entity& entity){
+void RenderSystem::insertEntity(lny::Entity& entity){
 
 	//an entity without a shape component cannot be rendered
 	if(entity.hasComponent<lny::CompShape>()){
@@ -41,14 +41,14 @@ void Renderer::insertEntity(lny::Entity& entity){
 };
 
 
-void Renderer::makeBatches(){
+void RenderSystem::makeBatches(){
 	//insert every entity into a render batch
 	for(auto &entity : entityManager->entities){
 		insertEntity(entity);
 	}
 }
 
-void Renderer::render(){
+void RenderSystem::render(){
 	localWindow->clear();
 	makeBatches();
 
@@ -61,7 +61,7 @@ void Renderer::render(){
 	clearBatches();
 }
 
-void Renderer::clearBatches(){
+void RenderSystem::clearBatches(){
 	for( auto & [key,value]: batchMap){
 		value.clear();	
 	}

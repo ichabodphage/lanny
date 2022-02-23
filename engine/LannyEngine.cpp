@@ -23,50 +23,17 @@ void LannyEngine::playScene(std::string sceneName) {
 	};
 }
 
-void LannyEngine::sendKeyPress(sf::Event * myKeyEvent, bool isPressed) {
-	//try block catches any exceptions if the current scene is not found in the map
-	try {
-		//poll events for the keycode of the key pressed, throw an exeption and continue if otherwise
-		int eventName = currentScene->keyEvents.at(myKeyEvent->key.code);
-		//send event with isPressed and eventName
-		currentScene->reciveInput(lny::Event(eventName, isPressed));
-	}
-	catch (std::exception e) {
 
-	};
-}
-
-void LannyEngine::sendMouseEvent(sf::Event* myMouseEvent, bool isPressed,lny::Vec2 mag) {
-	try {
-		//poll events for the keycode of the key pressed, throw an exeption and continue if otherwise
-		int eventName = currentScene->mouseEvents.at(myMouseEvent->mouseButton.button);
-		//send event with isPressed and eventName
-		currentScene->reciveInput(lny::Event(eventName, isPressed,mag));
-	}
-	catch (std::exception e) {
-
-	};
-}
 
 void LannyEngine::input() {
 	sf::Event event;
 	while (window->pollEvent(event)) {
 		switch (event.type) {
-			case sf::Event::Closed:			//close window 
+			case sf::Event::Closed:		//close window 
 				window->close();
 				break;
-			case sf::Event::KeyPressed:		//key down
-				sendKeyPress(&event,true);
-				break;
-			case sf::Event::KeyReleased:	//key up
-				sendKeyPress(&event,false);
-				break;
-			case sf::Event::MouseButtonPressed: // mouse pressed
-				sendMouseEvent(&event, true, { (float)event.mouseButton.x,(float)event.mouseButton.y });
-				break;
-			case sf::Event::MouseButtonReleased: //mouse unpressed
-				sendMouseEvent(&event, false, { (float)event.mouseButton.x,(float)event.mouseButton.y });
-				break;
+			case sf::Event::KeyPressed:
+				currentScene->sceneInput.reciveInput(event.key.code);
 		}
 	}
 }

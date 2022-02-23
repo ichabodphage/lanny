@@ -1,16 +1,17 @@
+#pragma once
 #include <SFML/Graphics.hpp>
 #include <map>
-#include "Texture.hpp"
-#include "RenderRect.hpp"
-#include "RenderBatch.hpp"
-#include "../Entity/Entity.hpp"
-#include "../Entity/Managers/EntityManager.hpp"
+#include "../../Renderer/Texture.hpp"
+#include "../../Renderer/RenderRect.hpp"
+#include "../../Renderer/RenderBatch.hpp"
+#include "../../Entity/Entity.hpp"
+#include "../../Entity/Managers/EntityManager.hpp"
 
 namespace lny{
 	/*
 	*	standard renderer class used to batch render entities
 	*/
-	class Renderer{
+	class RenderSystem {
 	private:
 		//map using texture keys and render batch pairs
 		std::map<sf::Texture*,lny::RenderBatch> batchMap;
@@ -28,7 +29,7 @@ namespace lny{
 
 	public:
 		//default constructor
-		Renderer(std::shared_ptr<sf::RenderWindow> win,lny::EntityManager* manager,size_t max);
+		RenderSystem(std::shared_ptr<sf::RenderWindow> win,lny::EntityManager* manager,size_t max);
 
 		//renders all entities in the batchMap
 		void render();

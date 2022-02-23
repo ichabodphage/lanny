@@ -23,6 +23,7 @@ namespace lny {
 
 		//constructor using size of rect and texture
 		RenderRect(lny::Vec2 nsize, lny::Texture* newTexture);
+
 		//changes the position of the vertex array
 		void setPos(lny::Vec2 pos);
 

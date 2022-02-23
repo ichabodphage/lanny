@@ -6,19 +6,7 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
-enum keyeventIDs {
-	END,
-	MOVE_UP,
-	MOVE_DOWN,
-	MOVE_LEFT,
-	MOVE_RIGHT,
-	CHANGE_SCENE,
-	GET_FPS,
-	PLAY_SONG,
-	PAUSE_SONG,
-	STOP_SONG,
-	COLIDE_CURSOR
-};
+
 class ColisonScene: public lny::BaseScene {
 public:
 	ColisonScene(lny::EngineWindow  localWindow,lny::LannyEngine * engine,lny::GLOBAL_MEDIA* media, lny::DEFAULT_MANAGER* w):BaseScene(localWindow, engine,media,w),localBatch(w->getEntityLimit()) {}
@@ -26,16 +14,15 @@ public:
 
 	float dt = 0.f;
 	void init() {
+		sceneInput.listen(sf::Keyboard::Key::Left,[](lny::EntityManager* entManager){
+			entManager->entities[0].getComponent<lny::CompTransform>().pos.x -= 10;
+		});
 
-		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Escape, END);
-		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::W,      MOVE_UP);
-		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::S,      MOVE_DOWN);
-		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::A,      MOVE_LEFT);
-		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::D,      MOVE_RIGHT);
-		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Num1,   CHANGE_SCENE);
-		registerInputEvent(lny::eventType::keyEvent, sf::Keyboard::Num2,   GET_FPS);
-
-		registerInputEvent(lny::eventType::mouseEvent, sf::Mouse::Left, COLIDE_CURSOR);
+		
+		sceneInput.listen(sf::Keyboard::Key::Right,[](lny::EntityManager* entManager){
+			
+		});
+		
 		globalMedia->setFolder<lny::TextureManager>("TextureAssets");
 		globalMedia->setFolder<lny::MusicManager>("MusicAssets");
 		globalMedia->get<lny::TextureManager>().loadTexture("box", "crate0_diffuse.png");
@@ -122,69 +109,15 @@ public:
 		recolor();
 		hitTest();
 		localRenderer.render();
-		std::this_thread::sleep_for(std::chrono::milliseconds(2));
+		std::this_thread::sleep_for(std::chrono::milliseconds(4));
 	}
 	void run(float deltaT) {
 		dt = deltaT;
 		updatePos(deltaT);
-		std::this_thread::sleep_for(std::chrono::milliseconds(2));
 	}
 	void getFrameRate() {
-		std::cout << "current frames per second: " << 1 / dt << "\n";
+
 
 	}
 
-	void reciveInput(lny::Event myEvent) {
-		switch (myEvent.name) {
-		case END:
-			kill();
-			break;
-		case MOVE_RIGHT:
-			if (myEvent.active) {
-				entityManager->entities[0].getComponent<lny::CompMovement>().velocity.x = 150.f;
-			}
-			else {
-				entityManager->entities[0].getComponent<lny::CompMovement>().velocity.x = 0;
-			}
-			break;
-		case MOVE_LEFT:
-			if (myEvent.active) {
-				entityManager->entities[0].getComponent<lny::CompMovement>().velocity.x = -150.f;
-			}
-			else {
-				entityManager->entities[0].getComponent<lny::CompMovement>().velocity.x = 0;
-			}
-			break;
-		case MOVE_UP:
-			if (myEvent.active) {
-				entityManager->entities[0].getComponent<lny::CompMovement>().velocity.y = -150.f;
-			}
-			else {
-				entityManager->entities[0].getComponent<lny::CompMovement>().velocity.y = 0;
-			}
-			break;
-		case MOVE_DOWN:
-			if (myEvent.active) {
-				entityManager->entities[0].getComponent<lny::CompMovement>().velocity.y = 150.f;
-			}
-			else {
-				entityManager->entities[0].getComponent<lny::CompMovement>().velocity.y = 0;
-			}
-			break;
-		case CHANGE_SCENE:
-			if (myEvent.active) {
-
-				globalEngine->playScene("scene2");
-			}
-			break;
-		case GET_FPS:
-			if (!myEvent.active) {
-				getFrameRate();
-			}
-			break;
-		case COLIDE_CURSOR:
-			std::cout << entityAABBCheck(entityManager->entities[0], entityManager->entities[1]);
-			break;
-		}
-	}
 };
