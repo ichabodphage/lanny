@@ -5,18 +5,33 @@ using namespace lny;
 Renderer::Renderer(std::shared_ptr<sf::RenderWindow> win,lny::EntityManager* manager,size_t max):localWindow(win),entityManager(manager),maxSize(max){};
 
 void Renderer::insertEntity(lny::Entity& entity){
-	
+
+	//an entity without a shape component cannot be rendered
 	if(entity.hasComponent<lny::CompShape>()){
-		lny::RenderRect entShape = entity.getComponent<lny::CompShape>().shape;
-	sf::Texture* entTexture = entShape.getTexture();
+		
+		lny::RenderRect entShape = 
+		entity.getComponent<lny::CompShape>().shape;
+		
+		sf::Texture* entTexture = entShape.getTexture();
+		//move the entity shape to its correct position
+		
 		if(entity.hasComponent<lny::CompTransform>()){
-			entShape.setPos(entity.getComponent<lny::CompTransform>().pos);
+			entShape.setPos(
+			entity.getComponent<lny::CompTransform>().pos);
 		}
+		
 		try{
-			//insert the entities verticies into the batchmap if a batch for the texture exists
+			
+			/*
+			insert the entities verticies into the batchmap if a batch
+			for the texture exists
+			*/
 			batchMap.at(entTexture).addVerticies(entShape);
 		}catch(std::exception e){
-			//create new batch if entities texture does not fit into any map
+			/*
+			create new batch if entities texture does not fit into any
+			map
+			*/
 			batchMap.insert(
 				std::pair<sf::Texture*,lny::RenderBatch>(entTexture,
 				lny::RenderBatch(maxSize,entTexture)));

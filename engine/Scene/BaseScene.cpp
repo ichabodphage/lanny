@@ -14,7 +14,7 @@ void BaseScene::render() {
 			}
 			
 			
-			window->draw(loc.shape.getPoints(), loc.shape.getTexture());
+			//window->draw(loc.shape.getPoints(), loc.shape.getTexture());
 			
 		}
 	}

@@ -10,8 +10,9 @@ namespace lny {
 	*/
 	class RenderRect {
 	private:
-		//vertex array of all the rectangles points
-		sf::VertexArray localShape;
+		//vertex array of all the rectangles points,
+		sf::Vertex localShape[4];
+
 		//length and width of rectangle
 		lny::Vec2 size;
 		//texture of the rectangle
@@ -26,7 +27,7 @@ namespace lny {
 		void setPos(lny::Vec2 pos);
 
 		//returns all the points in the vertex array
-		sf::VertexArray& getPoints();
+		sf::Vertex* getPoints();
 
 		//sets all points of the shape to a specific color
 		void setFillColor(sf::Color newColor);
