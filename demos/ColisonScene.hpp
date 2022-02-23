@@ -38,6 +38,8 @@ public:
 		registerInputEvent(lny::eventType::mouseEvent, sf::Mouse::Left, COLIDE_CURSOR);
 		globalMedia->setFolder<lny::TextureManager>("TextureAssets");
 		globalMedia->setFolder<lny::MusicManager>("MusicAssets");
+
+
 		globalMedia->get<lny::TextureManager>().loadTexture("box", "crate0_diffuse.png");
 		globalMedia->get<lny::TextureManager>().loadTexture("pen", "pen.jpg");
 		globalMedia->get<lny::TextureManager>().loadTexture("car", "car1_spr.png");
@@ -122,12 +124,10 @@ public:
 		recolor();
 		hitTest();
 		localRenderer.render();
-		std::this_thread::sleep_for(std::chrono::milliseconds(2));
 	}
 	void run(float deltaT) {
 		dt = deltaT;
 		updatePos(deltaT);
-		std::this_thread::sleep_for(std::chrono::milliseconds(2));
 	}
 	void getFrameRate() {
 		std::cout << "current frames per second: " << 1 / dt << "\n";
