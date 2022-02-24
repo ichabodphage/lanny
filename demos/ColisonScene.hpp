@@ -14,13 +14,19 @@ public:
 
 	float dt = 0.f;
 	void init() {
-		sceneInput.listen(sf::Keyboard::Key::Left,[](lny::EntityManager* entManager){
-			entManager->entities[0].getComponent<lny::CompTransform>().pos.x -= 10;
+		//left movement listener
+		sceneInput.listen(lny::Key,sf::Keyboard::Key::Left,[this](lny::Event keyEvent){
+			this->entityManager->entities[0].getComponent<lny::CompTransform>().pos.x -= 10;
 		});
 
-		
-		sceneInput.listen(sf::Keyboard::Key::Right,[](lny::EntityManager* entManager){
+		//right movement listener
+		sceneInput.listen(lny::Key,sf::Keyboard::Key::Right,[this](lny::Event keyEvent){
+			this->entityManager->entities[0].getComponent<lny::CompTransform>().pos.x += 10;
 			
+		});
+
+		sceneInput.listen(lny::Mouse, sf::Mouse::Left, [this](lny::Event keyEvent) {
+			this->getFrameRate();
 		});
 		
 		globalMedia->setFolder<lny::TextureManager>("TextureAssets");
@@ -67,22 +73,19 @@ public:
 		float TwoRightMostY = Two.getComponent<lny::CompBB>().size.y + Two.getComponent<lny::CompTransform>().pos.y;
 
 
-		if (((oneRightMostX < TwoRightMostX && oneRightMostX > Two.getComponent<lny::CompTransform>().pos.x) ||
-			(One.getComponent<lny::CompTransform>().pos.x < TwoRightMostX && One.getComponent<lny::CompTransform>().pos.x > Two.getComponent<lny::CompTransform>().pos.x))&&
-			((oneRightMostY < TwoRightMostY && oneRightMostY > Two.getComponent<lny::CompTransform>().pos.y) ||
-			(One.getComponent<lny::CompTransform>().pos.y < TwoRightMostY && One.getComponent<lny::CompTransform>().pos.y > Two.getComponent<lny::CompTransform>().pos.y))) {
-			return true;
-		}
-		return false;
+		return((oneRightMostX < TwoRightMostX&& oneRightMostX > Two.getComponent<lny::CompTransform>().pos.x) ||
+			(One.getComponent<lny::CompTransform>().pos.x < TwoRightMostX&& One.getComponent<lny::CompTransform>().pos.x > Two.getComponent<lny::CompTransform>().pos.x)) &&
+			((oneRightMostY < TwoRightMostY&& oneRightMostY > Two.getComponent<lny::CompTransform>().pos.y) ||
+			(One.getComponent<lny::CompTransform>().pos.y < TwoRightMostY&& One.getComponent<lny::CompTransform>().pos.y > Two.getComponent<lny::CompTransform>().pos.y));
 	}
 	void hitTest() {
 		for (auto& entOne : entityManager->entities) {
 			if (entOne.hasComponent<lny::CompBB>() && entOne.hasComponent<lny::CompTransform>()) {
 				for (auto& entTwo : entityManager->entities) {
-					if (entOne.getid() != entTwo.getid() && entTwo.hasComponent<lny::CompBB>() && entTwo.hasComponent<lny::CompTransform>()) {
-						if (entityAABBCheck(entOne, entTwo)) {
-							entOne.getComponent<lny::CompShape>().shape.setFillColor(sf::Color(255, 0, 0));
-						}
+					if (entOne.getid() != entTwo.getid() && entTwo.hasComponent<lny::CompBB>() && entTwo.hasComponent<lny::CompTransform>() && entityAABBCheck(entOne, entTwo)) {
+						
+						entOne.getComponent<lny::CompShape>().shape.setFillColor(sf::Color(255, 0, 0));
+						
 					}
 				}
 			}
@@ -116,7 +119,7 @@ public:
 		updatePos(deltaT);
 	}
 	void getFrameRate() {
-
+		std::cout << "framerate: " << 1 / dt << "\n";
 
 	}
 

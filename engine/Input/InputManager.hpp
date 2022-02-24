@@ -1,15 +1,18 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <map>
-
+#include <future>
 #include "../Entity/Entity.hpp"
 #include "../Entity/Managers/EntityManager.hpp"
 #include "InputHandler.hpp"
-
 namespace lny{
 	/*
 	*	class responsible for managing inputs
 	*/
+	enum inputType {
+		Key = 1,
+		Mouse = 20,
+	};
 	class InputManager{
 		private:
 			//map for all input events
@@ -26,9 +29,9 @@ namespace lny{
 			* method that inserts a new input handler 
 			* into the inputEvents map
 			*/
-			void listen(int eventID,std::function<void(lny::EntityManager*)>eventFunction);
+			void listen(enum inputType type,int eventID,std::function<void(lny::Event)>eventFunction);
 
 			//recives and runs a specific input
-			void reciveInput(int myEvent);
+			void reciveInput(sf::Event myEvent);
 	};
 }

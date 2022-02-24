@@ -6,11 +6,12 @@ namespace lny {
 	* Event struct used for the game engine to communicate inputs to the scene
 	*/
 	struct Event {
-		//event int enum "name"
-		int name;
-
+		//wheather or not the event ended
+		bool active;
+		//magnitude of the event
+		lny::Vec2 magnitude;
 		//keyboard input constructor
-		Event(int n) :name(n) {};
+		Event(bool n,lny::Vec2 mag) : active(n), magnitude(mag) {};
 		
 		
 	};

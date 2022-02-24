@@ -32,8 +32,8 @@ void LannyEngine::input() {
 			case sf::Event::Closed:		//close window 
 				window->close();
 				break;
-			case sf::Event::KeyPressed:
-				currentScene->sceneInput.reciveInput(event.key.code);
+			default:
+				currentScene->sceneInput.reciveInput(event);
 		}
 	}
 }
