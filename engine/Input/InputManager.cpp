@@ -37,17 +37,18 @@ void InputManager::reciveInput(sf::Event myEvent){
 			*/
 			case sf::Event::MouseButtonPressed:
 				//multiply the input code by lny::Key to prevent map colisions
-				inputMap.at(myEvent.mouseButton.button*lny::Key)
+				inputMap.at(myEvent.mouseButton.button*lny::Mouse)
 				.eventFunction(
 				lny::Event(true,
 				lny::Vec2(myEvent.mouseButton.x,myEvent.mouseButton.y)));
 				break;
 			case sf::Event::MouseButtonReleased:
-				inputMap.at(myEvent.mouseButton.button*lny::Key)
+				inputMap.at(myEvent.mouseButton.button*lny::Mouse)
 				.eventFunction(
 				lny::Event(false,
 				lny::Vec2(myEvent.mouseButton.x,myEvent.mouseButton.y)));
 				break;
+			c
 		}
 		
 	}catch(std::exception e){
