@@ -16,15 +16,37 @@ public:
 	void init() {
 		//left movement listener
 		sceneInput.listen(lny::Key,sf::Keyboard::Key::Left,[this](lny::Event keyEvent){
-			this->entityManager->entities[0].getComponent<lny::CompTransform>().pos.x -= 10;
+			if(keyEvent.active){
+				this->entityManager->entities[0].getComponent<lny::CompMovement>().velocity.x = -100;
+			}else{
+				this->entityManager->entities[0].getComponent<lny::CompMovement>().velocity.x = 0;
+			}
 		});
 
 		//right movement listener
 		sceneInput.listen(lny::Key,sf::Keyboard::Key::Right,[this](lny::Event keyEvent){
-			this->entityManager->entities[0].getComponent<lny::CompTransform>().pos.x += 10;
-			
+			if(keyEvent.active){
+				this->entityManager->entities[0].getComponent<lny::CompMovement>().velocity.x = 100;
+			}else{
+				this->entityManager->entities[0].getComponent<lny::CompMovement>().velocity.x = 0;
+			}
 		});
-
+		//up movement listener
+		sceneInput.listen(lny::Key,sf::Keyboard::Key::Up,[this](lny::Event keyEvent){
+			if(keyEvent.active){
+				this->entityManager->entities[0].getComponent<lny::CompMovement>().velocity.y = -100;
+			}else{
+				this->entityManager->entities[0].getComponent<lny::CompMovement>().velocity.y = 0;
+			}
+		});
+		//down movement listener
+		sceneInput.listen(lny::Key,sf::Keyboard::Key::Down,[this](lny::Event keyEvent){
+			if(keyEvent.active){
+				this->entityManager->entities[0].getComponent<lny::CompMovement>().velocity.y = 100;
+			}else{
+				this->entityManager->entities[0].getComponent<lny::CompMovement>().velocity.y = 0;
+			}
+		});
 		sceneInput.listen(lny::Mouse, sf::Mouse::Left, [this](lny::Event keyEvent) {
 			this->getFrameRate();
 		});
