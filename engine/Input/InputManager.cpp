@@ -48,7 +48,13 @@ void InputManager::reciveInput(sf::Event myEvent){
 				lny::Event(false,
 				lny::Vec2(myEvent.mouseButton.x,myEvent.mouseButton.y)));
 				break;
-			c
+			//mouse moved is special and only can return a true value
+			case sf::Event::MouseMoved:
+				inputMap.at(sf::Event::MouseMoved *lny::Mouse)
+				.eventFunction(
+				lny::Event(true,
+				lny::Vec2(myEvent.mouseMove.x,myEvent.mouseMove.y)));
+				break;
 		}
 		
 	}catch(std::exception e){
