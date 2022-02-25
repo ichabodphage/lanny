@@ -48,7 +48,8 @@ public:
 			}
 		});
 		sceneInput.listen(lny::Mouse, sf::Mouse::Left, [this](lny::Event keyEvent) {
-			this->getFrameRate();
+			if(keyEvent.active)
+				this->getFrameRate();
 		});
 		
 		globalMedia->setFolder<lny::TextureManager>("TextureAssets");
