@@ -29,13 +29,13 @@ public:
 		for (int i = 0; i < 100; i += 1) {
 			for (int j = 0; j < 10; j++) {
 				for (int k = 0; k < 10; k++) {
-					lny::Entity rect = entityManager->addEntity();
+					lny::Entity rect = entityManager.addEntity();
 					
 					rect.getComponent<lny::CompShape>() =
 					lny::CompShape(lny::Vec2(50,50));
 					
 					rect.getComponent<lny::CompShape>().shape
-					.setFillColor(sf::Color(255, (rand() %255)+1, 255));
+					.setFillColor(sf::Color(255, (rand() %255)+1, 255, (rand() % 255) + 1));
 					
 					rect.getComponent<lny::CompTransform>() =
 					lny::CompTransform(lny::Vec2(10 + j*50 , 10 + k * 50), 0);

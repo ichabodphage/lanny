@@ -5,7 +5,7 @@ using namespace lny;
 void BaseScene::render() {
 	window->clear();
 	//loop through all entities in the entity manager
-	for (auto& entity : entityManager->entities) {
+	for (auto& entity : entityManager.entities) {
 		//render entity if the entity has a shape
 		if (entity.hasComponent<lny::CompShape>()) {
 			auto loc = entity.getComponent<lny::CompShape>();
@@ -30,12 +30,12 @@ void BaseScene::init() {
 
 void BaseScene::kill() {
 	//setting isRunning to false ends the scene loop
-	entityManager->deInit();
+	entityManager.deInit();
 	isRunning = false;
 }
 
 void BaseScene::run_frameIndependant() {
-	entityManager->sweepInactive();
+	entityManager.sweepInactive();
 	localRenderer.render();
 }
 void BaseScene::run(float deltaT) {

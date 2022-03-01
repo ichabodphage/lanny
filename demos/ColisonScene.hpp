@@ -7,7 +7,7 @@
 #include <thread>
 #include <chrono>
 
-
+#define movement getComponent<lny::CompMovement>()
 /*
 * ColisonScene is a scene meant to test the engines input system
 */
@@ -23,10 +23,9 @@ public:
 		sceneInput.listen(lny::Key,sf::Keyboard::Key::Left,
 		[this](lny::Event keyEvent){
 			if(keyEvent.active){
-				this->entityManager->entities[0]
-				.getComponent<lny::CompMovement>().velocity.x = -100;
+				this->entityManager.entities[0].movement.velocity.x = -100;
 			}else{
-				this->entityManager->entities[0]
+				this->entityManager.entities[0]
 				.getComponent<lny::CompMovement>().velocity.x = 0;
 			}
 		});
@@ -35,21 +34,22 @@ public:
 		sceneInput.listen(lny::Key,sf::Keyboard::Key::Right,
 		[this](lny::Event keyEvent){
 			if(keyEvent.active){
-				this->entityManager->entities[0]
+				this->entityManager.entities[0]
 				.getComponent<lny::CompMovement>().velocity.x = 100;
 			}else{
-				this->entityManager->entities[0]
+				this->entityManager.entities[0]
 				.getComponent<lny::CompMovement>().velocity.x = 0;
 			}
 		});
+
 		//up movement listener
 		sceneInput.listen(lny::Key,sf::Keyboard::Key::Up,
 		[this](lny::Event keyEvent){
 			if(keyEvent.active){
-				this->entityManager->entities[0]
+				this->entityManager.entities[0]
 				.getComponent<lny::CompMovement>().velocity.y = -100;
 			}else{
-				this->entityManager->entities[0]
+				this->entityManager.entities[0]
 				.getComponent<lny::CompMovement>().velocity.y = 0;
 			}
 		});
@@ -58,10 +58,10 @@ public:
 		sceneInput.listen(lny::Key,sf::Keyboard::Key::Down,
 		[this](lny::Event keyEvent){
 			if(keyEvent.active){
-				this->entityManager->entities[0]
+				this->entityManager.entities[0]
 				.getComponent<lny::CompMovement>().velocity.y = 100;
 			}else{
-				this->entityManager->entities[0]
+				this->entityManager.entities[0]
 				.getComponent<lny::CompMovement>().velocity.y = 0;
 			}
 		});
@@ -72,11 +72,15 @@ public:
 			if(keyEvent.active)
 				this->getFrameRate();
 		});
+
+		//scene change listener
 		sceneInput.listen(lny::Key, sf::Keyboard::Num1, 
 		[this](lny::Event keyEvent) {
 			if(keyEvent.active)
 				globalEngine->playScene("scene2");
 		});
+
+
 		//set asset manager's folders
 		globalMedia->setFolder<lny::TextureManager>("TextureAssets");
 		globalMedia->setFolder<lny::MusicManager>("MusicAssets");
@@ -84,13 +88,16 @@ public:
 		//load necessary textures
 		globalMedia->get<lny::TextureManager>()
 		.loadTexture("box", "crate0_diffuse.png");
+
 		globalMedia->get<lny::TextureManager>()
 		.loadTexture("pen", "pen.jpg");
+
 		globalMedia->get<lny::TextureManager>()
 		.loadTexture("car", "car1_spr.png");
 
+
 		//add player entity
-		lny::Entity rect = entityManager->addEntity();
+		lny::Entity rect = entityManager.addEntity();
 		
 		rect.getComponent<lny::CompShape>() = 
 		lny::CompShape({ 50,50 });
@@ -104,9 +111,10 @@ public:
 		rect.getComponent<lny::CompMovement>() = 
 		lny::CompMovement({ 0,0 });
 
+
 		//add nonplayer colision entities
 		for (int i = 0; i < 10; i++) {
-			lny::Entity Two = entityManager->addEntity();
+			lny::Entity Two = entityManager.addEntity();
 			
 			Two.getComponent<lny::CompShape>() = 
 			lny::CompShape({ 50,50 });
@@ -124,7 +132,7 @@ public:
 	
 	//unused function that checks for an AABB colision with the mouse cursor
 	void AABBmouseColide(lny::Vec2 mousePos) {
-		for (auto& entityOne : entityManager->entities) {
+		for (auto& entityOne : entityManager.entities) {
 			if (entityOne.hasComponent<lny::CompBB>() &&
 				entityOne.hasComponent<lny::CompTransform>()) {
 				
@@ -180,11 +188,11 @@ public:
 
 	//scene system that checks for bounding box colisions between all entities
 	void hitTest() {
-		for (auto& entOne : entityManager->entities) {
+		for (auto& entOne : entityManager.entities) {
 			if (entOne.hasComponent<lny::CompBB>() &&
 				entOne.hasComponent<lny::CompTransform>()) {
 				
-				for (auto& entTwo : entityManager->entities) {
+				for (auto& entTwo : entityManager.entities) {
 					if (entOne.getid() != entTwo.getid() &&
 						entTwo.hasComponent<lny::CompBB>() &&
 						entTwo.hasComponent<lny::CompTransform>() &&
@@ -199,7 +207,7 @@ public:
 	}
 	//scene systems that sets all the entities to a white color
 	void recolor(){
-		for (auto& entOne : entityManager->entities) {
+		for (auto& entOne : entityManager.entities) {
 			if (entOne.hasComponent<lny::CompShape>()) {
 				entOne.getComponent<lny::CompShape>()
 				.shape.setFillColor(sf::Color(255,255,255));
@@ -208,7 +216,7 @@ public:
 	}
 	//scene system that updates each entities posiiton using its velocity
 	void updatePos(float deltaT) {
-		for (auto& entOne : entityManager->entities) {
+		for (auto& entOne : entityManager.entities) {
 			if (entOne.hasComponent<lny::CompTransform>() &&
 				entOne.hasComponent<lny::CompMovement>()) {
 				
@@ -222,7 +230,7 @@ public:
 	}
 
 	void run_frameIndependant() {
-		entityManager->sweepInactive();
+		entityManager.sweepInactive();
 		recolor();
 		hitTest();
 		localRenderer.render();

@@ -16,7 +16,6 @@ namespace lny {
 	};
 	class LannyEngine;
 	typedef std::shared_ptr<sf::RenderWindow> EngineWindow;
-	typedef std::shared_ptr<lny::EntityManager> SceneEntityManager;
 	/*
 	* BaseScene class that is used both as an abstract class to
 	*	derive specific scenes and as a default scene with no entities
@@ -27,7 +26,8 @@ namespace lny {
 	{
 	protected:
 		EngineWindow window;
-		SceneEntityManager entityManager;
+		//scenes entity manager
+		lny::EntityManager entityManager;
 		//pointer back to the engine
 		lny::LannyEngine* globalEngine;
 		//pointer back to the media manager
@@ -44,12 +44,12 @@ namespace lny {
 
 		//constructor using shared ptr of the window and the engine
 		BaseScene(EngineWindow localWindow, lny::LannyEngine* engine, lny::GLOBAL_MEDIA* media, ComponentMgr * components) :
-			entityManager(new EntityManager(components)),
+			entityManager(components),
 			globalEngine(engine),
 			globalMedia(media),
 			window(localWindow),
-			localRenderer(localWindow,entityManager.get(),components->getEntityLimit()),
-			sceneInput(entityManager.get()){}
+			localRenderer(localWindow,&entityManager,components->getEntityLimit()),
+			sceneInput(&entityManager){}
 
 		//renders all renderable Entites
 		virtual void render();

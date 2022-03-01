@@ -26,7 +26,7 @@ public:
 
 		//loop that adds box entities
 		for (int i = 0; i < 100; i+=10) {
-			lny::Entity rect = entityManager->addEntity();
+			lny::Entity rect = entityManager.addEntity();
 			
 			rect.getComponent<lny::CompShape>() = 
 			lny::CompShape({ 50,50 },
@@ -42,7 +42,7 @@ public:
 	
 		//loop that adds pen entities
 		for (int j = 0; j < 100; j += 10) {
-			lny::Entity rect2 = entityManager->addEntity();
+			lny::Entity rect2 = entityManager.addEntity();
 			rect2.getComponent<lny::CompShape>() = 
 			lny::CompShape({ 50,50 },
 			globalMedia->get<lny::TextureManager>().getTexture("pen"));
@@ -55,7 +55,7 @@ public:
 
 		//loop that adds car entities
 		for (int j = 0; j < 100; j += 10) {
-			lny::Entity rect2 = entityManager->addEntity();
+			lny::Entity rect2 = entityManager.addEntity();
 			
 			rect2.getComponent<lny::CompShape>() = 
 			lny::CompShape({ 100,50 },

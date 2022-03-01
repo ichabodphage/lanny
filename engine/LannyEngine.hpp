@@ -45,7 +45,10 @@ namespace lny {
 		};
 	
 		//scene loop that runs the current scene;
-		void runScene();		
+		void runScene();
+
+		//tells the current scene to poll for user input
+		void input();
 	public:
 		/*millisecond delay time to prevent too much CPU usage
 		* public as no undefined behavior is caused by modifying it
@@ -71,17 +74,8 @@ namespace lny {
 		void playScene(std::string sceneName);
 
 
-		//pools keyboard input
-		void input();
 
-		//sends an lny::Event to the scene currentScene containing a keycode and wheather or not a key is pressed
-		void sendKeyPress(sf::Event* myKeyEvent, bool isPressed);
 
-		//sends an lny event holding information on the mouse cursor
-		void sendMouseEvent(sf::Event* myKeyEvent, bool isPresse,lny::Vec2 mag);
-
-		//causes the current thread to sleep for ms time
-		//void delayFor(long ms);
 	};
 
 }
