@@ -30,6 +30,7 @@ namespace lny {
 		//adds the verticies of a RenderRect to the batch
 		void addVerticies(lny::RenderRect rectToInsert);
 
+		
 		//resets the batch to contain 0 items
 		void clear();
 

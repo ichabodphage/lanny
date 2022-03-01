@@ -23,6 +23,13 @@ public:
 			if(keyEvent.active)
 				globalEngine->playScene("scene3");
 		});
+		
+		//framerate event listener
+		sceneInput.listen(lny::Mouse, sf::Mouse::Left, 
+		[this](lny::Event keyEvent) {
+			if(keyEvent.active)
+				this->getFrameRate();
+		});
 
 		//loop that adds box entities
 		for (int i = 0; i < 100; i+=10) {

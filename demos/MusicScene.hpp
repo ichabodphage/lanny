@@ -27,12 +27,27 @@ public:
 				globalEngine->playScene("scene1");
 		});
 		
+		//framerate event listener
+		sceneInput.listen(lny::Mouse, sf::Mouse::Left, 
+		[this](lny::Event keyEvent) {
+			if(keyEvent.active)
+				this->getFrameRate();
+		});
+		
 		//input listner that plays the scenes song
 		sceneInput.listen(lny::Key, sf::Keyboard::Num2, 
 		[this](lny::Event keyEvent) {
 			if(keyEvent.active)
 				this->globalMedia->get<lny::MusicManager>()
 				.playTrack("songOne");
+		});
+		
+		//input listner that pauses the song
+		sceneInput.listen(lny::Key, sf::Keyboard::Num3, 
+		[this](lny::Event keyEvent) {
+			if(keyEvent.active)
+				this->globalMedia->get<lny::MusicManager>()
+				.pauseCurrentTrack();
 		});
 		
 		//load a song into the music manager

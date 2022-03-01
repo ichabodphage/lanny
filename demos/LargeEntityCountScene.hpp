@@ -25,6 +25,13 @@ public:
 				globalEngine->playScene("scene4");
 		});
 		
+		//framerate event listener
+		sceneInput.listen(lny::Mouse, sf::Mouse::Left, 
+		[this](lny::Event keyEvent) {
+			if(keyEvent.active)
+				this->getFrameRate();
+		});
+		
 		//loop that inserts aproximately 10,000 entities into the scene 
 		for (int i = 0; i < 100; i += 1) {
 			for (int j = 0; j < 10; j++) {
@@ -57,7 +64,6 @@ public:
 	
 	void getFrameRate() {
 		std::cout << "current frames per second: " << 1 / dt << "\n";
-
 	}
 
 	
