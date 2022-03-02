@@ -110,4 +110,4 @@ namespace lny {
 	};
 
 }
-#define DEFAULT_MANAGER ComponentManager<lny::CompShape, lny::CompTransform,lny::CompBB,lny::CompTexture,lny::CompMovement>
+#define DEFAULT_MANAGER ComponentManager<lny::CompShape, lny::CompTransform,lny::CompBB,lny::CompMovement>
