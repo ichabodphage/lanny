@@ -1,6 +1,8 @@
 # lanny
-lanny is a work in progress c++ 2d game engine designed for flexibility and customizability in mind
-lanny uses an entity component system for handling objects and for general architecture
+lanny is a work in progress c++ 2d game engine designed for flexibility and customizability in mind.
+
+the engine itself is designed like a library, provding a toolset that is both rigid in its functionality but flexible in how such functionality is implemented.
+
 ## dependancies
 SFML (used for graphics, audio, and IO)
 
