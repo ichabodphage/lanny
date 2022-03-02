@@ -17,7 +17,7 @@ namespace lny {
 		lny::Vec2u size;
 
 		//constructor using texture pointer and position
-		Texture(std::shared_ptr<sf::Texture> text, lny::Vec2u pos) : textureImage(text), size(text->getSize()),offset(pos) {};
+		Texture(std::shared_ptr<sf::Texture> text, lny::Vec2u pos,lny::Vec2u texSize) : textureImage(text), size(texSize),offset(pos) {};
 
 		//constructor using just the texture
 		Texture(std::shared_ptr<sf::Texture> text) : textureImage(text), size(text->getSize()), offset(lny::Vec2u(0,0)) {};

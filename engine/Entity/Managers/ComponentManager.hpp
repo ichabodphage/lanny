@@ -48,8 +48,6 @@ namespace lny {
 			
 		}
 
-		
-		
 		//adds an entity into the memory pool and returns its index
 		size_t addEntity() {
 			
@@ -83,6 +81,16 @@ namespace lny {
 			active = MemoryPool<bool>(maxEntitiyCount, false);
 			
 		}
+
+		//like deInit but sets each component vectors size to zero
+		void deactivate(){
+			for_each(components,
+				[](auto& x) {
+					x.reserve(0);
+				});
+			active = MemoryPool<bool>(0, false);
+		}
+
 		//resizes the max amount of entities allowed
 		void setMaxEntityCount(size_t newMax){
 			maxEntitiyCount = newMax;

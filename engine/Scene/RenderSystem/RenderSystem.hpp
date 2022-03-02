@@ -27,6 +27,11 @@ namespace lny{
 		//inserts a renderable entity into the renderer
 		void insertEntity(lny::Entity& entity);
 
+		//clears out all the batches
+		void clearBatches();
+
+		//method that makes the RenderBatches for the BatchMap
+		void makeBatches();
 	public:
 		//default constructor
 		RenderSystem(std::shared_ptr<sf::RenderWindow> win,lny::EntityManager* manager,size_t max);
@@ -34,13 +39,10 @@ namespace lny{
 		//renders all entities in the batchMap
 		void render();
 
-		//method that makes the RenderBatches for the BatchMap
-		void makeBatches();
-
+		//returns the size of the batches
 		size_t batchSize(){
 			return batchMap.size();
 		}
-		//clears out all the batches
-		void clearBatches();
+		
 	};
 }
