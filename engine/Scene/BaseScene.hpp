@@ -49,7 +49,7 @@ namespace lny {
 			globalMedia(media),
 			window(localWindow),
 			localRenderer(localWindow,&entityManager,components->getEntityLimit()),
-			sceneInput(&entityManager){}
+			sceneInput(){}
 
 		//renders all renderable Entites
 		virtual void render();

@@ -2,8 +2,7 @@
 
 using namespace lny;
 
-InputManager::InputManager(lny::EntityManager* localManager):entityManager(localManager) {};
-
+InputManager::InputManager(){};
 
 void InputManager::listen(enum inputType type, int eventID, std::function<void(lny::Event)>eventFunction) {
 	//check if input was allready registered first
