@@ -6,8 +6,9 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
-
 #define movement getComponent<lny::CompMovement>()
+#define bounds getComponent<lny::CompBB>()
+#define transform getComponent<lny::CompTransform>()
 /*
 * ColisonScene is a scene meant to test the engines input system
 */
@@ -137,11 +138,11 @@ public:
 				entityOne.hasComponent<lny::CompTransform>()) {
 				
 				float rightMostX = 
-				entityOne.getComponent<lny::CompBB>().size.x +
+				entityOne.bounds.size.x +
 				entityOne.getComponent<lny::CompTransform>().pos.x;
 				
 				float rightMostY = 
-				entityOne.getComponent<lny::CompBB>().size.y + 
+				entityOne.bounds.size.y + 
 				entityOne.getComponent<lny::CompTransform>().pos.y;
 				
 				if ((mousePos.x > entityOne.getComponent<lny::CompTransform>().pos.x &&
@@ -158,32 +159,28 @@ public:
 	bool entityAABBCheck(lny::Entity One,lny::Entity Two) {
 		//get rightmost x and y cordinates of both entities
 		float oneRightMostX = 
-		One.getComponent<lny::CompBB>().size.x +
-		One.getComponent<lny::CompTransform>().pos.x;
+		One.bounds.size.x +
+		One.transform.pos.x;
 		
 		float oneRightMostY = 
-		One.getComponent<lny::CompBB>().size.y +
-		One.getComponent<lny::CompTransform>().pos.y;
+		One.bounds.size.y +
+		One.transform.pos.y;
 
 		float TwoRightMostX = 
-		Two.getComponent<lny::CompBB>().size.x +
-		Two.getComponent<lny::CompTransform>().pos.x;
+		Two.bounds.size.x +
+		Two.transform.pos.x;
 		
 		float TwoRightMostY = 
-		Two.getComponent<lny::CompBB>().size.y +
-		Two.getComponent<lny::CompTransform>().pos.y;
+		Two.bounds.size.y +
+		Two.transform.pos.y;
 
 		//return the result of the bounding box check
 		return((oneRightMostX < TwoRightMostX&& oneRightMostX >
-			Two.getComponent<lny::CompTransform>().pos.x) ||
-			(One.getComponent<lny::CompTransform>().pos.x < TwoRightMostX&&
-			One.getComponent<lny::CompTransform>().pos.x >
-			Two.getComponent<lny::CompTransform>().pos.x)) &&
-			((oneRightMostY < TwoRightMostY&& oneRightMostY >
-			Two.getComponent<lny::CompTransform>().pos.y) ||
-			(One.getComponent<lny::CompTransform>().pos.y < TwoRightMostY&&
-			One.getComponent<lny::CompTransform>().pos.y >
-			Two.getComponent<lny::CompTransform>().pos.y));
+			Two.transform.pos.x) || (One.transform.pos.x < TwoRightMostX &&
+			One.transform.pos.x > Two.transform.pos.x)) &&
+			((oneRightMostY < TwoRightMostY && oneRightMostY >
+			Two.transform.pos.y) || (One.transform.pos.y < TwoRightMostY &&
+			One.transform.pos.y > Two.transform.pos.y));
 	}
 
 	//scene system that checks for bounding box colisions between all entities

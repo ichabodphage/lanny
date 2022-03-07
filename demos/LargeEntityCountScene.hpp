@@ -54,7 +54,6 @@ public:
 	}
 	void run_frameIndependant(){
 		localRenderer.render();
-		std::this_thread::sleep_for(std::chrono::milliseconds(2));
 	}
 	void run(float deltaT) {
 
