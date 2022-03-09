@@ -2,7 +2,6 @@
 #include "../Entity.hpp"
 #include "../../Typedefs.hpp"
 namespace lny {
-	typedef std::vector<lny::Entity> EntityVector;
 	/*
 	* EntityManager class manages insertion, retreval, 
 	* and removal of entities within a scene.
@@ -19,12 +18,15 @@ namespace lny {
 
 	public:
 		//constructor using pointer to the component manager
-		EntityManager(ComponentMgr* d) :localComponentManager(d) {}
-		//array holding entities made by the entity manager
-		EntityVector entities;
+		EntityManager(ComponentMgr* components) :
+		localComponentManager(components) {}
 
-		//method that inserts an enity into the entity array and returns the same entity
+		//array holding entities made by the entity manager
+		std::vector<lny::Entity> entities;
+
+		//creates and returns an entity into the EntityManager
 		lny::Entity addEntity();
+
 		//clears entities and tells the compoment manager to deconstruct all entity components
 		void deInit();
 		//removes all inactive entities from the entity array
