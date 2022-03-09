@@ -24,13 +24,13 @@ namespace lny {
 		//id of the entity
 		size_t id;	  
 
+		ComponentMgr* localComponentManager;
 	public:
 		//returns the enitity ID
 		size_t getid() {
 			return id;
 		}
-		ComponentMgr* localComponentManager;
-		Entity(size_t i, ComponentMgr* d) :id(i), localComponentManager(d) {};
+		Entity(size_t index, ComponentMgr* componentManager) :id(index), localComponentManager(componentManager) {};
 
 		//returns a reference to an entity component
 		template<typename T>

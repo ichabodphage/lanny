@@ -27,7 +27,8 @@ void for_each(TupleType&& t, FunctionType f)
 
 
 namespace lny {
-	
+	//forward declaration of Entity
+	class Entity;
 	template <class ...types>
 	class ComponentManager {
 	private:
@@ -35,9 +36,11 @@ namespace lny {
 		std::tuple<std::vector<types>...> components;
 		//max amount of entities allowed by the component manager
 		size_t maxEntitiyCount;
-	public:
+
+		friend class Entity;
 		//bool for wheather or not entity is active
 		MemoryPool<bool> active;
+	public:
 		ComponentManager(size_t maxEntities): active(maxEntities,false), maxEntitiyCount(maxEntities){
 			//reserve maxEntities amount of space in each vector
 			for_each(components,
@@ -50,9 +53,7 @@ namespace lny {
 
 		//adds an entity into the memory pool and returns its index
 		size_t addEntity() {
-			
 			return active.allocate(true);
-
 		}
 		void destroyEntity(size_t index) {
 			active.deallocate(index);
