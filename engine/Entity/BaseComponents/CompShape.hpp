@@ -12,12 +12,12 @@ namespace lny {
 	public:
 		//sf shape used for rendering
 		lny::RenderRect shape;
-		CompShape(Vec2 s) :shape(s) {
+		CompShape(Vec2 size) :shape(size) {
 			isActive = true;
 			
 		};
 
-		CompShape(Vec2 s,lny::Texture* tex) :shape(s,tex) {
+		CompShape(Vec2 size,lny::Texture* tex) :shape(size,tex) {
 			isActive = true;
 			
 		};
