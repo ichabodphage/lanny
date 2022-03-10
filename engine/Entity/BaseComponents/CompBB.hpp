@@ -10,6 +10,6 @@ namespace lny {
 	struct CompBB : Compoment {
 		//length width size of the bounding box
 		Vec2 size;
-		CompBB(Vec2 p) : size(p){ isActive = true; };
+		CompBB(Vec2 dimensions) : size(dimensions){ isActive = true; };
 	};
 }

@@ -13,7 +13,7 @@ namespace lny {
 	public:
 		//sf shape used for rendering
 		lny::Vec2 velocity;
-		CompMovement(Vec2 s) :velocity(s) {
+		CompMovement(Vec2 vel) :velocity(vel) {
 			isActive = true;
 
 		};
