@@ -12,6 +12,7 @@ namespace lny {
 		Vec2 pos;
 		//rotation of the entity around its shape component center
 		float rotation = 0.f;
-		CompTransform(Vec2 p, float r) : pos(p), rotation(r) { isActive = true; };
+		CompTransform(Vec2 position, float theta = 0.f) :
+		pos(position), rotation(theta) { isActive = true; };
 	};
 }
